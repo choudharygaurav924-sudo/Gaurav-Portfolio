@@ -51,10 +51,9 @@ export const FOOTER_LINKS = [
 ] as const;
 
 export const SOCIALS = [
-  { label: "Instagram", href: "https://instagram.com/echostudio" },
-  { label: "LinkedIn", href: "https://linkedin.com/company/echostudio" },
-  { label: "Twitter", href: "https://x.com/echostudio" },
-  { label: "Dribbble", href: "https://dribbble.com/echostudio" },
+  { label: "Instagram", href: "https://instagram.com" },
+  { label: "LinkedIn", href: "https://linkedin.com" },
+  { label: "Twitter", href: "https://x.com" },
 ] as const;
 
 /* ── HERO ──────────────────────────────────────────────────────────────────── */
