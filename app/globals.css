@@ -5,16 +5,8 @@
 @layer base {
   :root {
     color-scheme: dark;
-
-    /* Header rail. The menu header and the hero wordmark both read these, so
-       the shrinking wordmark lands exactly on the menu logo. Both elements are
-       fixed and full-width, so `100%` resolves identically for each. */
     --header-pad-x: 1.5rem;
     --header-pad-y: 1.375rem;
-
-    /* Hero scroll morph, driven by ScrollTrigger in Hero.tsx.
-       --hero-t: 1 = giant wordmark, 0 = header-sized.
-       The menu logo fades in as the hero wordmark fades out. */
     --hero-t: 1;
     --sm-logo-opacity: 0;
   }
@@ -32,14 +24,15 @@
   html {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    scroll-behavior: auto;
   }
 
   body {
     @apply bg-ink text-paper font-sans antialiased;
+    background: #050505;
     overflow-x: hidden;
   }
 
-  /* Anton has no lowercase personality — the source always sets it uppercase. */
   h1,
   h2,
   h3 {
@@ -48,7 +41,7 @@
   }
 
   ::selection {
-    @apply bg-accent text-paper;
+    @apply bg-accent text-ink;
   }
 
   :focus-visible {
@@ -58,251 +51,468 @@
 }
 
 @layer components {
-  /* Content container — 1400px max with 24px gutters, per the source. */
   .shell {
     @apply mx-auto w-full max-w-shell px-6;
   }
 
-  /* Parenthesised eyebrow label: (ABOUT), (SERVICES) */
   .eyebrow {
-    @apply font-sans text-xs uppercase tracking-widest text-muted;
+    @apply font-sans text-[0.7rem] uppercase tracking-[0.2em] text-muted;
   }
 
-  .hairline {
-    @apply h-px w-full bg-line;
+  .eyebrow--light {
+    color: rgba(243, 241, 236, 0.8);
   }
 
-  /* ── HERO ────────────────────────────────────────────────────────────────
-     Everything below reads --hero-t (1 = at rest, 0 = scrolled past), which
-     Hero.tsx drives from a single scrubbed ScrollTrigger. */
+  .text-muted {
+    color: #8a8a8a;
+  }
 
-  .hero-root {
+  .editorial-section {
+    @apply py-24 md:py-28 lg:py-36;
+  }
+
+  .section-heading {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .section-intro {
+    max-width: 34rem;
+    font-size: 1rem;
+    line-height: 1.7;
+    color: #c7c5c0;
+  }
+
+  .title-sequence {
     position: relative;
-    /* Sits under the following section, which scrolls up over it. */
-    z-index: 0;
-  }
-
-  /* Two viewports tall: one to look at, one to scroll through. */
-  .hero-stage {
-    position: relative;
-    height: 200svh;
-  }
-
-  .hero-pin {
-    position: sticky;
-    top: 0;
-    height: 100svh;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 7rem 1.5rem 4rem;
+    background: #050505;
     overflow: hidden;
   }
 
-  .hero-backdrop {
-    position: absolute;
-    inset: 0;
-    /* Fades out over the first ~70% of the morph. */
-    opacity: calc(var(--hero-t) * 1.4);
-  }
-
-  .hero-media {
-    height: 100%;
-    width: 100%;
-    object-fit: cover;
-    /* Drifts back slightly as it fades, so the exit has depth. */
-    transform: scale(calc(1 + (1 - var(--hero-t)) * 0.06));
-    transform-origin: center 40%;
-  }
-
-  /* Feathers the photo's hard edges into the black page background. */
-  .hero-vignette {
+  .title-sequence::before {
+    content: "";
     position: absolute;
     inset: 0;
     background:
-      radial-gradient(
-        62% 62% at 52% 46%,
-        transparent 38%,
-        theme("colors.ink") 100%
-      ),
-      linear-gradient(
-        to bottom,
-        theme("colors.ink") 0%,
-        transparent 22%,
-        transparent 58%,
-        theme("colors.ink") 96%
-      );
+      linear-gradient(to bottom, rgba(5, 5, 5, 0.82), rgba(5, 5, 5, 0.55), rgba(5, 5, 5, 0.92)),
+      url("/images/hero-base.webp") center/cover no-repeat;
+    opacity: 0.72;
+    transform: scale(1.05);
   }
 
-  .hero-mark {
-    position: absolute;
-    top: var(--header-pad-y);
-    left: var(--header-pad-x);
-    z-index: 30;
-    display: block;
-    line-height: 0.78;
-    text-decoration: none;
-    color: theme("colors.paper");
-    transform-origin: left top;
-    /* Interpolates between the header size and the measured giant size. */
-    font-size: calc(
-      24px + (var(--mark-giant, 240px) - 24px) * var(--hero-t)
-    );
-    /* Dims to the reference's grey as it grows. */
-    opacity: calc(1 - var(--hero-t) * 0.18);
-  }
-
-  .hero-mark-inner {
+  .title-sequence__meta,
+  .title-sequence__center,
+  .title-sequence__scroll {
     position: relative;
-    display: inline-block;
-    font-family: var(--font-display), Impact, sans-serif;
-    text-transform: uppercase;
-    letter-spacing: 0.01em;
-    white-space: nowrap;
+    z-index: 1;
   }
 
-  .hero-content {
+  .title-sequence__meta {
     position: absolute;
-    inset: 0;
+    top: 1.5rem;
+    left: 1.5rem;
+    right: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    font-size: 0.68rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(243, 241, 236, 0.7);
+  }
+
+  .title-sequence__center {
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
-    padding: 0 var(--header-pad-x) 2.5rem;
-    /* Leaves faster than the backdrop so the next section reads cleanly. */
-    opacity: calc(var(--hero-t) * 1.9 - 0.35);
-    transform: translate3d(0, calc((1 - var(--hero-t)) * -3rem), 0);
-    pointer-events: none;
-  }
-
-  .hero-content a {
-    pointer-events: auto;
-  }
-
-  .hero-headline {
-    align-self: flex-end;
-    max-width: 22ch;
-    margin-bottom: auto;
-    /* Clears the wordmark above it. The mark is absolutely positioned, so its
-       height has to be reserved by hand: top gutter + rendered height (font
-       size x line-height) + a gap. At --hero-t: 0 the mark has shrunk to the
-       header, so this collapses to the small-header clearance. */
-    padding-top: calc(
-      var(--header-pad-y) + 24px * 0.78 + 2.5rem +
-        (var(--mark-giant, 240px) - 24px) * 0.78 * var(--hero-t)
-    );
-    text-align: right;
-    font-size: clamp(2rem, 4.6vw, 4.25rem);
-    line-height: 1.02;
-    letter-spacing: 0.01em;
-    text-wrap: balance;
-  }
-
-  .hero-statement {
-    max-width: 34ch;
-    font-family: var(--font-display), Impact, sans-serif;
-    font-size: clamp(1.35rem, 2.6vw, 2.35rem);
-    line-height: 1.14;
-    text-transform: none;
-    letter-spacing: 0.01em;
-  }
-
-  .hero-statement-strong {
-    color: theme("colors.paper");
-  }
-
-  .hero-statement-muted {
-    color: theme("colors.muted");
-  }
-
-  .hero-logos {
-    display: flex;
     align-items: center;
+    text-align: center;
     gap: 1.5rem;
-    margin-top: 2.75rem;
   }
 
-  .hero-logos-label {
-    flex: none;
-    font-size: 0.6875rem;
-    text-transform: uppercase;
-    letter-spacing: 0.14em;
-    color: theme("colors.muted");
-  }
-
-  .hero-logos-track {
-    flex: 1;
-    min-width: 0;
-  }
-
-  .hero-logo {
+  .title-sequence__name {
     display: flex;
-    flex-shrink: 0;
+    flex-direction: column;
     align-items: center;
-    margin-inline: 2rem;
-    opacity: 0.55;
-    transition: opacity 0.3s ease;
+    gap: 0.2em;
+    font-size: clamp(4rem, 12vw, 15rem);
+    line-height: 0.86;
+    letter-spacing: -0.06em;
+    color: #f3f1ec;
   }
 
-  .hero-logo:hover {
-    opacity: 1;
+  .title-sequence__roles {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.2rem 2.25rem;
+    font-size: 0.72rem;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: rgba(243, 241, 236, 0.72);
   }
 
-  /* The headline would crowd the wordmark on narrow screens. */
-  @media (max-width: 809px) {
-    .hero-headline {
-      align-self: flex-start;
-      text-align: left;
-    }
-
-    .hero-logos-label {
-      display: none;
-    }
+  .title-sequence__statement {
+    max-width: 42rem;
+    font-size: clamp(1.1rem, 1.7vw, 1.5rem);
+    line-height: 1.5;
+    letter-spacing: -0.02em;
+    color: rgba(243, 241, 236, 0.9);
   }
 
-  /* No scroll morph: show the resting layout at full strength. */
-  @media (prefers-reduced-motion: reduce) {
-    .hero-stage {
-      height: 100svh;
-    }
+  .title-sequence__statement span {
+    color: #f3f1ec;
+  }
 
-    .hero-backdrop,
-    .hero-content {
-      opacity: 1;
-      transform: none;
-    }
+  .title-sequence__scroll {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.9rem;
+    font-size: 0.7rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: rgba(243, 241, 236, 0.8);
+  }
 
-    .hero-media {
-      transform: none;
-    }
+  .title-sequence__line {
+    display: inline-block;
+    width: 4rem;
+    height: 1px;
+    background: rgba(243, 241, 236, 0.7);
+  }
 
-    /* The menu logo owns the rail; the giant wordmark would collide. */
-    .hero-mark {
-      display: none;
-    }
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1.3fr 0.7fr;
+    gap: 2rem 4rem;
+    margin-top: 3rem;
+  }
+
+  .about-lead {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    font-size: clamp(2.2rem, 5vw, 5rem);
+    line-height: 0.96;
+    letter-spacing: -0.06em;
+    text-transform: uppercase;
+    color: #f3f1ec;
+  }
+
+  .about-copy {
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    gap: 1.4rem;
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #c7c5c0;
+    max-width: 28rem;
+  }
+
+  .system-list {
+    display: grid;
+    margin-top: 3rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .system-row {
+    display: grid;
+    grid-template-columns: 6rem minmax(0, 1fr) minmax(0, 2fr);
+    gap: 1.2rem 1.8rem;
+    padding: 1.5rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .system-number {
+    font-family: var(--font-display), Impact, sans-serif;
+    font-size: clamp(2rem, 4vw, 4rem);
+    line-height: 1;
+    color: rgba(243, 241, 236, 0.6);
+  }
+
+  .system-row h3 {
+    font-size: clamp(1.5rem, 3vw, 3rem);
+    line-height: 0.94;
+    letter-spacing: -0.05em;
+    color: #f3f1ec;
+  }
+
+  .system-row p {
+    align-self: center;
+    color: #c7c5c0;
+    line-height: 1.7;
+  }
+
+  .work-list {
+    display: grid;
+    gap: 3rem;
+    margin-top: 3rem;
+  }
+
+  .work-item {
+    display: grid;
+    grid-template-columns: 1.4fr 0.8fr;
+    gap: 1.6rem 2.2rem;
+    align-items: center;
+    padding-top: 1rem;
+  }
+
+  .work-media {
+    position: relative;
+    min-height: 30rem;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    overflow: hidden;
+    background: #171717;
+  }
+
+  .work-image {
+    transition: transform 0.8s ease;
+  }
+
+  .work-item:hover .work-image {
+    transform: scale(1.04);
+  }
+
+  .work-details h3 {
+    font-size: clamp(2rem, 4.5vw, 4rem);
+    line-height: 0.94;
+    letter-spacing: -0.05em;
+    color: #f3f1ec;
+  }
+
+  .tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-top: 1.5rem;
+  }
+
+  .tag-list span {
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    padding: 0.5rem 0.8rem;
+    font-size: 0.62rem;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: rgba(243, 241, 236, 0.7);
+  }
+
+  .lab-section {
+    background: #0b0b0b;
+  }
+
+  .lab-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.25rem;
+    margin-top: 3rem;
+  }
+
+  .lab-card {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: #171717;
+  }
+
+  .lab-card--nova { border-color: rgba(133, 188, 255, 0.35); }
+  .lab-card--vanta { border-color: rgba(255, 122, 84, 0.35); }
+  .lab-card--aura { border-color: rgba(114, 89, 255, 0.35); }
+
+  .lab-media {
+    position: relative;
+    min-height: 18rem;
+    overflow: hidden;
+  }
+
+  .lab-copy {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    padding: 1.5rem 1.25rem 1.7rem;
+  }
+
+  .lab-label {
+    font-size: 0.62rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(243, 241, 236, 0.72);
+  }
+
+  .lab-card h3 {
+    font-size: clamp(1.8rem, 3vw, 2.8rem);
+    line-height: 0.96;
+    letter-spacing: -0.05em;
+    color: #f3f1ec;
+  }
+
+  .lab-line {
+    font-size: 0.9rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(243, 241, 236, 0.88);
+  }
+
+  .lab-copy p:last-child {
+    line-height: 1.7;
+    color: #c7c5c0;
+  }
+
+  .resume-section {
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .contact-section {
+    display: grid;
+    grid-template-columns: 1.3fr 0.7fr;
+    gap: 2rem 3rem;
+    align-items: end;
+    padding-top: 5rem;
+    padding-bottom: 6rem;
+  }
+
+  .contact-title {
+    font-size: clamp(3rem, 8vw, 8rem);
+    line-height: 0.9;
+    letter-spacing: -0.06em;
+    color: #f3f1ec;
+  }
+
+  .contact-copy {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    color: #c7c5c0;
+    font-size: 1.05rem;
+    line-height: 1.8;
+  }
+
+  .contact-copy a {
+    align-self: flex-start;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    padding: 0.9rem 1.5rem;
+    font-size: 0.7rem;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: #f3f1ec;
+  }
+
+  .site-footer {
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 4rem 0 2rem;
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr 0.8fr;
+    gap: 2rem;
+  }
+
+  .footer-note {
+    max-width: 28rem;
+    color: #c7c5c0;
+    line-height: 1.8;
+  }
+
+  .footer-link {
+    display: inline-block;
+    margin-top: 1.5rem;
+    color: #f3f1ec;
+    font-size: 0.95rem;
+  }
+
+  .footer-links {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    margin-top: 1.1rem;
+  }
+
+  .footer-links a {
+    color: rgba(243, 241, 236, 0.8);
+  }
+
+  .footer-wordmark {
+    margin-top: 4rem;
+    display: flex;
+    justify-content: center;
+    font-family: var(--font-display), Impact, sans-serif;
+    font-size: clamp(4rem, 15vw, 17rem);
+    line-height: 0.85;
+    letter-spacing: -0.06em;
+    color: #f3f1ec;
+  }
+
+  .footer-wordmark span {
+    color: rgba(243, 241, 236, 0.68);
+  }
+
+  .footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+    padding-top: 1.3rem;
+    margin-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    color: #8a8a8a;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
   }
 }
 
-@layer utilities {
-  /* Edge fade used on the logo marquee. */
-  .mask-fade-x {
-    mask-image: linear-gradient(
-      to right,
-      transparent,
-      #000 12%,
-      #000 88%,
-      transparent
-    );
-    -webkit-mask-image: linear-gradient(
-      to right,
-      transparent,
-      #000 12%,
-      #000 88%,
-      transparent
-    );
+@media (max-width: 980px) {
+  .about-grid,
+  .work-item,
+  .contact-section,
+  .footer-grid,
+  .lab-grid {
+    grid-template-columns: 1fr;
   }
 
-  .pause-on-hover:hover * {
-    animation-play-state: paused;
+  .title-sequence__meta {
+    gap: 0.5rem;
+    font-size: 0.55rem;
+    letter-spacing: 0.14em;
+    flex-wrap: wrap;
+    justify-content: center;
   }
 }
 
-/* Lenis smooth scroll — required classes, copied from the bundled lenis.css. */
+@media (max-width: 640px) {
+  .title-sequence__roles {
+    gap: 0.8rem 1.2rem;
+    letter-spacing: 0.18em;
+    font-size: 0.58rem;
+  }
+
+  .system-row {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+
+  .title-sequence__statement {
+    max-width: 20rem;
+  }
+
+  .title-sequence__scroll {
+    letter-spacing: 0.18em;
+  }
+}
+
 html.lenis,
 html.lenis body {
   height: auto;

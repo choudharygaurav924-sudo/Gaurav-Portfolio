@@ -1,40 +1,35 @@
 import { SiteMenu } from "@/components/sections/SiteMenu";
 import { Hero } from "@/components/sections/Hero";
 import { About } from "@/components/sections/About";
+import { CreativeSystem } from "@/components/sections/CreativeSystem";
 import { Work } from "@/components/sections/Work";
-import { WhyUs } from "@/components/sections/WhyUs";
-import { TestimonialHighlight } from "@/components/sections/TestimonialHighlight";
 import { Services } from "@/components/sections/Services";
-import { Process } from "@/components/sections/Process";
-import { Testimonials } from "@/components/sections/Testimonials";
-import { Pricing } from "@/components/sections/Pricing";
-import { FAQ } from "@/components/sections/FAQ";
-import { Blog } from "@/components/sections/Blog";
 import { CTA } from "@/components/sections/CTA";
 import { Footer } from "@/components/sections/Footer";
 
-/**
- * Section order mirrors the source page 1:1.
- */
 export default function Home() {
   return (
     <>
       <SiteMenu />
       <main>
         <Hero />
-        {/* Rides up over the pinned hero — needs a stacking context and an
-            opaque background to occlude it. */}
         <div className="relative z-10 bg-ink">
           <About />
+          <CreativeSystem />
           <Work />
-          <WhyUs />
-          <TestimonialHighlight />
           <Services />
-          <Process />
-          <Testimonials />
-          <Pricing />
-          <FAQ />
-          <Blog />
+          <section id="resume" className="shell editorial-section resume-section">
+            <span className="eyebrow">(RESUME / EXPERIENCE)</span>
+            <h2 className="text-display-md mt-6">
+              Marketing thinking.
+              <br />
+              <span className="text-muted">Creative execution.</span>
+            </h2>
+            <p className="section-intro mt-8">
+              Experience across digital marketing, campaign development, content,
+              audience thinking, creative direction, execution, and measurement.
+            </p>
+          </section>
           <CTA />
         </div>
       </main>

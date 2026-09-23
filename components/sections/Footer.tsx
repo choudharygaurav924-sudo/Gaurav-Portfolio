@@ -1,100 +1,59 @@
+import { BRAND } from "@/lib/data";
 import Link from "next/link";
-import { BRAND, FOOTER_LINKS, NAV_LINKS, SOCIALS } from "@/lib/data";
 
 export function Footer() {
   return (
-    <footer data-name="Footer" className="border-t border-line pt-20">
+    <footer className="site-footer">
       <div className="shell">
-        <div className="grid gap-12 lg:grid-cols-[1.2fr_1fr_1fr]">
+        <div className="footer-grid">
           <div>
-            <p className="max-w-xs text-sm leading-relaxed text-muted">
-              {BRAND.footerNote}
-            </p>
-            <Link
-              href={`mailto:${BRAND.email}`}
-              className="mt-6 inline-block text-sm text-paper transition-colors duration-300 hover:text-accent"
-            >
+            <p className="footer-note">{BRAND.footerNote}</p>
+            <Link href={`mailto:${BRAND.email}`} className="footer-link">
               {BRAND.email}
             </Link>
-            <p className="mt-2 text-sm text-muted">{BRAND.phone}</p>
+            <p className="eyebrow mt-4">{BRAND.location}</p>
           </div>
 
           <nav aria-label="Sections">
-            <h2 className="eyebrow">Navigate</h2>
-            <ul className="mt-5 flex flex-col gap-3">
-              {NAV_LINKS.map((link) => (
+            <p className="eyebrow">Navigate</p>
+            <ul className="footer-links">
+              {[
+                { label: "About", href: "#about" },
+                { label: "Mindset", href: "#mindset" },
+                { label: "Work", href: "#work" },
+                { label: "Lab", href: "#lab" },
+                { label: "Resume", href: "#resume" },
+                { label: "Contact", href: "#contact" },
+              ].map((link) => (
                 <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="text-sm text-muted-light transition-colors duration-300 hover:text-accent"
-                  >
-                    {link.label}
-                  </Link>
+                  <Link href={link.href}>{link.label}</Link>
                 </li>
               ))}
             </ul>
           </nav>
 
           <nav aria-label="Social">
-            <h2 className="eyebrow">Elsewhere</h2>
-            <ul className="mt-5 flex flex-col gap-3">
-              {SOCIALS.map((social) => (
-                <li key={social.label}>
-                  <Link
-                    href={social.href}
-                    className="text-sm text-muted-light transition-colors duration-300 hover:text-accent"
-                  >
-                    {social.label}
-                  </Link>
-                </li>
-              ))}
+            <p className="eyebrow">Elsewhere</p>
+            <ul className="footer-links">
+              <li>
+                <Link href="https://linkedin.com">LinkedIn</Link>
+              </li>
+              <li>
+                <Link href="https://instagram.com">Instagram</Link>
+              </li>
             </ul>
           </nav>
         </div>
 
-        {/* Oversized wordmark with logo icon */}
-        <div className="mt-24 overflow-hidden">
-          <div
-            aria-hidden
-            className="translate-y-[0.12em] whitespace-nowrap text-center font-display text-display-xl uppercase leading-none tracking-display text-paper flex items-center justify-center gap-4 sm:gap-6"
-          >
-            <svg
-              aria-hidden="true"
-              className="h-[0.75em] w-[0.75em] text-accent shrink-0"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2.2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="M12 2L2 7l10 5 10-5-10-5z" />
-              <path d="M2 17l10 5 10-5" />
-              <path d="M2 12l10 5 10-5" />
-            </svg>
-            <span>
-              {BRAND.name}
-              <span className="text-accent">.</span>
-            </span>
-          </div>
+        <div className="footer-wordmark">
+          GAURAV<span>.</span>
         </div>
 
-        <div className="flex flex-col gap-4 border-t border-line py-8 md:flex-row md:items-center md:justify-between">
-          <p className="text-xs text-muted">
-            &copy; {BRAND.year} {BRAND.name}. All rights reserved.
-          </p>
-          <ul className="flex items-center gap-6">
-            {FOOTER_LINKS.map((link) => (
-              <li key={link.label}>
-                <Link
-                  href={link.href}
-                  className="text-xs text-muted transition-colors duration-300 hover:text-accent"
-                >
-                  {link.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
+        <div className="footer-bottom">
+          <span>
+            © {BRAND.year} {BRAND.name}
+          </span>
+          <Link href="#hero">Back to top</Link>
         </div>
       </div>
     </footer>
