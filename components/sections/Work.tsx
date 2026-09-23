@@ -1,44 +1,36 @@
-"use client";
-
 import Image from "next/image";
-import { PROJECTS } from "@/lib/data";
+import { CASE_STUDIES } from "@/lib/data";
 
 export function Work() {
   return (
-    <section id="work" className="shell editorial-section">
+    <section id="work" className="shell editorial-section case-study-section">
       <div className="section-heading">
         <div>
-          <span className="eyebrow">(REAL / ACADEMIC WORK)</span>
-          <h2 className="text-display-md mt-5">Selected work.</h2>
+          <span className="eyebrow">(SELECTED WORK)</span>
+          <h2 className="text-display-md mt-5">Real / academic work.</h2>
         </div>
         <p className="section-intro">
-          Marketing thinking, campaign development, and creative execution —
-          grounded in real and academic work.
+          Case-study beginnings: the thinking, systems, and creative decisions
+          behind the work.
         </p>
       </div>
 
-      <div className="work-list">
-        {PROJECTS.map((project) => (
-          <article key={project.title} className="work-item">
-            <div className="work-media">
-              <Image
-                src={project.image}
-                alt={project.title}
-                fill
-                sizes="(min-width: 1024px) 62vw, 100vw"
-                className="work-image object-cover"
-              />
+      <div className="case-study-list">
+        {CASE_STUDIES.map((project) => (
+          <article key={project.title} className="case-study" id={project.anchor}>
+            <div className="case-study-media">
+              <Image src={project.image} alt={project.title} fill sizes="(min-width: 1024px) 66vw, 100vw" className="case-study-image object-cover" />
+              <span className="case-study-index">{project.index}</span>
             </div>
-
-            <div className="work-details">
-              <span className="system-number">{project.index}</span>
-              <p className="eyebrow mt-5">{project.year}</p>
+            <div className="case-study-details">
+              <p className="eyebrow">{project.label}</p>
               <h3>{project.title}</h3>
-              <p className="text-muted mt-4 max-w-md">{project.blurb}</p>
-              <div className="tag-list">
-                {project.tags.map((tag) => (
-                  <span key={tag}>{tag}</span>
-                ))}
+              <p className="case-study-type">{project.type}</p>
+              <p className="case-study-role">{project.role}</p>
+              <p className="text-muted">{project.description}</p>
+              <div className="tag-list">{project.tags.map((tag) => <span key={tag}>{tag}</span>)}</div>
+              <div className="case-study-story">
+                {project.story.map(([heading, body]) => <div key={heading}><span>{heading}</span><p>{body}</p></div>)}
               </div>
             </div>
           </article>
