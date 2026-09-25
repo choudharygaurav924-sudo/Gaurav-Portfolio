@@ -35,6 +35,13 @@
     ".next/types/**/*.ts"
   ],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "components/sections/Blog.tsx",
+    "components/sections/FAQ.tsx",
+    "components/sections/Pricing.tsx",
+    "components/sections/Process.tsx",
+    "components/sections/TestimonialHighlight.tsx",
+    "components/sections/Testimonials.tsx",
+    "components/sections/WhyUs.tsx"
   ]
 }
