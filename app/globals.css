@@ -1,13 +1,3 @@
-/* =========================================================
-   GAURAV SINGH — CINEMATIC EDITORIAL PORTFOLIO
-   GLOBAL STYLES
-   ========================================================= */
-
-
-/* =========================================================
-   01 — GLOBAL
-   ========================================================= */
-
 :root {
   --ink: #050505;
   --paper: #f3f1ec;
@@ -16,53 +6,9 @@
   --muted: #8a8a8a;
   --muted-light: #c7c5c0;
 
-  --font-display: "Times New Roman", Times, Georgia, serif;
-  --font-sans: Arial, Helvetica, sans-serif;
-}
-
-html {
-  background: var(--ink);
-  scroll-behavior: smooth;
-}
-
-body {
-  margin: 0;
-  padding: 0;
-
-  background: var(--ink);
-  color: var(--paper);
-
-  font-family: var(--font-sans);
-
-  overflow-x: hidden;
-
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-* {
-  box-sizing: border-box;
-}
-
-*::selection {
-  background: var(--paper);
-  color: var(--ink);
-}
-
-html,
-body {
-  width: 100%;
-  min-height: 100%;
-}
-
-button,
-input,
-textarea,
-select {
-  font: inherit;
-}
-
-button {
+  --font-display: "Anton", Impact, sans-serif;
+  --font-sans: "Inter", Arial, Helvetica, sans-serif;
+}button {
   border: 0;
 }
 
