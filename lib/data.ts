@@ -114,3 +114,11 @@ export interface Post {
 }
 
 export const POSTS: readonly Post[] = [];
+
+export interface FaqItem {
+  question: string;
+  answer: string;
+}
+
+// FAQ is retained as an empty legacy data set because the active page does not render the FAQ section.
+export const FAQ: readonly FaqItem[] = [];
