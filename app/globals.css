@@ -2268,3 +2268,46 @@ a {
     margin-top: 0.5rem;
   }
 }
+/* =========================================================
+   FOOTER — NAVIGATION SCALE + CONTACT ANCHOR
+   ========================================================= */
+
+.site-footer__column .site-footer__eyebrow {
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+}
+
+.site-footer__column .site-footer__link {
+  font-size: 0.92rem;
+  line-height: 1.35;
+  margin-bottom: 0.95rem;
+}
+
+.site-footer__email {
+  font-size: clamp(1.15rem, 2.2vw, 2rem);
+}
+
+/* Contact anchor positioning */
+#contact-email {
+  scroll-margin-top: 32vh;
+}
+
+
+/* =========================================================
+   FOOTER — MOBILE
+   ========================================================= */
+
+@media (max-width: 600px) {
+  .site-footer__column .site-footer__eyebrow {
+    font-size: 0.66rem;
+  }
+
+  .site-footer__column .site-footer__link {
+    font-size: 0.84rem;
+    margin-bottom: 0.8rem;
+  }
+
+  #contact-email {
+    scroll-margin-top: 20vh;
+  }
+}
