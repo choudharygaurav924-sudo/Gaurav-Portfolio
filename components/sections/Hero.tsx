@@ -12,6 +12,7 @@ export function Hero() {
 
   useEffect(() => {
     const section = sectionRef.current;
+
     if (!section || reducedMotion) return;
 
     gsap.registerPlugin(ScrollTrigger);
@@ -19,19 +20,23 @@ export function Hero() {
     const ctx = gsap.context(() => {
       const items = gsap.utils.toArray<HTMLElement>("[data-title]");
 
-      // Establish a deterministic starting state.
+      /*
+       * Clean starting state.
+       * No blur is applied to the typography.
+       */
       gsap.set(items, {
         opacity: 1,
         y: 0,
         scale: 1,
-        filter: "blur(0px)",
         letterSpacing: "normal",
-        willChange: "transform, opacity, filter, letter-spacing",
+        willChange: "transform, opacity, letter-spacing",
       });
 
-      // One scroll-controlled timeline.
-      // Because the timeline is scrubbed, it automatically reverses
-      // when the user scrolls back upward.
+      /*
+       * One scrubbed timeline.
+       * Scrolling down = animation progresses.
+       * Scrolling up = animation reverses.
+       */
       const timeline = gsap.timeline({
         scrollTrigger: {
           trigger: section,
@@ -44,7 +49,6 @@ export function Hero() {
       timeline.to(items, {
         yPercent: -18,
         opacity: 0,
-        filter: "blur(10px)",
         letterSpacing: "0.18em",
         stagger: 0.06,
         ease: "none",
@@ -67,7 +71,8 @@ export function Hero() {
         <span>{BRAND.name}</span>
 
         <span>
-          {BRAND.headlineTop} / {BRAND.headlineBottom.split(" / ")[1]}
+          {BRAND.headlineTop} /{" "}
+          {BRAND.headlineBottom.split(" / ")[1]}
         </span>
 
         <span>{BRAND.location}</span>
@@ -78,23 +83,36 @@ export function Hero() {
           01 — CINEMATIC OPENING
         </p>
 
-        <h1 id="hero-title" className="title-sequence__name">
+        <h1
+          id="hero-title"
+          className="title-sequence__name"
+        >
           <span data-title>GAURAV</span>
           <span data-title>SINGH</span>
         </h1>
 
-        <div data-title className="title-sequence__roles">
+        <div
+          data-title
+          className="title-sequence__roles"
+        >
           <span>MARKETING</span>
           <span>CREATIVE</span>
           <span>DIGITAL</span>
         </div>
 
-        <p data-title className="title-sequence__statement">
-          <span>{HERO.statementStrong}</span> {HERO.statementMuted}
+        <p
+          data-title
+          className="title-sequence__statement"
+        >
+          <span>{HERO.statementStrong}</span>{" "}
+          {HERO.statementMuted}
         </p>
       </div>
 
-      <a className="title-sequence__scroll" href="#about">
+      <a
+        className="title-sequence__scroll"
+        href="#about"
+      >
         <span className="title-sequence__line" />
         SCROLL TO ENTER
       </a>
