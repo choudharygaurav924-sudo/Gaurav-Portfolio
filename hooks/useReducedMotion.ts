@@ -1,35 +1,29 @@
-// hooks/useFitText.ts
-'use client';
-import { useEffect, RefObject } from 'react';
+"use client";
 
-interface FitTextOptions {
-  max?: number;
-  min?: number;
-  padding?: number;
-}
+import { useEffect, useState } from "react";
 
-export function useFitText(
-  ref: RefObject<HTMLElement>,
-  { max = 17, min = 3, padding = 0.92 }: FitTextOptions = {}
-) {
+export function useReducedMotion(): boolean {
+  const [reducedMotion, setReducedMotion] = useState(false);
+
   useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
+    const mediaQuery = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    );
 
-    const fit = () => {
-      const parent = el.parentElement;
-      if (!parent) return;
-      let size = max;
-      el.style.fontSize = `${size}rem`;
-      const target = parent.clientWidth * padding;
-      while (el.scrollWidth > target && size > min) {
-        size -= 0.25;
-        el.style.fontSize = `${size}rem`;
-      }
+    const updatePreference = () => {
+      setReducedMotion(mediaQuery.matches);
     };
 
-    fit();
-    window.addEventListener('resize', fit);
-    return () => window.removeEventListener('resize', fit);
-  }, [ref, max, min, padding]);
+    updatePreference();
+
+    mediaQuery.addEventListener("change", updatePreference);
+
+    return () => {
+      mediaQuery.removeEventListener("change", updatePreference);
+    };
+  }, []);
+
+  return reducedMotion;
 }
+
+export default useReducedMotion;
