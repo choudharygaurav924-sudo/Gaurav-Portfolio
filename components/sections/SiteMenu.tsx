@@ -20,7 +20,7 @@ export function SiteMenu() {
       logoText={BRAND.name}
       logoHref="#hero"
       ctaLabel="GET IN TOUCH"
-      ctaHref="#contact"
+      ctaHref="#contact-email"
       colors={["#050505", "#171717"]}
       accentColor="#F3F1EC"
       menuButtonColor="#F3F1EC"
