@@ -1071,3 +1071,353 @@
     transition: none;
   }
 }
+/* =========================================================
+   PART 5 — CREATIVE LAB
+   ========================================================= */
+
+.creative-lab {
+  position: relative;
+  background: var(--paper);
+  color: var(--ink);
+  padding: 8rem 4vw 10rem;
+  overflow: hidden;
+}
+
+/* ---------------------------------------------------------
+   TOP META
+   --------------------------------------------------------- */
+
+.creative-lab__top {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 2rem;
+  align-items: center;
+
+  padding-bottom: 2rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.16);
+
+  font-size: 0.68rem;
+  line-height: 1;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.creative-lab__top span:nth-child(2) {
+  text-align: center;
+}
+
+.creative-lab__top span:last-child {
+  text-align: right;
+}
+
+/* ---------------------------------------------------------
+   INTRO
+   --------------------------------------------------------- */
+
+.creative-lab__intro {
+  max-width: 1100px;
+  padding: 9rem 0 10rem;
+}
+
+.creative-lab__eyebrow {
+  margin: 0 0 2rem;
+
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+
+  color: rgba(0, 0, 0, 0.48);
+}
+
+.creative-lab__intro h2 {
+  max-width: 1000px;
+  margin: 0;
+
+  font-size: clamp(4rem, 8vw, 9rem);
+  font-weight: 400;
+  line-height: 0.88;
+  letter-spacing: -0.055em;
+}
+
+.creative-lab__intro h2 span {
+  color: rgba(0, 0, 0, 0.3);
+}
+
+.creative-lab__intro-copy {
+  max-width: 480px;
+  margin: 3rem 0 0 auto;
+
+  font-size: 1rem;
+  line-height: 1.7;
+
+  color: rgba(0, 0, 0, 0.58);
+}
+
+/* ---------------------------------------------------------
+   PROJECT LIST
+   --------------------------------------------------------- */
+
+.creative-lab__projects {
+  display: flex;
+  flex-direction: column;
+  gap: 14rem;
+}
+
+/* ---------------------------------------------------------
+   PROJECT
+   --------------------------------------------------------- */
+
+.creative-lab__project {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(300px, 0.6fr);
+  gap: 5vw;
+
+  align-items: center;
+
+  min-height: 80vh;
+}
+
+.creative-lab__project:nth-child(even) {
+  grid-template-columns: minmax(300px, 0.6fr) minmax(0, 1.4fr);
+}
+
+.creative-lab__project:nth-child(even)
+  .creative-lab__media {
+  order: 2;
+}
+
+.creative-lab__project:nth-child(even)
+  .creative-lab__content {
+  order: 1;
+}
+
+/* ---------------------------------------------------------
+   IMAGE
+   --------------------------------------------------------- */
+
+.creative-lab__media {
+  position: relative;
+
+  height: min(72vh, 760px);
+
+  overflow: hidden;
+
+  background: #dedbd5;
+}
+
+.creative-lab__image {
+  position: absolute;
+  inset: 0;
+
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.creative-lab__overlay {
+  position: absolute;
+  inset: 0;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.02) 0%,
+      rgba(0, 0, 0, 0.04) 50%,
+      rgba(0, 0, 0, 0.28) 100%
+    );
+}
+
+.creative-lab__number {
+  position: absolute;
+  left: 2rem;
+  bottom: 1.75rem;
+  z-index: 2;
+
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.creative-lab__label {
+  position: absolute;
+  right: 2rem;
+  bottom: 1.75rem;
+  z-index: 2;
+
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* ---------------------------------------------------------
+   CONTENT
+   --------------------------------------------------------- */
+
+.creative-lab__content {
+  max-width: 560px;
+}
+
+.creative-lab__category {
+  margin: 0 0 2rem;
+
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+
+  color: rgba(0, 0, 0, 0.42);
+}
+
+.creative-lab__content h3 {
+  margin: 0;
+
+  font-size: clamp(3.5rem, 5.5vw, 7rem);
+  font-weight: 400;
+  line-height: 0.88;
+  letter-spacing: -0.055em;
+}
+
+.creative-lab__line {
+  margin: 2rem 0 0;
+
+  font-size: 1rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.creative-lab__copy {
+  max-width: 470px;
+  margin: 2rem 0 0;
+
+  font-size: 0.95rem;
+  line-height: 1.75;
+
+  color: rgba(0, 0, 0, 0.58);
+}
+
+/* ---------------------------------------------------------
+   PROJECT FOOTER
+   --------------------------------------------------------- */
+
+.creative-lab__footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+
+  margin-top: 3rem;
+  padding-top: 1.25rem;
+
+  border-top: 1px solid rgba(0, 0, 0, 0.16);
+
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+
+  color: rgba(0, 0, 0, 0.48);
+}
+
+/* ---------------------------------------------------------
+   BOTTOM
+   --------------------------------------------------------- */
+
+.creative-lab__bottom {
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+
+  margin-top: 12rem;
+  padding-top: 1.5rem;
+
+  border-top: 1px solid rgba(0, 0, 0, 0.16);
+
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+
+  color: rgba(0, 0, 0, 0.42);
+}
+
+/* ---------------------------------------------------------
+   MOBILE
+   --------------------------------------------------------- */
+
+@media (max-width: 800px) {
+  .creative-lab {
+    padding: 5rem 5vw 7rem;
+  }
+
+  .creative-lab__top {
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .creative-lab__top span:nth-child(2) {
+    text-align: right;
+  }
+
+  .creative-lab__top span:last-child {
+    grid-column: 1 / -1;
+    text-align: left;
+    padding-top: 0.5rem;
+  }
+
+  .creative-lab__intro {
+    padding: 6rem 0 7rem;
+  }
+
+  .creative-lab__intro h2 {
+    font-size: clamp(3.2rem, 15vw, 6rem);
+  }
+
+  .creative-lab__intro-copy {
+    margin: 2.5rem 0 0;
+  }
+
+  .creative-lab__projects {
+    gap: 9rem;
+  }
+
+  .creative-lab__project,
+  .creative-lab__project:nth-child(even) {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 3rem;
+
+    min-height: auto;
+  }
+
+  .creative-lab__project:nth-child(even)
+    .creative-lab__media,
+  .creative-lab__project:nth-child(even)
+    .creative-lab__content {
+    order: initial;
+  }
+
+  .creative-lab__media {
+    height: 65vh;
+    min-height: 430px;
+  }
+
+  .creative-lab__content h3 {
+    font-size: clamp(3rem, 13vw, 5rem);
+  }
+
+  .creative-lab__bottom {
+    margin-top: 8rem;
+  }
+}
+
+/* ---------------------------------------------------------
+   REDUCED MOTION
+   --------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .creative-lab {
+    scroll-behavior: auto;
+  }
+}
