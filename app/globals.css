@@ -2034,3 +2034,237 @@ a {
     text-align: left;
   }
 }
+/* =========================================================
+   PART 8 — CINEMATIC FOOTER
+   ========================================================= */
+
+.site-footer {
+  position: relative;
+  background: var(--ink);
+  color: var(--paper);
+  border-top: 1px solid var(--line);
+  overflow: hidden;
+}
+
+.site-footer__inner {
+  padding: 5rem 5vw 2rem;
+}
+
+.site-footer__top {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 4rem;
+  padding-bottom: 6rem;
+}
+
+.site-footer__statement {
+  max-width: 620px;
+}
+
+.site-footer__eyebrow {
+  display: block;
+  margin-bottom: 1.5rem;
+  font-size: 0.65rem;
+  line-height: 1.2;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.site-footer__statement p {
+  margin: 0;
+  max-width: 600px;
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 4.5rem);
+  font-weight: 400;
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+}
+
+.site-footer__column nav {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.site-footer__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+  font-size: 0.78rem;
+  line-height: 1.2;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  color: var(--paper);
+  transition: color 250ms ease;
+}
+
+.site-footer__link span {
+  font-size: 0.7em;
+  transition: transform 250ms ease;
+}
+
+.site-footer__link:hover {
+  color: var(--muted-light);
+}
+
+.site-footer__link:hover span {
+  transform: translate(3px, -3px);
+}
+
+.site-footer__email-row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 3rem;
+  padding: 2rem 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.site-footer__email-row .site-footer__eyebrow {
+  margin: 0;
+}
+
+.site-footer__email {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: clamp(1rem, 2vw, 1.8rem);
+  letter-spacing: -0.02em;
+  text-decoration: none;
+  color: var(--paper);
+  transition: color 250ms ease;
+}
+
+.site-footer__email span {
+  font-size: 0.7em;
+  transition: transform 250ms ease;
+}
+
+.site-footer__email:hover {
+  color: var(--muted-light);
+}
+
+.site-footer__email:hover span {
+  transform: translate(4px, -4px);
+}
+
+.site-footer__wordmark {
+  margin-top: 7rem;
+  font-family: var(--font-display);
+  font-size: clamp(5rem, 18vw, 19rem);
+  font-weight: 400;
+  line-height: 0.72;
+  letter-spacing: -0.075em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.site-footer__wordmark span {
+  display: block;
+  color: var(--muted);
+}
+
+.site-footer__bottom {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 2rem;
+  margin-top: 5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--line);
+  font-size: 0.62rem;
+  line-height: 1.2;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.site-footer__bottom span:nth-child(2) {
+  text-align: center;
+}
+
+.site-footer__bottom a {
+  text-align: right;
+  color: inherit;
+  text-decoration: none;
+  transition: color 250ms ease;
+}
+
+.site-footer__bottom a:hover {
+  color: var(--paper);
+}
+
+
+/* =========================================================
+   FOOTER — TABLET
+   ========================================================= */
+
+@media (max-width: 900px) {
+  .site-footer__top {
+    grid-template-columns: 1.5fr 1fr 1fr;
+    gap: 2.5rem;
+  }
+
+  .site-footer__wordmark {
+    margin-top: 5rem;
+    font-size: clamp(5rem, 17vw, 12rem);
+  }
+}
+
+
+/* =========================================================
+   FOOTER — MOBILE
+   ========================================================= */
+
+@media (max-width: 600px) {
+  .site-footer__inner {
+    padding: 3.5rem 1.25rem 1.5rem;
+  }
+
+  .site-footer__top {
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem 2rem;
+    padding-bottom: 4rem;
+  }
+
+  .site-footer__statement {
+    grid-column: 1 / -1;
+  }
+
+  .site-footer__statement p {
+    font-size: clamp(2rem, 9vw, 3.5rem);
+  }
+
+  .site-footer__email-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.5rem;
+  }
+
+  .site-footer__email {
+    font-size: 1rem;
+  }
+
+  .site-footer__wordmark {
+    margin-top: 5rem;
+    font-size: clamp(4.5rem, 19vw, 8rem);
+  }
+
+  .site-footer__bottom {
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-top: 3rem;
+  }
+
+  .site-footer__bottom span:nth-child(2) {
+    text-align: right;
+  }
+
+  .site-footer__bottom a {
+    grid-column: 1 / -1;
+    text-align: left;
+    margin-top: 0.5rem;
+  }
+}
