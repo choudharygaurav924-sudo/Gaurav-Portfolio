@@ -8,267 +8,171 @@ import { BRAND, HERO } from "@/lib/data";
 
 export function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
-  const stageRef = useRef<HTMLDivElement>(null);
+  const countdownRef = useRef<HTMLSpanElement>(null);
   const reducedMotion = useReducedMotion();
 
   useEffect(() => {
     const section = sectionRef.current;
-    const stage = stageRef.current;
+    const countdown = countdownRef.current;
 
-    if (!section || !stage || reducedMotion) return;
+    if (!section || !countdown || reducedMotion) return;
 
     gsap.registerPlugin(ScrollTrigger);
 
     const ctx = gsap.context(() => {
-      const countdown = stage.querySelector<HTMLElement>(
-        "[data-hero-countdown]"
-      );
-
-      const countdownLabel = stage.querySelector<HTMLElement>(
-        "[data-hero-countdown-label]"
-      );
-
-      const name = stage.querySelector<HTMLElement>(
-        "[data-hero-name]"
-      );
-
-      const nameLetters = gsap.utils.toArray<HTMLElement>(
-        "[data-hero-letter]"
-      );
-
-      const portrait = stage.querySelector<HTMLElement>(
+      const letters = gsap.utils.toArray<HTMLElement>("[data-hero-letter]");
+      const portrait = section.querySelector<HTMLElement>(
         "[data-hero-portrait]"
       );
-
-      const portraitGlow = stage.querySelector<HTMLElement>(
+      const portraitGlow = section.querySelector<HTMLElement>(
         "[data-hero-glow]"
       );
-
-      const roles = stage.querySelector<HTMLElement>(
-        "[data-hero-roles]"
+      const countdownWrap = section.querySelector<HTMLElement>(
+        "[data-hero-countdown-wrap]"
       );
-
-      const statement = stage.querySelector<HTMLElement>(
+      const countdownLabel = section.querySelector<HTMLElement>(
+        "[data-hero-countdown-label]"
+      );
+      const roles = section.querySelector<HTMLElement>("[data-hero-roles]");
+      const statement = section.querySelector<HTMLElement>(
         "[data-hero-statement]"
       );
-
-      const scrollPrompt = stage.querySelector<HTMLElement>(
+      const scrollHint = section.querySelector<HTMLElement>(
         "[data-hero-scroll]"
       );
+      const meta = gsap.utils.toArray<HTMLElement>("[data-hero-meta]");
 
-      /*
-       * Initial state
-       */
+      const counter = { value: 6 };
 
-      gsap.set(countdown, {
+      gsap.set(letters, {
         opacity: 0,
-        scale: 0.8,
+        scaleX: 3.8,
+        y: 20,
+        transformOrigin: "50% 50%",
       });
 
-      gsap.set(countdownLabel, {
-        opacity: 0,
-        y: 12,
-      });
-
-      gsap.set(name, {
-        opacity: 0,
-      });
-
-      gsap.set(nameLetters, {
-        opacity: 0,
-        x: 0,
-        scaleX: 1,
-      });
+      gsap.set(
+        [
+          portrait,
+          portraitGlow,
+          roles,
+          statement,
+          scrollHint,
+          ...meta,
+        ].filter(Boolean),
+        {
+          opacity: 0,
+        }
+      );
 
       gsap.set(portrait, {
-        opacity: 0,
-        scale: 1.12,
-        y: 30,
-      });
-
-      gsap.set(portraitGlow, {
-        opacity: 0,
-        scale: 0.8,
+        scale: 1.08,
+        x: 40,
+        y: 20,
       });
 
       gsap.set(roles, {
-        opacity: 0,
-        y: 25,
+        y: 20,
       });
 
       gsap.set(statement, {
-        opacity: 0,
-        y: 30,
+        y: 35,
       });
 
-      gsap.set(scrollPrompt, {
-        opacity: 0,
+      gsap.set(scrollHint, {
         y: 15,
       });
 
-      /*
-       * Opening sequence
-       */
+      gsap.set(meta, {
+        y: -10,
+      });
 
       const intro = gsap.timeline();
 
-      /*
-       * Countdown
-       */
-
       intro
-        .to(countdown, {
-          opacity: 1,
-          scale: 1,
-          duration: 0.45,
-          ease: "power3.out",
+        .to(counter, {
+          value: 81,
+          duration: 0.7,
+          ease: "none",
+          onUpdate: () => {
+            countdown.textContent = String(
+              Math.round(counter.value)
+            ).padStart(2, "0");
+          },
+        })
+        .to(counter, {
+          value: 100,
+          duration: 0.7,
+          ease: "power2.out",
+          onUpdate: () => {
+            countdown.textContent = String(
+              Math.round(counter.value)
+            ).padStart(2, "0");
+          },
         })
         .to(
-          countdown,
-          {
-            textContent: "81",
-            duration: 0.18,
-            ease: "none",
-          },
-          "+=0.35"
-        )
-        .to(
-          countdown,
-          {
-            textContent: "100",
-            duration: 0.2,
-            ease: "none",
-          },
-          "+=0.18"
-        )
-        .to(
-          countdownLabel,
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.35,
-            ease: "power3.out",
-          },
-          "-=0.05"
-        )
-
-        /*
-         * Countdown exits
-         */
-
-        .to(
-          [countdown, countdownLabel],
+          countdownWrap,
           {
             opacity: 0,
-            duration: 0.35,
-            ease: "power2.in",
-          },
-          "+=0.45"
-        )
-
-        /*
-         * GAURAV appears
-         */
-
-        .to(
-          name,
-          {
-            opacity: 1,
-            duration: 0.25,
-          },
-          "-=0.05"
-        )
-
-        .to(
-          nameLetters,
-          {
-            opacity: 1,
+            y: -20,
             duration: 0.45,
-            stagger: 0.055,
+            ease: "power2.inOut",
+          },
+          "+=0.25"
+        )
+        .to(
+          letters,
+          {
+            opacity: 1,
+            scaleX: 3.8,
+            y: 0,
+            duration: 0.7,
+            stagger: 0.045,
             ease: "power3.out",
           },
           "-=0.1"
         )
-
-        /*
-         * Stretch the letters apart
-         */
-
         .to(
-          nameLetters,
+          letters,
           {
-            x: (index) => {
-              const direction = index < 3 ? -1 : 1;
-              return direction * (index === 2 || index === 3 ? 170 : 250);
-            },
-            scaleX: 0.72,
-            duration: 1.2,
-            stagger: 0.035,
-            ease: "power3.inOut",
-          }
-        )
-
-        /*
-         * Bring GAURAV back together
-         */
-
-        .to(
-          nameLetters,
-          {
-            x: 0,
             scaleX: 1,
             duration: 1.15,
-            stagger: 0.035,
-            ease: "power4.inOut",
-          }
-        )
-
-        /*
-         * Portrait emerges behind the word
-         */
-
-        .to(
-          portraitGlow,
-          {
-            opacity: 1,
-            scale: 1,
-            duration: 0.9,
-            ease: "power3.out",
+            stagger: 0.025,
+            ease: "expo.inOut",
           },
-          "-=0.75"
+          "-=0.15"
         )
-
         .to(
           portrait,
           {
-            opacity: 0.78,
+            opacity: 1,
             scale: 1,
+            x: 0,
             y: 0,
-            duration: 1.1,
+            duration: 1.2,
             ease: "power3.out",
           },
-          "-=0.85"
+          "-=0.9"
         )
-
-        /*
-         * Roles
-         */
-
+        .to(
+          portraitGlow,
+          {
+            opacity: 0.5,
+            duration: 0.8,
+            ease: "power2.out",
+          },
+          "-=0.8"
+        )
         .to(
           roles,
           {
             opacity: 1,
             y: 0,
-            duration: 0.7,
+            duration: 0.65,
             ease: "power3.out",
           },
-          "-=0.35"
+          "-=0.55"
         )
-
-        /*
-         * Statement
-         */
-
         .to(
           statement,
           {
@@ -277,29 +181,31 @@ export function Hero() {
             duration: 0.8,
             ease: "power3.out",
           },
-          "-=0.25"
+          "-=0.35"
         )
-
-        /*
-         * Scroll prompt
-         */
-
         .to(
-          scrollPrompt,
+          scrollHint,
           {
             opacity: 1,
             y: 0,
+            duration: 0.5,
+            ease: "power2.out",
+          },
+          "-=0.3"
+        )
+        .to(
+          meta,
+          {
+            opacity: 1,
+            y: 0,
+            stagger: 0.08,
             duration: 0.45,
             ease: "power2.out",
           },
-          "-=0.15"
+          "-=0.35"
         );
 
-      /*
-       * Scroll-linked cinematic exit
-       */
-
-      const scrollTimeline = gsap.timeline({
+      const exit = gsap.timeline({
         scrollTrigger: {
           trigger: section,
           start: "top top",
@@ -308,44 +214,58 @@ export function Hero() {
         },
       });
 
-      scrollTimeline
+      exit
         .to(
-          name,
+          letters,
           {
-            scale: 1.18,
-            yPercent: -12,
-            duration: 1,
+            yPercent: -18,
+            opacity: 0,
+            scale: 0.94,
+            letterSpacing: "0.08em",
+            stagger: 0.025,
             ease: "none",
-          }
+          },
+          0
         )
         .to(
           portrait,
           {
-            scale: 1.12,
-            yPercent: -8,
-            opacity: 0.35,
-            duration: 1,
+            yPercent: -10,
+            opacity: 0,
+            scale: 1.04,
             ease: "none",
           },
-          "<"
+          0
         )
         .to(
-          [roles, statement],
+          portraitGlow,
+          {
+            yPercent: -8,
+            opacity: 0,
+            ease: "none",
+          },
+          0
+        )
+        .to(
+          roles,
           {
             yPercent: -25,
             opacity: 0,
-            duration: 1,
             ease: "none",
           },
-          "<"
+          0
         )
         .to(
-          [countdown, countdownLabel],
+          statement,
           {
+            yPercent: -20,
             opacity: 0,
+            ease: "none",
           },
-          "<"
+          0
         );
+
+      ScrollTrigger.refresh();
     }, section);
 
     return () => {
@@ -360,54 +280,73 @@ export function Hero() {
       className="cinematic-hero"
       aria-labelledby="hero-title"
     >
-      <div
-        ref={stageRef}
-        className="cinematic-hero__stage"
-      >
-        <div className="cinematic-hero__meta">
-          <span>{BRAND.name}</span>
-          <span>PORTFOLIO / {BRAND.year}</span>
-          <span>{BRAND.location}</span>
+      <div className="cinematic-hero__stage">
+        <div className="cinematic-hero__top">
+          <span data-hero-meta>
+            {BRAND.name}
+          </span>
+
+          <span data-hero-meta>
+            {BRAND.year}
+          </span>
+
+          <span data-hero-meta>
+            {BRAND.location}
+          </span>
         </div>
 
         <div
-          className="cinematic-hero__countdown"
-          data-hero-countdown
+          className="cinematic-hero__counter"
+          data-hero-countdown-wrap
           aria-hidden="true"
         >
-          06
+          <span
+            ref={countdownRef}
+            className="cinematic-hero__counter-number"
+          >
+            06
+          </span>
+
+          <span
+            className="cinematic-hero__counter-label"
+            data-hero-countdown-label
+          >
+            LOADING / PORTFOLIO
+          </span>
         </div>
 
-        <div
-          className="cinematic-hero__countdown-label"
-          data-hero-countdown-label
-        >
-          <span>GAURAV SINGH</span>
-          <span>MARKETING × CREATIVE × DIGITAL</span>
+        <div className="cinematic-hero__portrait-wrap">
+          <div
+            className="cinematic-hero__portrait-glow"
+            data-hero-glow
+          />
+
+          <img
+            src="/assets/gaurav-portrait.jpg"
+            alt=""
+            className="cinematic-hero__portrait"
+            data-hero-portrait
+            onError={(event) => {
+              event.currentTarget.style.display = "none";
+            }}
+          />
         </div>
 
-        <div
-          className="cinematic-hero__portrait-glow"
-          data-hero-glow
-        />
+        <div className="cinematic-hero__identity">
+          <p className="cinematic-hero__eyebrow">
+            01 — MARKETING / CREATIVE / DIGITAL
+          </p>
 
-        <div
-          className="cinematic-hero__portrait"
-          data-hero-portrait
-          aria-hidden="true"
-        />
-
-        <div className="cinematic-hero__center">
           <h1
             id="hero-title"
             className="cinematic-hero__name"
-            data-hero-name
             aria-label="GAURAV"
           >
             {"GAURAV".split("").map((letter, index) => (
               <span
                 key={`${letter}-${index}`}
                 data-hero-letter
+                aria-hidden="true"
               >
                 {letter}
               </span>
@@ -422,22 +361,31 @@ export function Hero() {
             <span>CREATIVE</span>
             <span>DIGITAL</span>
           </div>
+        </div>
 
-          <p
-            className="cinematic-hero__statement"
-            data-hero-statement
-          >
-            <strong>{HERO.statementStrong}</strong>{" "}
+        <div
+          className="cinematic-hero__statement"
+          data-hero-statement
+        >
+          <p>
+            <span>{HERO.statementStrong}</span>{" "}
             {HERO.statementMuted}
           </p>
         </div>
 
-        <div
+        <a
+          href="#about"
           className="cinematic-hero__scroll"
           data-hero-scroll
         >
           <span className="cinematic-hero__scroll-line" />
           <span>SCROLL TO ENTER</span>
+        </a>
+
+        <div className="cinematic-hero__bottom">
+          <span>01 / 08</span>
+          <span>PORTFOLIO / 2026</span>
+          <span>{BRAND.location}</span>
         </div>
       </div>
     </section>
