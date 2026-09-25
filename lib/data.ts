@@ -103,3 +103,14 @@ export const CASE_STUDIES = [
     story: [["RESEARCH", "Investigate the category and the context around the opportunity."], ["AUDIENCE", "Define who the campaign needs to reach and what matters to them."], ["POSITIONING", "Find a clear and compelling place for the idea to live."]],
   },
 ] as const;
+
+export interface Post {
+  title: string;
+  excerpt: string;
+  date: string;
+  category: string;
+  image: string;
+  href: string;
+}
+
+export const POSTS: readonly Post[] = [];
