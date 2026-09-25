@@ -19,9 +19,9 @@ export function SiteMenu() {
       displayItemNumbering
       logoText={BRAND.name}
       logoHref="#hero"
-      ctaLabel="Let's Talk"
+      ctaLabel="GET IN TOUCH"
       ctaHref="#contact"
-      colors={["#171717", "#8A8A8A"]}
+      colors={["#050505", "#171717"]}
       accentColor="#F3F1EC"
       menuButtonColor="#F3F1EC"
       openMenuButtonColor="#050505"
