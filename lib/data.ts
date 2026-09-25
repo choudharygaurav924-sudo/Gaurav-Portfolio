@@ -3,7 +3,7 @@ export const BRAND = {
   wordmark: "GAURAV",
   headlineTop: "MARKETING",
   headlineBottom: "CREATIVE / DIGITAL",
-  email: "hello@gauravsingh.com",
+  email: "choudharygaurav924@gmail.com",
   phone: "",
   location: "BASED — TORONTO / CANADA",
   timezone: "",
@@ -21,53 +21,22 @@ export const HERO = {
 } as const;
 
 export const NAV_LINKS = [
-  {
-    label: "About",
-    href: "#about",
-    ariaLabel: "Go to the about section",
-  },
-  {
-    label: "Mindset",
-    href: "#mindset",
-    ariaLabel: "Read my marketing mindset",
-  },
-  {
-    label: "Work",
-    href: "#work",
-    ariaLabel: "See selected work",
-  },
-  {
-    label: "Lab",
-    href: "#lab",
-    ariaLabel: "See self-initiated campaigns",
-  },
-  {
-    label: "Resume",
-    href: "#resume",
-    ariaLabel: "View experience and resume",
-  },
-  {
-    label: "Contact",
-    href: "#contact",
-    ariaLabel: "Get in touch",
-  },
+  { label: "About", href: "#about", ariaLabel: "Go to the about section" },
+  { label: "Mindset", href: "#mindset", ariaLabel: "Read my marketing mindset" },
+  { label: "Work", href: "#work", ariaLabel: "See selected work" },
+  { label: "Lab", href: "#lab", ariaLabel: "See self-initiated campaigns" },
+  { label: "Resume", href: "#resume", ariaLabel: "View experience and resume" },
+  { label: "Contact", href: "#contact", ariaLabel: "Get in touch" },
 ] as const;
 
 export const SOCIALS = [
-  {
-    label: "LinkedIn",
-    href: "https://linkedin.com",
-  },
-  {
-    label: "Instagram",
-    href: "https://instagram.com",
-  },
+  { label: "LinkedIn", href: "https://linkedin.com" },
+  { label: "Instagram", href: "https://instagram.com" },
 ] as const;
 
 export const ABOUT = {
   label: "(ABOUT)",
-  statementStrong:
-    "Marketing strategy with a creative point of view. ",
+  statementStrong: "Marketing strategy with a creative point of view. ",
   statementMuted:
     "I turn audience insight into campaigns, content, and experiences people remember.",
 } as const;
@@ -138,11 +107,7 @@ export const CASE_STUDIES = [
     image: "/images/work-1.jpg",
     description:
       "A campaign-led marketing role built around coordination, content, client work, and tracking across multiple digital and social initiatives.",
-    tags: [
-      "Digital / Social",
-      "Campaign Tracking",
-      "Content / Client Work",
-    ],
+    tags: ["Digital / Social", "Campaign Tracking", "Content / Client Work"],
     story: [
       [
         "THE CHALLENGE",
@@ -164,11 +129,7 @@ export const CASE_STUDIES = [
     image: "/images/work-2.jpg",
     description:
       "An outreach and follow-up system for a real estate and mortgage audience, combining targeted communication with practical CRM discipline.",
-    tags: [
-      "Targeted Outreach",
-      "Google Sheets CRM",
-      "Campaign / Event Work",
-    ],
+    tags: ["Targeted Outreach", "Google Sheets CRM", "Campaign / Event Work"],
     story: [
       [
         "THE CHALLENGE",
@@ -190,12 +151,7 @@ export const CASE_STUDIES = [
     image: "/images/work-3.jpg",
     description:
       "An academic advertising project developed through research, audience thinking, positioning, campaign strategy, and creative direction.",
-    tags: [
-      "Research",
-      "Audience",
-      "Positioning",
-      "Creative Direction",
-    ],
+    tags: ["Research", "Audience", "Positioning", "Creative Direction"],
     story: [
       [
         "RESEARCH",
@@ -221,11 +177,7 @@ export const EXPERIENCE = [
     location: "DELHI, INDIA — REMOTE",
     description:
       "B2B marketing for a wholesale supplier of polycarbonate roofing sheets, supporting brand communication, digital marketing, and business development.",
-    tags: [
-      "B2B Marketing",
-      "Digital Marketing",
-      "Business Development",
-    ],
+    tags: ["B2B Marketing", "Digital Marketing", "Business Development"],
   },
   {
     period: "JAN 2026 — APR 2026",
@@ -234,12 +186,7 @@ export const EXPERIENCE = [
     location: "ONTARIO, CANADA",
     description:
       "Built targeted outreach and follow-up systems for real estate and mortgage professionals, using direct outreach, CRM tracking, campaign support, and event promotion.",
-    tags: [
-      "5,000+ Outreach",
-      "~1,000 Opportunities",
-      "CRM",
-      "Lead Generation",
-    ],
+    tags: ["5,000+ Outreach", "~1,000 Opportunities", "CRM", "Lead Generation"],
   },
   {
     period: "JAN 2025 — APR 2025",
@@ -248,12 +195,7 @@ export const EXPERIENCE = [
     location: "ONTARIO, CANADA",
     description:
       "Led a five-person marketing team across digital campaigns, content, client work, campaign tracking, and event promotion.",
-    tags: [
-      "Team Leadership",
-      "Campaigns",
-      "Social Media",
-      "Content",
-    ],
+    tags: ["Team Leadership", "Campaigns", "Social Media", "Content"],
   },
   {
     period: "2022 — 2025",
@@ -262,12 +204,7 @@ export const EXPERIENCE = [
     location: "ONTARIO, CANADA",
     description:
       "Advanced Diploma focused on advertising, digital marketing, strategic media planning, campaign strategy, creative direction, and marketing analytics.",
-    tags: [
-      "Advertising",
-      "Digital Marketing",
-      "Strategy",
-      "Analytics",
-    ],
+    tags: ["Advertising", "Digital Marketing", "Strategy", "Analytics"],
   },
 ] as const;
 
@@ -287,5 +224,4 @@ export interface FaqItem {
   answer: string;
 }
 
-// FAQ is retained as an empty legacy data set because the active page does not render the FAQ section.
 export const FAQ: readonly FaqItem[] = [];
