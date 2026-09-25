@@ -66,7 +66,8 @@ export const SOCIALS = [
 
 export const ABOUT = {
   label: "(ABOUT)",
-  statementStrong: "Marketing strategy with a creative point of view. ",
+  statementStrong:
+    "Marketing strategy with a creative point of view. ",
   statementMuted:
     "I turn audience insight into campaigns, content, and experiences people remember.",
 } as const;
@@ -212,6 +213,64 @@ export const CASE_STUDIES = [
   },
 ] as const;
 
+export const EXPERIENCE = [
+  {
+    period: "AUG 2026 — PRESENT",
+    company: "SS TRADERS",
+    role: "MARKETING SPECIALIST",
+    location: "DELHI, INDIA — REMOTE",
+    description:
+      "B2B marketing for a wholesale supplier of polycarbonate roofing sheets, supporting brand communication, digital marketing, and business development.",
+    tags: [
+      "B2B Marketing",
+      "Digital Marketing",
+      "Business Development",
+    ],
+  },
+  {
+    period: "JAN 2026 — APR 2026",
+    company: "PHILER.AI",
+    role: "MARKETING SPECIALIST INTERN",
+    location: "ONTARIO, CANADA",
+    description:
+      "Built targeted outreach and follow-up systems for real estate and mortgage professionals, using direct outreach, CRM tracking, campaign support, and event promotion.",
+    tags: [
+      "5,000+ Outreach",
+      "~1,000 Opportunities",
+      "CRM",
+      "Lead Generation",
+    ],
+  },
+  {
+    period: "JAN 2025 — APR 2025",
+    company: "LIFE IS A SPECIAL EVENT",
+    role: "MARKETING TEAM LEADER — CO-OP",
+    location: "ONTARIO, CANADA",
+    description:
+      "Led a five-person marketing team across digital campaigns, content, client work, campaign tracking, and event promotion.",
+    tags: [
+      "Team Leadership",
+      "Campaigns",
+      "Social Media",
+      "Content",
+    ],
+  },
+  {
+    period: "2022 — 2025",
+    company: "SHERIDAN COLLEGE",
+    role: "ADVERTISING & DIGITAL MARKETING",
+    location: "ONTARIO, CANADA",
+    description:
+      "Advanced Diploma focused on advertising, digital marketing, strategic media planning, campaign strategy, creative direction, and marketing analytics.",
+    tags: [
+      "Advertising",
+      "Digital Marketing",
+      "Strategy",
+      "Analytics",
+    ],
+  },
+] as const;
+
 export interface Post {
   title: string;
   excerpt: string;
@@ -230,41 +289,3 @@ export interface FaqItem {
 
 // FAQ is retained as an empty legacy data set because the active page does not render the FAQ section.
 export const FAQ: readonly FaqItem[] = [];
-export const EXPERIENCE = [
-  {
-    period: "AUG 2026 — PRESENT",
-    company: "SS TRADERS",
-    role: "MARKETING SPECIALIST",
-    location: "DELHI, INDIA",
-    description:
-      "B2B marketing for a wholesale supplier of polycarbonate roofing sheets, supporting brand communication, digital marketing, and business development.",
-    tags: ["B2B Marketing", "Digital Marketing", "Business Development"],
-  },
-  {
-    period: "JAN 2026 — APR 2026",
-    company: "PHILER.AI",
-    role: "MARKETING SPECIALIST INTERN",
-    location: "ONTARIO / ALBERTA",
-    description:
-      "Built targeted outreach and follow-up systems for real estate and mortgage professionals, using direct outreach, CRM tracking, campaign support, and event promotion.",
-    tags: ["5,000+ Outreach", "~1,000 Opportunities", "CRM", "Lead Generation"],
-  },
-  {
-    period: "JAN 2025 — APR 2025",
-    company: "LIFE IS A SPECIAL EVENT",
-    role: "MARKETING TEAM LEADER — CO-OP",
-    location: "ONTARIO, CANADA",
-    description:
-      "Led a five-person marketing team across digital campaigns, content, client work, campaign tracking, and event promotion.",
-    tags: ["Team Leadership", "Campaigns", "Social Media", "Content"],
-  },
-  {
-    period: "2022 — 2025",
-    company: "SHERIDAN COLLEGE",
-    role: "ADVERTISING & DIGITAL MARKETING",
-    location: "ONTARIO, CANADA",
-    description:
-      "Advanced Diploma focused on advertising, digital marketing, strategic media planning, campaign strategy, creative direction, and marketing analytics.",
-    tags: ["Advertising", "Digital Marketing", "Strategy", "Analytics"],
-  },
-] as const;
