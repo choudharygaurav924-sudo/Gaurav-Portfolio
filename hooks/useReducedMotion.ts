@@ -1,24 +1,35 @@
-"use client";
+// hooks/useFitText.ts
+'use client';
+import { useEffect, RefObject } from 'react';
 
-import { useEffect, useState } from "react";
+interface FitTextOptions {
+  max?: number;
+  min?: number;
+  padding?: number;
+}
 
-const QUERY = "(prefers-reduced-motion: reduce)";
-
-/**
- * Tracks the user's reduced-motion preference and reacts to live changes.
- * Starts `false` so SSR and first paint agree, then syncs on mount.
- */
-export function useReducedMotion(): boolean {
-  const [reduced, setReduced] = useState(false);
-
+export function useFitText(
+  ref: RefObject<HTMLElement>,
+  { max = 17, min = 3, padding = 0.92 }: FitTextOptions = {}
+) {
   useEffect(() => {
-    const mq = window.matchMedia(QUERY);
-    setReduced(mq.matches);
+    const el = ref.current;
+    if (!el) return;
 
-    const onChange = (event: MediaQueryListEvent) => setReduced(event.matches);
-    mq.addEventListener("change", onChange);
-    return () => mq.removeEventListener("change", onChange);
-  }, []);
+    const fit = () => {
+      const parent = el.parentElement;
+      if (!parent) return;
+      let size = max;
+      el.style.fontSize = `${size}rem`;
+      const target = parent.clientWidth * padding;
+      while (el.scrollWidth > target && size > min) {
+        size -= 0.25;
+        el.style.fontSize = `${size}rem`;
+      }
+    };
 
-  return reduced;
+    fit();
+    window.addEventListener('resize', fit);
+    return () => window.removeEventListener('resize', fit);
+  }, [ref, max, min, padding]);
 }
