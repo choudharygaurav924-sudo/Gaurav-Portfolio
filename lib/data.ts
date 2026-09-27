@@ -127,6 +127,62 @@ export const CREATIVE_LAB = [
   },
 ] as const;
 
+/* =========================================================
+   SELECTED WORK
+   ========================================================= */
+
+export interface Project {
+  index: string;
+  title: string;
+  blurb: string;
+  image: string;
+  href: string;
+  year: string;
+  tags: readonly string[];
+  status: "real" | "academic" | "self-initiated";
+}
+
+export const PROJECTS: readonly Project[] = [
+  {
+    index: "01",
+    title: "Life Is A Special Event",
+    blurb:
+      "Marketing Team Leader during my college co-op, working across campaign coordination, digital activity, client work, event promotion, content support, and campaign tracking.",
+    image: "/images/life-is-a-special-event-cover.png",
+    href: "#work",
+    year: "REAL WORK",
+    tags: [
+      "Marketing",
+      "Campaigns",
+      "Digital / Social",
+      "Team Leadership",
+    ],
+    status: "real",
+  },
+
+  {
+    index: "02",
+    title: "Sheridan / LagerShed",
+    blurb:
+      "Academic advertising and marketing project shaped through research, audience definition, positioning, campaign strategy, and creative direction.",
+    image: "/images/sheridan-lagershed-photo.jpg",
+    href: "#work",
+    year: "ACADEMIC PROJECT",
+    tags: [
+      "Research",
+      "Audience",
+      "Positioning",
+      "Campaign Strategy",
+      "Creative Direction",
+    ],
+    status: "academic",
+  },
+] as const;
+
+/* =========================================================
+   CASE STUDIES
+   ========================================================= */
+
 export const CASE_STUDIES = [
   {
     index: "01",
@@ -177,68 +233,6 @@ export const CASE_STUDIES = [
 
   {
     index: "02",
-    anchor: "philer-ai",
-    title: "PHILER.AI",
-    label: "REAL WORK",
-    type: "Digital Outreach / Lead Generation",
-    role: "MARKETING SPECIALIST INTERN",
-
-    /*
-      IMPORTANT:
-      NO PHILER IMAGES.
-      NO SPREADSHEETS.
-      NO CRM SCREENSHOTS.
-      NO CONTACT LISTS.
-    */
-    image: "",
-
-    images: [],
-
-    description:
-      "A targeted digital outreach and lead-generation workflow built around prospect research, contact organization, engagement tracking, follow-ups, and CRM-style pipeline management.",
-
-    tags: [
-      "5,000+ Outreach",
-      "~1,000 Opportunities",
-      "Lead Generation",
-      "Follow-up",
-      "CRM Workflow",
-    ],
-
-    story: [
-      [
-        "THE ROLE",
-        "Marketing Specialist Intern focused on prospect research, targeted digital outreach, contact organization, engagement tracking, follow-ups, and lead-generation support.",
-      ],
-      [
-        "THE AUDIENCE",
-        "Real estate agents and mortgage professionals across Ontario and Alberta.",
-      ],
-      [
-        "THE PROCESS",
-        "Research relevant prospects, organize contact information, conduct targeted outreach, track engagement, identify follow-up opportunities, and maintain structured records throughout the process.",
-      ],
-      [
-        "THE SYSTEM",
-        "Used structured CRM-style workflows to organize prospects, track outreach status, monitor engagement, validate contact information, and manage follow-up activity.",
-      ],
-      [
-        "THE OUTREACH",
-        "Worked across direct digital outreach channels to introduce the company, communicate the value proposition, and move relevant prospects toward the next stage of the conversation.",
-      ],
-      [
-        "THE FOLLOW-UP",
-        "Maintained follow-up activity based on engagement and response status rather than treating every prospect as the same.",
-      ],
-      [
-        "THE RESULT",
-        "The workflow supported more than 5,000 targeted outreach interactions and approximately 1,000 client opportunities.",
-      ],
-    ],
-  },
-
-  {
-    index: "03",
     anchor: "sheridan-lagershed",
     title: "SHERIDAN / LAGERSHED",
     label: "ACADEMIC PROJECT",
