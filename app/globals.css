@@ -1,31 +1,835 @@
-/* =========================================================
-   HERO SPACE FIX
-========================================================= */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap");
 
-.cinematic-hero {
-  min-height: 100svh !important;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #050505;
+  --text: #f2f2f0;
+  --muted: #858585;
+  --line: rgba(255, 255, 255, 0.14);
+  --line-soft: rgba(255, 255, 255, 0.08);
 }
 
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  background: var(--bg);
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Inter", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+img {
+  max-width: 100%;
+}
+
+::selection {
+  background: #f2f2f0;
+  color: #050505;
+}
+
+/* =========================================
+   GLOBAL
+========================================= */
+
+.site-shell {
+  width: 100%;
+  overflow: hidden;
+  background: var(--bg);
+}
+
+.section-label {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--line);
+  color: #777;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+/* =========================================
+   HEADER
+========================================= */
+
+.site-header {
+  position: fixed;
+  z-index: 100;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 76px;
+  padding: 0 34px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  mix-blend-mode: difference;
+  color: white;
+}
+
+.site-logo {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+}
+
+.site-nav {
+  display: flex;
+  align-items: center;
+  gap: 26px;
+}
+
+.site-nav a,
+.site-header-contact {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.site-nav a {
+  opacity: 0.75;
+  transition: opacity 0.25s ease;
+}
+
+.site-nav a:hover {
+  opacity: 1;
+}
+
+.site-header-contact {
+  opacity: 0.9;
+}
+
+/* =========================================
+   HERO
+========================================= */
+
+.cinematic-hero,
 .title-sequence {
   min-height: 100svh !important;
+  height: auto !important;
 }
 
-.cinematic-hero__stage {
-  height: 100svh !important;
-  min-height: 100svh !important;
-}
-
+.cinematic-hero__stage,
 .title-sequence__stage {
   height: 100svh !important;
   min-height: 100svh !important;
 }
 
-/* Remove unnecessary space after the hero */
-.portrait-section {
-  margin-top: 0 !important;
-  padding-top: 0 !important;
+.title-sequence {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
 }
 
-.portrait-section:empty {
-  display: none;
+.title-sequence__stage {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.title-sequence__center {
+  width: 100%;
+  padding: 0 4vw;
+}
+
+.title-sequence__name {
+  position: relative;
+  width: 100%;
+  text-align: center;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: clamp(72px, 18vw, 300px);
+  font-weight: 700;
+  line-height: 0.78;
+  letter-spacing: -0.08em;
+  white-space: nowrap;
+}
+
+.title-sequence__name span {
+  display: inline-block;
+}
+
+.title-sequence__meta,
+.title-sequence__roles,
+.title-sequence__intro,
+.title-sequence__location,
+.title-sequence__scroll {
+  font-size: 10px;
+  line-height: 1.5;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.title-sequence__intro {
+  max-width: 420px;
+  margin: 40px auto 0;
+  color: #999;
+  text-align: center;
+}
+
+.title-sequence__location {
+  position: absolute;
+  left: 34px;
+  bottom: 30px;
+  color: #777;
+}
+
+.title-sequence__scroll {
+  position: absolute;
+  right: 34px;
+  bottom: 30px;
+  color: #777;
+}
+
+/* =========================================
+   PORTRAIT
+========================================= */
+
+.portrait-section {
+  position: relative;
+  padding: 110px 34px 140px;
+  margin: 0;
+}
+
+.portrait-section > * {
+  max-width: 1400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.portrait-section .section-label {
+  margin-bottom: 45px;
+}
+
+.interactive-portrait {
+  position: relative;
+  width: min(100%, 1100px);
+  margin: 0 auto;
+}
+
+/* Compatibility with different portrait component class names */
+
+.interactive-portrait__frame,
+.portrait-frame,
+.interactive-portrait {
+  perspective: 1200px;
+}
+
+.interactive-portrait img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* =========================================
+   EDITORIAL SECTIONS
+========================================= */
+
+.editorial-section {
+  padding: 140px 34px;
+}
+
+.about-content,
+.mindset-content,
+.experience-list {
+  max-width: 1400px;
+  margin: 80px auto 0;
+}
+
+.editorial-heading {
+  max-width: 1200px;
+  margin: 0;
+
+  font-family: "Space Grotesk", sans-serif;
+  font-size: clamp(48px, 8vw, 132px);
+  font-weight: 500;
+  line-height: 0.92;
+  letter-spacing: -0.065em;
+}
+
+.editorial-muted {
+  max-width: 650px;
+  margin: 55px 0 0 auto;
+
+  color: var(--muted);
+  font-size: clamp(20px, 2.3vw, 32px);
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+}
+
+.about-location {
+  margin-top: 100px;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+
+  display: flex;
+  justify-content: space-between;
+
+  color: #777;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* =========================================
+   MINDSET
+========================================= */
+
+.mindset-intro {
+  max-width: 800px;
+  margin-bottom: 100px;
+}
+
+.mindset-intro p {
+  margin: 0;
+
+  font-family: "Space Grotesk", sans-serif;
+  font-size: clamp(40px, 6vw, 90px);
+  line-height: 0.95;
+  letter-spacing: -0.055em;
+}
+
+.creative-system {
+  border-top: 1px solid var(--line);
+}
+
+.system-row {
+  display: grid;
+  grid-template-columns: 80px 1fr 1fr;
+  gap: 30px;
+  align-items: center;
+
+  min-height: 90px;
+  border-bottom: 1px solid var(--line);
+
+  font-size: 13px;
+}
+
+.system-number {
+  color: #666;
+}
+
+.system-title {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: clamp(22px, 3vw, 42px);
+  letter-spacing: -0.04em;
+}
+
+.system-description {
+  color: #777;
+}
+
+/* =========================================
+   WORK
+========================================= */
+
+.work-section {
+  padding: 140px 34px;
+}
+
+.work-list {
+  max-width: 1400px;
+  margin: 75px auto 0;
+  display: flex;
+  flex-direction: column;
+  gap: 110px;
+}
+
+.work-card {
+  display: block;
+}
+
+.work-card-media {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: #101010;
+}
+
+.work-card-image {
+  object-fit: cover;
+  transition: transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.work-card:hover .work-card-image {
+  transform: scale(1.035);
+}
+
+.work-card-number {
+  position: absolute;
+  z-index: 3;
+  top: 22px;
+  left: 24px;
+
+  font-size: 11px;
+  letter-spacing: 0.1em;
+}
+
+.work-card-arrow {
+  position: absolute;
+  z-index: 3;
+  right: 22px;
+  bottom: 18px;
+
+  font-size: 28px;
+  line-height: 1;
+}
+
+.work-card-placeholder {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #111;
+  color: #555;
+
+  font-family: "Space Grotesk", sans-serif;
+  font-size: clamp(30px, 6vw, 90px);
+  letter-spacing: -0.05em;
+}
+
+.work-card-info {
+  padding-top: 22px;
+}
+
+.work-card-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+
+  color: #666;
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.work-card-title-row {
+  margin-top: 24px;
+
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 30px;
+}
+
+.work-card-title-row h3 {
+  margin: 0;
+
+  font-family: "Space Grotesk", sans-serif;
+  font-size: clamp(42px, 7vw, 100px);
+  font-weight: 500;
+  line-height: 0.9;
+  letter-spacing: -0.06em;
+}
+
+.work-card-title-row span {
+  flex-shrink: 0;
+
+  color: #777;
+  font-size: 9px;
+  letter-spacing: 0.1em;
+}
+
+.work-card-role {
+  margin: 30px 0 0;
+
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  color: #999;
+}
+
+.work-card-description {
+  max-width: 650px;
+  margin: 18px 0 0;
+
+  color: #777;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.work-card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 24px;
+}
+
+.work-card-tags span,
+.experience-tags span {
+  padding: 7px 10px;
+  border: 1px solid var(--line);
+
+  color: #777;
+  font-size: 8px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* =========================================
+   CREATIVE LAB
+========================================= */
+
+.lab-section {
+  padding: 140px 34px;
+}
+
+.lab-header {
+  max-width: 1400px;
+  margin: 80px auto;
+  display: grid;
+  grid-template-columns: 1.3fr 0.7fr;
+  gap: 80px;
+  align-items: end;
+}
+
+.lab-header h2 {
+  margin: 0;
+
+  font-family: "Space Grotesk", sans-serif;
+  font-size: clamp(50px, 9vw, 150px);
+  line-height: 0.82;
+  letter-spacing: -0.075em;
+}
+
+.lab-header p {
+  margin: 0;
+
+  color: #777;
+  font-size: 16px;
+  line-height: 1.45;
+}
+
+.lab-grid {
+  max-width: 1400px;
+  margin: 0 auto;
+
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.lab-card-media {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background: #101010;
+}
+
+.lab-card-image {
+  object-fit: cover;
+}
+
+.lab-card-placeholder {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 42px;
+  letter-spacing: -0.06em;
+}
+
+.lab-card-info {
+  padding-top: 18px;
+}
+
+.lab-card-info > span {
+  color: #666;
+  font-size: 8px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.lab-card-info h3 {
+  margin: 10px 0 0;
+
+  font-family: "Space Grotesk", sans-serif;
+  font-size: clamp(30px, 4vw, 55px);
+  line-height: 0.9;
+  letter-spacing: -0.05em;
+}
+
+.lab-card-info p {
+  margin: 18px 0 0;
+  color: #777;
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+/* =========================================
+   EXPERIENCE
+========================================= */
+
+.experience-list {
+  border-top: 1px solid var(--line);
+}
+
+.experience-row {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: 50px;
+
+  padding: 45px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.experience-date {
+  color: #666;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+}
+
+.experience-main h3 {
+  margin: 0;
+
+  font-family: "Space Grotesk", sans-serif;
+  font-size: clamp(35px, 5vw, 70px);
+  font-weight: 500;
+  line-height: 0.9;
+  letter-spacing: -0.055em;
+}
+
+.experience-role {
+  margin: 18px 0 0;
+
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.experience-location {
+  margin: 8px 0 0;
+
+  color: #666;
+  font-size: 10px;
+}
+
+.experience-description {
+  max-width: 700px;
+  margin: 25px 0 0;
+
+  color: #777;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.experience-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 22px;
+}
+
+/* =========================================
+   CONTACT
+========================================= */
+
+.contact-section {
+  padding: 150px 34px 80px;
+}
+
+.contact-content {
+  max-width: 1400px;
+  margin: 100px auto 0;
+}
+
+.contact-kicker {
+  margin: 0 0 45px;
+
+  color: #777;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.contact-content h2 {
+  margin: 0;
+
+  font-family: "Space Grotesk", sans-serif;
+  font-size: clamp(70px, 15vw, 230px);
+  font-weight: 500;
+  line-height: 0.76;
+  letter-spacing: -0.085em;
+}
+
+.contact-email {
+  display: inline-block;
+  margin-top: 70px;
+
+  font-size: clamp(18px, 2vw, 28px);
+  letter-spacing: -0.03em;
+
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 8px;
+}
+
+/* =========================================
+   FOOTER
+========================================= */
+
+.site-footer {
+  padding: 25px 34px;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr 2fr;
+  gap: 30px;
+
+  border-top: 1px solid var(--line);
+
+  color: #555;
+  font-size: 9px;
+  line-height: 1.5;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.site-footer div:last-child {
+  text-align: right;
+}
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 900px) {
+  .site-header {
+    padding: 0 18px;
+  }
+
+  .site-nav {
+    display: none;
+  }
+
+  .site-header-contact {
+    font-size: 9px;
+  }
+
+  .portrait-section,
+  .editorial-section,
+  .work-section,
+  .lab-section,
+  .contact-section {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+
+  .title-sequence__location {
+    left: 18px;
+  }
+
+  .title-sequence__scroll {
+    right: 18px;
+  }
+
+  .about-content,
+  .mindset-content,
+  .experience-list,
+  .work-list,
+  .lab-grid,
+  .lab-header,
+  .contact-content {
+    margin-top: 55px;
+  }
+
+  .editorial-muted {
+    margin-left: 0;
+  }
+
+  .about-location {
+    margin-top: 60px;
+  }
+
+  .system-row {
+    grid-template-columns: 45px 1fr;
+    gap: 15px;
+    padding: 25px 0;
+  }
+
+  .system-description {
+    grid-column: 2;
+  }
+
+  .work-card-title-row {
+    display: block;
+  }
+
+  .work-card-title-row span {
+    display: block;
+    margin-top: 15px;
+  }
+
+  .lab-header {
+    grid-template-columns: 1fr;
+    gap: 35px;
+  }
+
+  .lab-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .experience-row {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .site-footer {
+    padding: 25px 18px;
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .site-footer div:last-child {
+    text-align: left;
+  }
+}
+
+/* =========================================
+   REDUCED MOTION
+========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
 }
