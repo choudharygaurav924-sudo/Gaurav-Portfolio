@@ -1,54 +1,36 @@
 import { SiteMenu } from "@/components/sections/SiteMenu";
 import { Hero } from "@/components/sections/Hero";
-import { InteractivePortrait } from "@/components/sections/InteractivePortrait";
 import { About } from "@/components/sections/About";
 import { CreativeSystem } from "@/components/sections/CreativeSystem";
 import { Work } from "@/components/sections/Work";
 import { CreativeLab } from "@/components/sections/CreativeLab";
 import { Experience } from "@/components/sections/Experience";
+import { Services } from "@/components/sections/Services";
 import { CTA } from "@/components/sections/CTA";
 import { Footer } from "@/components/sections/Footer";
 
 export default function Home() {
   return (
-    <div className="site-shell">
+    <main>
       <SiteMenu />
 
-      <main>
-        {/* 01 — CINEMATIC OPENING */}
-        <Hero />
+      <Hero />
 
-        {/* 02 — PORTRAIT */}
-        <section className="portrait-section">
-          <div className="section-label">
-            <span>(01)</span>
-            <span>PORTRAIT</span>
-          </div>
+      <About />
 
-          <InteractivePortrait />
-        </section>
+      <CreativeSystem />
 
-        {/* 03 — ABOUT */}
-        <About />
+      <Work />
 
-        {/* 04 — MINDSET */}
-        <CreativeSystem />
+      <CreativeLab />
 
-        {/* 05 — SELECTED WORK */}
-        <Work />
+      <Experience />
 
-        {/* 06 — CREATIVE LAB */}
-        <CreativeLab />
+      <Services />
 
-        {/* 07 — EXPERIENCE */}
-        <Experience />
+      <CTA />
 
-        {/* 08 — CONTACT */}
-        <CTA />
-      </main>
-
-      {/* 09 — FOOTER */}
       <Footer />
-    </div>
+    </main>
   );
 }
