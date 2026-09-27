@@ -32,15 +32,8 @@ export function InteractivePortrait() {
       rotateY(${rotateY}deg)
     `;
 
-    frame.style.setProperty(
-      "--mouse-x",
-      `${x * 100}%`
-    );
-
-    frame.style.setProperty(
-      "--mouse-y",
-      `${y * 100}%`
-    );
+    frame.style.setProperty("--mouse-x", `${x * 100}%`);
+    frame.style.setProperty("--mouse-y", `${y * 100}%`);
   };
 
   const resetPointer = () => {
@@ -73,7 +66,7 @@ export function InteractivePortrait() {
         <div className="interactive-portrait__image-wrap">
           <img
             ref={imageRef}
-            src="/images/gaurav-portrait.jpg"
+            src="/images/gaurav-portrait.png"
             alt="Gaurav Singh"
             className="interactive-portrait__image"
             draggable={false}
@@ -118,12 +111,14 @@ export function InteractivePortrait() {
           grid-template-columns: 1fr auto 1fr;
           gap: 2rem;
           align-items: center;
+
           font-family: Arial, Helvetica, sans-serif;
           font-size: 9px;
           font-weight: 600;
           letter-spacing: 0.18em;
           line-height: 1.2;
           text-transform: uppercase;
+
           color: rgba(243, 241, 236, 0.48);
         }
 
@@ -146,12 +141,15 @@ export function InteractivePortrait() {
           --mouse-y: 50%;
 
           position: relative;
+
           width: min(100%, 1100px);
           height: min(76vh, 820px);
           min-height: 520px;
+
           margin: 0 auto;
 
           overflow: hidden;
+
           perspective: 1200px;
           transform-style: preserve-3d;
 
@@ -163,13 +161,16 @@ export function InteractivePortrait() {
         .interactive-portrait__image-wrap {
           position: absolute;
           inset: -3%;
+
           overflow: hidden;
+
           transform-style: preserve-3d;
         }
 
         .interactive-portrait__image {
           width: 100%;
           height: 100%;
+
           display: block;
 
           object-fit: cover;
@@ -191,6 +192,7 @@ export function InteractivePortrait() {
             filter 0.6s ease;
 
           will-change: transform;
+
           user-select: none;
           pointer-events: none;
         }
@@ -246,8 +248,10 @@ export function InteractivePortrait() {
 
         .interactive-portrait__corner {
           position: absolute;
+
           width: 22px;
           height: 22px;
+
           pointer-events: none;
           z-index: 3;
         }
@@ -255,6 +259,7 @@ export function InteractivePortrait() {
         .interactive-portrait__corner--tl {
           top: 18px;
           left: 18px;
+
           border-top: 1px solid rgba(255, 255, 255, 0.65);
           border-left: 1px solid rgba(255, 255, 255, 0.65);
         }
@@ -262,6 +267,7 @@ export function InteractivePortrait() {
         .interactive-portrait__corner--tr {
           top: 18px;
           right: 18px;
+
           border-top: 1px solid rgba(255, 255, 255, 0.65);
           border-right: 1px solid rgba(255, 255, 255, 0.65);
         }
@@ -269,6 +275,7 @@ export function InteractivePortrait() {
         .interactive-portrait__corner--bl {
           bottom: 18px;
           left: 18px;
+
           border-bottom: 1px solid rgba(255, 255, 255, 0.65);
           border-left: 1px solid rgba(255, 255, 255, 0.65);
         }
@@ -276,12 +283,14 @@ export function InteractivePortrait() {
         .interactive-portrait__corner--br {
           bottom: 18px;
           right: 18px;
+
           border-bottom: 1px solid rgba(255, 255, 255, 0.65);
           border-right: 1px solid rgba(255, 255, 255, 0.65);
         }
 
         .interactive-portrait__cursor {
           position: absolute;
+
           left: 50%;
           top: 50%;
 
@@ -298,6 +307,7 @@ export function InteractivePortrait() {
           color: rgba(255, 255, 255, 0.72);
 
           pointer-events: none;
+
           opacity: 0;
 
           transition: opacity 0.3s ease;
@@ -306,7 +316,9 @@ export function InteractivePortrait() {
         .interactive-portrait__cursor span {
           width: 5px;
           height: 5px;
+
           border-radius: 50%;
+
           background: #fff;
         }
 
@@ -317,6 +329,7 @@ export function InteractivePortrait() {
 
         .interactive-portrait__number {
           position: absolute;
+
           right: 24px;
           bottom: 20px;
 
