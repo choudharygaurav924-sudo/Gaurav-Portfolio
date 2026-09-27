@@ -127,23 +127,6 @@ export const CREATIVE_SYSTEM = [
   ],
 ] as const;
 
-/*
-|--------------------------------------------------------------------------
-| SELECTED WORK
-|--------------------------------------------------------------------------
-|
-| These three projects are the primary case studies.
-|
-| 01 — Professional co-op work
-| 02 — Professional internship work
-| 03 — Academic project
-|
-| The current image paths are temporary placeholders from the existing
-| portfolio structure. We will replace them with the polished portfolio
-| visuals once those assets are prepared.
-|
-*/
-
 export const CASE_STUDIES = [
   {
     index: "01",
@@ -153,17 +136,14 @@ export const CASE_STUDIES = [
     type: "Marketing / Campaign Development",
     role: "MARKETING TEAM LEADER — CO-OP",
     image: "/images/work-1.jpg",
-
     description:
       "A campaign-led marketing role built around coordination, content, client work, event promotion, and campaign tracking across multiple digital and social initiatives.",
-
     tags: [
       "Digital / Social",
       "Campaign Tracking",
       "Content / Client Work",
       "Team Leadership",
     ],
-
     story: [
       [
         "THE ROLE",
@@ -188,17 +168,14 @@ export const CASE_STUDIES = [
     type: "Digital Marketing / Lead Generation",
     role: "MARKETING SPECIALIST INTERN",
     image: "/images/work-2.jpg",
-
     description:
       "An outreach and follow-up system for a real estate and mortgage audience, combining targeted communication, lead generation, CRM tracking, campaign support, and event promotion.",
-
     tags: [
       "5,000+ Outreach",
       "~1,000 Opportunities",
       "Google Sheets CRM",
       "Lead Generation",
     ],
-
     story: [
       [
         "THE ROLE",
@@ -223,10 +200,8 @@ export const CASE_STUDIES = [
     type: "Advertising / Marketing Strategy",
     role: "ACADEMIC ADVERTISING & MARKETING PROJECT",
     image: "/images/work-3.jpg",
-
     description:
       "An academic advertising project developed through research, audience thinking, positioning, campaign strategy, and creative direction.",
-
     tags: [
       "Research",
       "Audience",
@@ -234,7 +209,6 @@ export const CASE_STUDIES = [
       "Campaign Strategy",
       "Creative Direction",
     ],
-
     story: [
       [
         "THE PROJECT",
