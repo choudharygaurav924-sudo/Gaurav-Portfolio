@@ -281,3 +281,48 @@ export const CASE_STUDIES = [
     ],
   },
 ] as const;
+export const EXPERIENCE = [
+  {
+    period: "AUG 2026 — PRESENT",
+    company: "SS TRADERS",
+    role: "MARKETING SPECIALIST",
+    location: "DELHI, INDIA / REMOTE",
+    description:
+      "B2B marketing for a wholesale supplier of polycarbonate roofing sheets, supporting marketing communication, positioning, outreach, and business development activity.",
+    tags: [
+      "B2B Marketing",
+      "Digital Marketing",
+      "Business Development",
+    ],
+  },
+
+  {
+    period: "JAN 2025 — APR 2025",
+    company: "LIFE IS A SPECIAL EVENT",
+    role: "MARKETING TEAM LEADER — CO-OP",
+    location: "ONTARIO, CANADA",
+    description:
+      "Led a five-person marketing team across digital campaigns, social activity, event promotion, client work, and campaign tracking.",
+    tags: [
+      "Team Leadership",
+      "Campaigns",
+      "Social Media",
+      "Campaign Tracking",
+    ],
+  },
+
+  {
+    period: "2022 — 2025",
+    company: "SHERIDAN COLLEGE",
+    role: "ADVERTISING & DIGITAL MARKETING",
+    location: "ONTARIO, CANADA",
+    description:
+      "Advanced Diploma focused on advertising, digital marketing, strategic media planning, campaign strategy, creative direction, and marketing analytics.",
+    tags: [
+      "Advertising",
+      "Digital Marketing",
+      "Strategy",
+      "Analytics",
+    ],
+  },
+] as const;
