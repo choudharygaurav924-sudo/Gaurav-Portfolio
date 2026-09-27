@@ -21,22 +21,53 @@ export const HERO = {
 } as const;
 
 export const NAV_LINKS = [
-  { label: "About", href: "#about", ariaLabel: "Go to the about section" },
-  { label: "Mindset", href: "#mindset", ariaLabel: "Read my marketing mindset" },
-  { label: "Work", href: "#work", ariaLabel: "See selected work" },
-  { label: "Lab", href: "#lab", ariaLabel: "See self-initiated campaigns" },
-  { label: "Resume", href: "#resume", ariaLabel: "View experience and resume" },
-  { label: "Contact", href: "#contact", ariaLabel: "Get in touch" },
+  {
+    label: "About",
+    href: "#about",
+    ariaLabel: "Go to the about section",
+  },
+  {
+    label: "Mindset",
+    href: "#mindset",
+    ariaLabel: "Read my marketing mindset",
+  },
+  {
+    label: "Work",
+    href: "#work",
+    ariaLabel: "See selected work",
+  },
+  {
+    label: "Lab",
+    href: "#lab",
+    ariaLabel: "See self-initiated campaigns",
+  },
+  {
+    label: "Resume",
+    href: "#resume",
+    ariaLabel: "View experience and resume",
+  },
+  {
+    label: "Contact",
+    href: "#contact",
+    ariaLabel: "Get in touch",
+  },
 ] as const;
 
 export const SOCIALS = [
-  { label: "LinkedIn", href: "https://linkedin.com" },
-  { label: "Instagram", href: "https://instagram.com" },
+  {
+    label: "LinkedIn",
+    href: "https://linkedin.com",
+  },
+  {
+    label: "Instagram",
+    href: "https://instagram.com",
+  },
 ] as const;
 
 export const ABOUT = {
   label: "(ABOUT)",
-  statementStrong: "Marketing strategy with a creative point of view. ",
+  statementStrong:
+    "Marketing strategy with a creative point of view.",
   statementMuted:
     "I turn audience insight into campaigns, content, and experiences people remember.",
 } as const;
@@ -96,6 +127,23 @@ export const CREATIVE_SYSTEM = [
   ],
 ] as const;
 
+/*
+|--------------------------------------------------------------------------
+| SELECTED WORK
+|--------------------------------------------------------------------------
+|
+| These three projects are the primary case studies.
+|
+| 01 — Professional co-op work
+| 02 — Professional internship work
+| 03 — Academic project
+|
+| The current image paths are temporary placeholders from the existing
+| portfolio structure. We will replace them with the polished portfolio
+| visuals once those assets are prepared.
+|
+*/
+
 export const CASE_STUDIES = [
   {
     index: "01",
@@ -105,20 +153,33 @@ export const CASE_STUDIES = [
     type: "Marketing / Campaign Development",
     role: "MARKETING TEAM LEADER — CO-OP",
     image: "/images/work-1.jpg",
+
     description:
-      "A campaign-led marketing role built around coordination, content, client work, and tracking across multiple digital and social initiatives.",
-    tags: ["Digital / Social", "Campaign Tracking", "Content / Client Work"],
+      "A campaign-led marketing role built around coordination, content, client work, event promotion, and campaign tracking across multiple digital and social initiatives.",
+
+    tags: [
+      "Digital / Social",
+      "Campaign Tracking",
+      "Content / Client Work",
+      "Team Leadership",
+    ],
+
     story: [
+      [
+        "THE ROLE",
+        "Marketing Team Leader during my college co-op, working across campaign development, content, digital activity, client work, event promotion, and coordination.",
+      ],
       [
         "THE CHALLENGE",
         "Coordinate multiple campaigns and keep the work moving across a five-person marketing team.",
       ],
       [
         "THE APPROACH",
-        "Lead the team while connecting campaign planning, content, client work, and tracking.",
+        "Connect campaign planning, content development, social activity, event promotion, and campaign tracking into an organized marketing workflow.",
       ],
     ],
   },
+
   {
     index: "02",
     anchor: "philer-ai",
@@ -127,20 +188,33 @@ export const CASE_STUDIES = [
     type: "Digital Marketing / Lead Generation",
     role: "MARKETING SPECIALIST INTERN",
     image: "/images/work-2.jpg",
+
     description:
-      "An outreach and follow-up system for a real estate and mortgage audience, combining targeted communication with practical CRM discipline.",
-    tags: ["Targeted Outreach", "Google Sheets CRM", "Campaign / Event Work"],
+      "An outreach and follow-up system for a real estate and mortgage audience, combining targeted communication, lead generation, CRM tracking, campaign support, and event promotion.",
+
+    tags: [
+      "5,000+ Outreach",
+      "~1,000 Opportunities",
+      "Google Sheets CRM",
+      "Lead Generation",
+    ],
+
     story: [
       [
-        "THE CHALLENGE",
-        "Reach a focused real estate and mortgage audience and create a reliable path from outreach to opportunity.",
+        "THE ROLE",
+        "Marketing Specialist Intern focused on digital outreach, lead generation, follow-up, CRM organization, campaign support, and event promotion.",
       ],
       [
         "THE AUDIENCE",
-        "People in the real estate and mortgage space who value a clear, useful connection.",
+        "Real estate and mortgage professionals across Ontario and Alberta.",
+      ],
+      [
+        "THE APPROACH",
+        "Build a repeatable outreach and follow-up system using targeted communication, Google Sheets CRM tracking, campaign support, and event promotion.",
       ],
     ],
   },
+
   {
     index: "03",
     anchor: "sheridan-lagershed",
@@ -149,13 +223,26 @@ export const CASE_STUDIES = [
     type: "Advertising / Marketing Strategy",
     role: "ACADEMIC ADVERTISING & MARKETING PROJECT",
     image: "/images/work-3.jpg",
+
     description:
       "An academic advertising project developed through research, audience thinking, positioning, campaign strategy, and creative direction.",
-    tags: ["Research", "Audience", "Positioning", "Creative Direction"],
+
+    tags: [
+      "Research",
+      "Audience",
+      "Positioning",
+      "Campaign Strategy",
+      "Creative Direction",
+    ],
+
     story: [
       [
+        "THE PROJECT",
+        "A Sheridan College advertising and digital marketing project developed around LagerShed.",
+      ],
+      [
         "RESEARCH",
-        "Investigate the category and the context around the opportunity.",
+        "Investigate the category, audience, competitive environment, and context around the opportunity.",
       ],
       [
         "AUDIENCE",
@@ -163,7 +250,11 @@ export const CASE_STUDIES = [
       ],
       [
         "POSITIONING",
-        "Find a clear and compelling place for the idea to live.",
+        "Develop a clear direction that connects the brand, audience, and campaign idea.",
+      ],
+      [
+        "CREATIVE DIRECTION",
+        "Translate the strategy into campaign visuals and advertising concepts.",
       ],
     ],
   },
@@ -177,8 +268,13 @@ export const EXPERIENCE = [
     location: "DELHI, INDIA — REMOTE",
     description:
       "B2B marketing for a wholesale supplier of polycarbonate roofing sheets, supporting brand communication, digital marketing, and business development.",
-    tags: ["B2B Marketing", "Digital Marketing", "Business Development"],
+    tags: [
+      "B2B Marketing",
+      "Digital Marketing",
+      "Business Development",
+    ],
   },
+
   {
     period: "JAN 2026 — APR 2026",
     company: "PHILER.AI",
@@ -186,8 +282,14 @@ export const EXPERIENCE = [
     location: "ONTARIO, CANADA",
     description:
       "Built targeted outreach and follow-up systems for real estate and mortgage professionals, using direct outreach, CRM tracking, campaign support, and event promotion.",
-    tags: ["5,000+ Outreach", "~1,000 Opportunities", "CRM", "Lead Generation"],
+    tags: [
+      "5,000+ Outreach",
+      "~1,000 Opportunities",
+      "CRM",
+      "Lead Generation",
+    ],
   },
+
   {
     period: "JAN 2025 — APR 2025",
     company: "LIFE IS A SPECIAL EVENT",
@@ -195,8 +297,14 @@ export const EXPERIENCE = [
     location: "ONTARIO, CANADA",
     description:
       "Led a five-person marketing team across digital campaigns, content, client work, campaign tracking, and event promotion.",
-    tags: ["Team Leadership", "Campaigns", "Social Media", "Content"],
+    tags: [
+      "Team Leadership",
+      "Campaigns",
+      "Social Media",
+      "Content",
+    ],
   },
+
   {
     period: "2022 — 2025",
     company: "SHERIDAN COLLEGE",
@@ -204,7 +312,12 @@ export const EXPERIENCE = [
     location: "ONTARIO, CANADA",
     description:
       "Advanced Diploma focused on advertising, digital marketing, strategic media planning, campaign strategy, creative direction, and marketing analytics.",
-    tags: ["Advertising", "Digital Marketing", "Strategy", "Analytics"],
+    tags: [
+      "Advertising",
+      "Digital Marketing",
+      "Strategy",
+      "Analytics",
+    ],
   },
 ] as const;
 
