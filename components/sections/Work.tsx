@@ -1,68 +1,104 @@
-"use client";
-
-import { useEffect, useRef } from "react";
+import Image from "next/image";
 import Link from "next/link";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { CASE_STUDIES } from "@/lib/data";
-import { useReducedMotion } from "@/hooks/useReducedMotion";
 
 export function Work() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const reducedMotion = useReducedMotion();
+  return (
+    <section id="work" className="work-section editorial-section">
+      <div className="shell">
+        <div className="section-heading work-heading">
+          <div>
+            <span className="eyebrow">(REAL WORK)</span>
 
-  useEffect(() => {
-    const section = sectionRef.current;
+            <h2 className="text-display-md mt-6">
+              Campaigns.
+              <br />
+              Systems.
+              <br />
+              Experiences.
+            </h2>
+          </div>
 
-    if (!section || reducedMotion) return;
+          <p className="section-intro">
+            Selected real-world and academic work across marketing,
+            digital outreach, campaign development, and strategy.
+          </p>
+        </div>
 
-    gsap.registerPlugin(ScrollTrigger);
+        <div className="project-list">
+          {CASE_STUDIES.map((project) => (
+            <article key={project.anchor} className="project">
+              {project.image ? (
+                <Link
+                  href={`/work/${project.anchor}`}
+                  className="project-image"
+                >
+                  <Image
+                    src={project.image}
+                    alt={project.title}
+                    fill
+                    sizes="(max-width: 900px) 100vw, 90vw"
+                    className="project-image-element"
+                  />
 
-    const ctx = gsap.context(() => {
-      const projects =
-        gsap.utils.toArray<HTMLElement>("[data-project]");
+                  <span className="project-image-number">
+                    {project.index}
+                  </span>
 
-      projects.forEach((project) => {
-        const image = project.querySelector<HTMLElement>(
-          "[data-project-image]"
-        );
+                  <span className="project-image-arrow">↗</span>
+                </Link>
+              ) : (
+                <Link
+                  href={`/work/${project.anchor}`}
+                  className="project-text-only"
+                >
+                  <span className="project-image-number">
+                    {project.index}
+                  </span>
 
-        const content = project.querySelector<HTMLElement>(
-          "[data-project-content]"
-        );
+                  <span className="project-image-arrow">↗</span>
+                </Link>
+              )}
 
-        const number = project.querySelector<HTMLElement>(
-          "[data-project-number]"
-        );
+              <div className="project-content">
+                <div className="project-meta">
+                  <span>
+                    {project.index} / {project.label}
+                  </span>
 
-        if (!image || !content || !number) return;
+                  <span>{project.type}</span>
+                </div>
 
-        gsap.fromTo(
-          image,
-          {
-            scale: 1.08,
-          },
-          {
-            scale: 1,
-            ease: "none",
-            scrollTrigger: {
-              trigger: project,
-              start: "top bottom",
-              end: "bottom top",
-              scrub: 1,
-            },
-          }
-        );
+                <Link
+                  href={`/work/${project.anchor}`}
+                  className="project-title-link"
+                >
+                  <h3>{project.title}</h3>
 
-        gsap.fromTo(
-          content,
-          {
-            y: 60,
-            opacity: 0,
-          },
-          {
-            y: 0,
-            opacity: 1,
+                  <span>VIEW CASE STUDY ↗</span>
+                </Link>
+
+                <p className="project-role">
+                  {project.role}
+                </p>
+
+                <p className="project-description">
+                  {project.description}
+                </p>
+
+                <div className="project-tags">
+                  {project.tags.map((tag) => (
+                    <span key={tag}>{tag}</span>
+                  ))}
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}            opacity: 1,
             ease: "power3.out",
             scrollTrigger: {
               trigger: project,
