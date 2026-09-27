@@ -1,68 +1,99 @@
-import Link from "next/link";
-import { notFound } from "next/navigation";
-import { CASE_STUDIES } from "@/lib/data";
+import { SiteMenu } from "@/components/sections/SiteMenu";
+import { Hero } from "@/components/sections/Hero";
+import { InteractivePortrait } from "@/components/sections/InteractivePortrait";
+import { About } from "@/components/sections/About";
+import { CreativeSystem } from "@/components/sections/CreativeSystem";
+import { Work } from "@/components/sections/Work";
+import { Services } from "@/components/sections/Services";
+import { CTA } from "@/components/sections/CTA";
+import { Footer } from "@/components/sections/Footer";
+import { EXPERIENCE } from "@/lib/data";
 
-type PageProps = {
-  params: Promise<{
-    slug: string;
-  }>;
-};
-
-export function generateStaticParams() {
-  return CASE_STUDIES.map((project) => ({
-    slug: project.anchor,
-  }));
-}
-
-export default async function WorkCaseStudy({
-  params,
-}: PageProps) {
-  const { slug } = await params;
-
-  const project = CASE_STUDIES.find(
-    (item) => item.anchor === slug
-  );
-
-  if (!project) {
-    notFound();
-  }
-
+export default function Home() {
   return (
-    <main className="case-study">
-      <header className="case-study__nav">
-        <Link href="/" className="case-study__back">
-          ← BACK TO PORTFOLIO
-        </Link>
+    <>
+      <SiteMenu />
 
-        <span>{project.index} / 03</span>
+      <main>
+        <Hero />
 
-        <span>{project.label}</span>
-      </header>
+        <InteractivePortrait />
 
-      <section className="case-study__hero">
-        <div className="case-study__hero-meta">
-          <span>{project.type}</span>
-          <span>{project.role}</span>
+        <div className="relative z-10 bg-ink">
+          <About />
+
+          <CreativeSystem />
+
+          <Work />
+
+          <Services />
+
+          <section
+            id="resume"
+            className="experience-editorial"
+          >
+            <div className="experience-editorial__top">
+              <span>(EXPERIENCE)</span>
+              <span>07 — RESUME</span>
+              <span>MARKETING / DIGITAL / STRATEGY</span>
+            </div>
+
+            <div className="experience-editorial__intro">
+              <p className="experience-editorial__eyebrow">
+                EXPERIENCE / EDUCATION
+              </p>
+
+              <h2>
+                Where I&apos;ve
+                <br />
+                <span>built the work.</span>
+              </h2>
+            </div>
+
+            <div className="experience-editorial__list">
+              {EXPERIENCE.map((item) => (
+                <article
+                  key={`${item.company}-${item.period}`}
+                  className="experience-editorial__item"
+                >
+                  <div className="experience-editorial__period">
+                    {item.period}
+                  </div>
+
+                  <div className="experience-editorial__company">
+                    <h3>{item.company}</h3>
+                    <p>{item.role}</p>
+                  </div>
+
+                  <div className="experience-editorial__details">
+                    <span>{item.location}</span>
+
+                    <p>{item.description}</p>
+
+                    <div className="experience-editorial__tags">
+                      {item.tags.map((tag) => (
+                        <span key={tag}>{tag}</span>
+                      ))}
+                    </div>
+                  </div>
+                </article>
+              ))}
+            </div>
+
+            <div className="experience-editorial__bottom">
+              <span>07 / 08</span>
+              <span>EXPERIENCE / EDUCATION</span>
+            </div>
+          </section>
+
+          <CTA />
         </div>
+      </main>
 
-        <h1>{project.title}</h1>
-
-        <div className="case-study__hero-image">
-          <img
-            src={project.image}
-            alt={project.title}
-          />
-        </div>
-      </section>
-
-      <section className="case-study__overview">
-        <div>
-          <span className="case-study__label">
-            OVERVIEW
-          </span>
-        </div>
-
-        <div className="case-study__overview-copy">
+      <Footer />
+    </>
+  );
+}        <div className="case-study__overview-copy">
           <p>{project.description}</p>
 
           <div className="case-study__tags">
