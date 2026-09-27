@@ -31,13 +31,13 @@ export default function Home() {
         {/* 03 — ABOUT */}
         <About />
 
-        {/* 04 — MINDSET / CREATIVE THINKING */}
+        {/* 04 — MINDSET */}
         <CreativeSystem />
 
-        {/* 05 — SELECTED REAL / ACADEMIC WORK */}
+        {/* 05 — SELECTED WORK */}
         <Work />
 
-        {/* 06 — SELF-INITIATED CREATIVE LAB */}
+        {/* 06 — CREATIVE LAB */}
         <CreativeLab />
 
         {/* 07 — EXPERIENCE */}
