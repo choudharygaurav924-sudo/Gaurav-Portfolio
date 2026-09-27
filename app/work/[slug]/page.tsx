@@ -77,6 +77,62 @@ export default async function WorkCaseStudy({
         ))}
       </section>
 
+      {project.images.length > 0 && (
+        <section className="case-study-gallery">
+          <div className="section-meta">
+            <span>PROJECT MATERIAL</span>
+            <span>SELECTED VISUALS</span>
+            <span>{project.index}</span>
+          </div>
+
+          <div className="case-study-gallery__grid">
+            {project.images.map((image, index) => (
+              <figure
+                className={
+                  index === 0
+                    ? "case-study-gallery__item case-study-gallery__item--large"
+                    : "case-study-gallery__item"
+                }
+                key={image}
+              >
+                <img
+                  src={image}
+                  alt={`${project.title} project visual ${index + 1}`}
+                />
+
+                <figcaption>
+                  {String(index + 1).padStart(2, "0")}
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+        </section>
+      )}
+
+      <section className="case-study-next">
+        <span>NEXT</span>
+
+        <Link href="/#work">
+          VIEW ALL WORK ↗
+        </Link>
+      </section>
+    </main>
+  );
+}              <span key={tag}>{tag}</span>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="case-study-story">
+        {project.story.map(([label, copy]) => (
+          <article key={label}>
+            <span>{label}</span>
+            <p>{copy}</p>
+          </article>
+        ))}
+      </section>
+
       <section className="case-study-material">
         <div className="section-meta">
           <span>PROJECT MATERIAL</span>
