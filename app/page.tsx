@@ -1,5 +1,6 @@
 import { SiteMenu } from "@/components/sections/SiteMenu";
 import { Hero } from "@/components/sections/Hero";
+import { InteractivePortrait } from "@/components/sections/InteractivePortrait";
 import { About } from "@/components/sections/About";
 import { CreativeSystem } from "@/components/sections/CreativeSystem";
 import { Work } from "@/components/sections/Work";
@@ -13,8 +14,9 @@ export default function Home() {
     <>
       <SiteMenu />
 
-      <main>
-        <Hero />
+     <main>
+  <Hero />
+  <InteractivePortrait />
 
         <div className="relative z-10 bg-ink">
           <About />
