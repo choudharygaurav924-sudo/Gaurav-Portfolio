@@ -1,77 +1,109 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
-import { CASE_STUDIES } from "@/lib/data";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useEffect, useRef } from "react";
+import { PROJECTS } from "@/lib/data";
+import { SplitText } from "@/components/ui/SplitText";
+import { useReducedMotion } from "@/hooks/useReducedMotion";
 
 export function Work() {
-  return (
-    <section className="work-section" id="work">
-      <div className="work-section__header">
-        <div className="section-label">(SELECTED WORK)</div>
+  const ref = useRef<HTMLElement>(null);
+  const reducedMotion = useReducedMotion();
 
-        <p className="work-section__intro">
-          A selection of marketing, digital, campaign, and creative work.
+  useEffect(() => {
+    if (reducedMotion || !ref.current) return;
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    const ctx = gsap.context(() => {
+      gsap
+        .utils
+        .toArray<HTMLElement>(".work-image")
+        .forEach((image) =>
+          gsap.fromTo(
+            image,
+            { scale: 1.12 },
+            {
+              scale: 1,
+              ease: "none",
+              scrollTrigger: {
+                trigger: image,
+                start: "top bottom",
+                end: "bottom top",
+                scrub: 1.2,
+              },
+            }
+          )
+        );
+    }, ref);
+
+    return () => ctx.revert();
+  }, [reducedMotion]);
+
+  return (
+    <section
+      ref={ref}
+      id="work"
+      className="shell editorial-section"
+    >
+      <div className="section-heading">
+        <div>
+          <span className="eyebrow">
+            (REAL / ACADEMIC WORK)
+          </span>
+
+          <SplitText
+            as="h2"
+            text="Selected work"
+            className="text-display-md mt-5"
+          />
+        </div>
+
+        <p className="section-intro">
+          Marketing thinking, campaign development, and
+          creative execution — grounded in real and academic work.
         </p>
       </div>
 
       <div className="work-list">
-        {CASE_STUDIES.map((project, index) => (
+        {PROJECTS.map((project) => (
           <article
-            className="work-project"
-            key={project.anchor}
+            key={project.title}
+            className="work-item"
           >
-            <Link
-              href={`/work/${project.anchor}`}
-              className="work-project__link"
-            >
-              <div className="work-project__number">
-                {String(index + 1).padStart(2, "0")}
+            <div className="work-media">
+              <Image
+                src={project.image}
+                alt=""
+                fill
+                sizes="(min-width: 1024px) 62vw, 100vw"
+                className="work-image object-cover"
+              />
+            </div>
+
+            <div className="work-details">
+              <span className="system-number">
+                {project.index}
+              </span>
+
+              <p className="eyebrow mt-5">
+                {project.year}
+              </p>
+
+              <h3>{project.title}</h3>
+
+              <p className="text-muted mt-4 max-w-md">
+                {project.blurb}
+              </p>
+
+              <div className="tag-list">
+                {project.tags.map((tag) => (
+                  <span key={tag}>{tag}</span>
+                ))}
               </div>
-
-              <div className="work-project__visual">
-                {project.image ? (
-                  <Image
-                    src={project.image}
-                    alt={project.title}
-                    width={1600}
-                    height={1000}
-                    className="work-project__image"
-                  />
-                ) : (
-                  <div className="work-project__text-only">
-                    <span className="project-text-only-title">
-                      {project.title}
-                    </span>
-                  </div>
-                )}
-              </div>
-
-              <div className="work-project__info">
-                <div className="work-project__meta">
-                  <span>{project.year}</span>
-                  <span>{project.role}</span>
-                </div>
-
-                <h2 className="work-project__title">
-                  {project.title}
-                </h2>
-
-                <p className="work-project__description">
-                  {project.description}
-                </p>
-
-                <div className="work-project__tags">
-                  {project.tags.map((tag) => (
-                    <span key={tag}>{tag}</span>
-                  ))}
-                </div>
-
-                <span className="work-project__cta">
-                  VIEW CASE STUDY →
-                </span>
-              </div>
-            </Link>
+            </div>
           </article>
         ))}
       </div>
