@@ -1,393 +1,378 @@
+"use client";
+
+import Image from "next/image";
 import Link from "next/link";
-import { Hero } from "@/components/sections/Hero";
-import { InteractivePortrait } from "@/components/sections/InteractivePortrait";
+
+import Hero from "@/components/sections/Hero";
+import InteractivePortrait from "@/components/sections/InteractivePortrait";
 import {
+  ABOUT,
+  BRAND,
   CASE_STUDIES,
   CREATIVE_LAB,
+  CREATIVE_SYSTEM,
   EXPERIENCE,
-  BRAND,
   HERO,
 } from "@/lib/data";
 
-export default function Home() {
+export default function HomePage() {
   return (
-    <main className="portfolio-page">
+    <main className="site">
+
+      {/* =====================================================
+          HEADER
+      ===================================================== */}
       <header className="site-header">
-        <Link href="/" className="site-header__logo">
-          GAURAV <span>SINGH</span><i>.</i>
+        <Link href="/" className="site-logo">
+          GAURAV SINGH<span>.</span>
         </Link>
 
-        <div className="site-header__right">
-          <a href="#contact" className="site-header__contact">
-            GET IN TOUCH
-          </a>
-
-          <a href="#work" className="site-header__menu">
-            MENU <span>☰</span>
-          </a>
-        </div>
+        <nav className="site-nav">
+          <a href="#about">ABOUT</a>
+          <a href="#work">WORK</a>
+          <a href="#lab">LAB</a>
+          <a href="#resume">RESUME</a>
+          <a href="#contact">CONTACT</a>
+        </nav>
       </header>
 
+
+      {/* =====================================================
+          HERO
+      ===================================================== */}
       <Hero />
 
-      <InteractivePortrait />
 
-      {/* ABOUT */}
-      <section id="about" className="editorial-section about-section">
-        <div className="section-meta">
-          <span>(ABOUT)</span>
-          <span>02 — POINT OF VIEW</span>
-          <span>{BRAND.location}</span>
-        </div>
-
-        <div className="about-section__grid">
-          <div className="section-index">02 / 08</div>
-
-          <div className="about-section__main">
-            <p className="section-kicker">MARKETING / CREATIVE</p>
-
-            <h2>
-              Marketing strategy
-              <br />
-              <span>with a creative point of view.</span>
-            </h2>
-
-            <p className="about-section__lead">
-              {HERO.statementStrong}
-            </p>
-
-            <p>{HERO.statementMuted}</p>
-
-            <p>
-              I turn audience insight into campaigns, content, and
-              experiences people remember.
-            </p>
-          </div>
-        </div>
+      {/* =====================================================
+          INTERACTIVE PORTRAIT
+      ===================================================== */}
+      <section className="portrait-section">
+        <InteractivePortrait />
       </section>
 
-      {/* MINDSET */}
-      <section id="mindset" className="editorial-section mindset-section">
-        <div className="section-meta">
-          <span>(MARKETING MINDSET)</span>
-          <span>03 — HOW I THINK</span>
-          <span>STRATEGY / CREATIVE / IMPACT</span>
+
+      {/* =====================================================
+          ABOUT
+      ===================================================== */}
+      <section id="about" className="editorial-section about-section">
+        <div className="section-index">01</div>
+
+        <div className="section-label">
+          {ABOUT.label}
         </div>
 
-        <div className="mindset-section__content">
-          <p className="section-kicker">THE WAY I APPROACH THE WORK</p>
-
+        <div className="editorial-copy">
           <h2>
-            Ideas should have
-            <br />
-            <span>somewhere to go.</span>
+            {ABOUT.statementStrong}
           </h2>
 
           <p>
-            Strategy gives creativity direction. Creativity gives strategy a
-            reason to be remembered.
+            {ABOUT.statementMuted}
           </p>
-
-          <div className="mindset-grid">
-            <div>
-              <span>01</span>
-              <h3>INSIGHT</h3>
-              <p>
-                Start with the audience, the tension, and the truth behind
-                the brief.
-              </p>
-            </div>
-
-            <div>
-              <span>02</span>
-              <h3>STRATEGY</h3>
-              <p>
-                Find the sharpest direction and the reason for people to
-                care.
-              </p>
-            </div>
-
-            <div>
-              <span>03</span>
-              <h3>CONCEPT</h3>
-              <p>
-                Turn the strategy into a big idea with a distinct point of
-                view.
-              </p>
-            </div>
-
-            <div>
-              <span>04</span>
-              <h3>EXECUTION</h3>
-              <p>
-                Make the idea real across content, digital, social, and
-                experience.
-              </p>
-            </div>
-
-            <div>
-              <span>05</span>
-              <h3>IMPACT</h3>
-              <p>
-                Measure what moved, learn what matters, and sharpen the next
-                idea.
-              </p>
-            </div>
-          </div>
         </div>
       </section>
 
-      {/* WORK */}
-      <section id="work" className="work-section">
-        <div className="section-meta work-section__meta">
-          <span>(SELECTED WORK)</span>
-          <span>04 — WORK</span>
-          <span>REAL / ACADEMIC</span>
+
+      {/* =====================================================
+          MINDSET
+      ===================================================== */}
+      <section id="mindset" className="mindset-section">
+        <div className="section-index">02</div>
+
+        <div className="section-label">
+          (MINDSET)
         </div>
 
-        <div className="work-section__intro">
-          <p className="section-kicker">SELECTED PROJECTS</p>
+        <div className="mindset-intro">
+          <h2>
+            I like the part of marketing where
+            strategy becomes something people can
+            actually see, feel, and respond to.
+          </h2>
+        </div>
 
+        <div className="creative-system">
+          {CREATIVE_SYSTEM.map(([number, title, description]) => (
+            <div
+              className="creative-system-row"
+              key={number}
+            >
+              <span>{number}</span>
+
+              <strong>{title}</strong>
+
+              <p>{description}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+
+      {/* =====================================================
+          WORK
+      ===================================================== */}
+      <section id="work" className="work-section">
+        <div className="section-index">03</div>
+
+        <div className="section-label">
+          (SELECTED WORK)
+        </div>
+
+        <div className="work-intro">
           <h2>
             Work built around
             <br />
-            <span>people, ideas &amp; outcomes.</span>
+            ideas that need to move.
           </h2>
 
           <p>
-            Real professional experience and academic work across digital
-            marketing, campaigns, outreach, CRM systems, lead generation,
-            strategy and creative direction.
+            Real work, academic strategy, and hands-on
+            marketing experience — presented through the
+            thinking behind the work.
           </p>
         </div>
+
 
         <div className="work-list">
           {CASE_STUDIES.map((project) => (
             <Link
-              key={project.anchor}
               href={`/work/${project.anchor}`}
               className="work-card"
+              key={project.anchor}
             >
-              <div className="work-card__top">
-                <span>{project.index}</span>
-                <span>{project.label}</span>
-                <span>VIEW CASE STUDY ↗</span>
-              </div>
 
-              <div className="work-card__visual">
-                {project.image ? (
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    className="work-card__image"
-                    loading="lazy"
-                  />
-                ) : (
-                  <div className="work-card__visual-placeholder">
-                    <span>CASE STUDY</span>
-                  </div>
-                )}
+              {/* IMAGE */}
+              <div className="work-card-media">
 
-                <div className="work-card__visual-overlay" />
-
-                <div className="work-card__visual-number">
+                <div className="work-card-number">
                   {project.index}
                 </div>
 
-                <div className="work-card__visual-title">
-                  {project.title}
-                </div>
+                {project.image ? (
+                  <Image
+                    src={project.image}
+                    alt={project.title}
+                    fill
+                    sizes="(max-width: 900px) 100vw, 90vw"
+                    className="work-card-image"
+                  />
+                ) : (
+                  <div className="work-card-placeholder">
+                    <span>{project.title}</span>
+                  </div>
+                )}
 
-                <div className="work-card__visual-line" />
+                <div className="work-card-arrow">
+                  ↗
+                </div>
               </div>
 
-              <div className="work-card__bottom">
-                <div>
+
+              {/* INFORMATION BELOW IMAGE */}
+              <div className="work-card-info">
+
+                <div className="work-card-meta">
+                  <span>{project.label}</span>
+                  <span>{project.type}</span>
+                </div>
+
+                <div className="work-card-title-row">
                   <h3>{project.title}</h3>
-                  <p>{project.role}</p>
+
+                  <span className="work-card-view">
+                    VIEW CASE STUDY
+                  </span>
                 </div>
 
-                <div>
-                  <p>{project.description}</p>
+                <p className="work-card-role">
+                  {project.role}
+                </p>
 
-                  <div className="work-tags">
-                    {project.tags.map((tag) => (
-                      <span key={tag}>{tag}</span>
-                    ))}
-                  </div>
+                <p className="work-card-description">
+                  {project.description}
+                </p>
+
+                <div className="work-card-tags">
+                  {project.tags.map((tag) => (
+                    <span key={tag}>
+                      {tag}
+                    </span>
+                  ))}
                 </div>
+
               </div>
             </Link>
           ))}
         </div>
-
-        <div className="section-bottom">
-          <span>04 / 08</span>
-          <span>CLICK A PROJECT TO EXPLORE</span>
-        </div>
       </section>
 
-      {/* CREATIVE LAB */}
+
+      {/* =====================================================
+          CREATIVE LAB
+      ===================================================== */}
       <section id="lab" className="lab-section">
-        <div className="section-meta">
-          <span>(CREATIVE LAB)</span>
-          <span>05 — SELF-INITIATED</span>
-          <span>CONCEPT / ART DIRECTION / DIGITAL</span>
+        <div className="section-index">04</div>
+
+        <div className="section-label">
+          (CREATIVE LAB)
         </div>
 
-        <div className="lab-section__intro">
-          <p className="section-kicker">
-            SELF-INITIATED / FICTIONAL CAMPAIGNS
-          </p>
-
+        <div className="lab-intro">
           <h2>
-            When there&apos;s
+            Concepts, experiments,
             <br />
-            <span>no brief.</span>
+            and creative direction.
           </h2>
 
           <p>
-            A space for ideas I build because I want to explore a brand, a
-            visual language, or a different way of communicating a product.
+            Self-initiated concepts exploring branding,
+            campaign thinking, visual direction, and
+            AI-assisted creative production.
           </p>
         </div>
 
-        <div className="lab-list">
-          {CREATIVE_LAB.map((item, index) => (
-            <article className="lab-item" key={item.title}>
-              <div className="lab-item__number">0{index + 1}</div>
 
-              <div className="lab-item__content">
-                <p>{item.label}</p>
-                <h3>{item.title}</h3>
-                <strong>{item.line}</strong>
-                <p>{item.copy}</p>
+        <div className="lab-grid">
+          {CREATIVE_LAB.map((item, index) => (
+            <article
+              className={`lab-card lab-card-${index + 1}`}
+              key={item.title}
+            >
+              <div className="lab-card-top">
+                <span>
+                  0{index + 1}
+                </span>
+
+                <small>
+                  {item.label}
+                </small>
               </div>
 
-              <div className="lab-item__arrow">↗</div>
+              <div className="lab-card-content">
+                <h3>{item.title}</h3>
+
+                <div className="lab-line">
+                  {item.line}
+                </div>
+
+                <p>{item.copy}</p>
+              </div>
             </article>
           ))}
         </div>
-
-        <div className="section-bottom">
-          <span>05 / 08</span>
-          <span>IDEAS WITHOUT A CLIENT BRIEF</span>
-        </div>
       </section>
 
-      {/* EXPERIENCE */}
+
+      {/* =====================================================
+          EXPERIENCE / RESUME
+      ===================================================== */}
       <section id="resume" className="experience-section">
-        <div className="section-meta">
-          <span>(EXPERIENCE)</span>
-          <span>06 — RESUME</span>
-          <span>MARKETING / DIGITAL / STRATEGY</span>
+        <div className="section-index">05</div>
+
+        <div className="section-label">
+          (EXPERIENCE)
         </div>
 
-        <div className="experience-section__intro">
-          <p className="section-kicker">EXPERIENCE / EDUCATION</p>
-
+        <div className="experience-intro">
           <h2>
-            Where I&apos;ve
+            Where I've
             <br />
-            <span>built the work.</span>
+            been building.
           </h2>
         </div>
 
         <div className="experience-list">
           {EXPERIENCE.map((item) => (
             <article
-              className="experience-item"
+              className="experience-row"
               key={`${item.company}-${item.period}`}
             >
-              <div className="experience-item__period">
+              <div className="experience-period">
                 {item.period}
               </div>
 
-              <div className="experience-item__company">
+              <div className="experience-main">
                 <h3>{item.company}</h3>
-                <p>{item.role}</p>
-              </div>
 
-              <div className="experience-item__details">
-                <span>{item.location}</span>
-                <p>{item.description}</p>
+                <div className="experience-role">
+                  {item.role}
+                </div>
 
-                <div className="work-tags">
+                <div className="experience-location">
+                  {item.location}
+                </div>
+
+                <p>
+                  {item.description}
+                </p>
+
+                <div className="experience-tags">
                   {item.tags.map((tag) => (
-                    <span key={tag}>{tag}</span>
+                    <span key={tag}>
+                      {tag}
+                    </span>
                   ))}
                 </div>
               </div>
             </article>
           ))}
         </div>
-
-        <div className="section-bottom">
-          <span>06 / 08</span>
-          <span>EXPERIENCE / EDUCATION</span>
-        </div>
       </section>
 
-      {/* CONTACT */}
+
+      {/* =====================================================
+          CONTACT
+      ===================================================== */}
       <section id="contact" className="contact-section">
-        <div className="section-meta">
-          <span>(CONTACT)</span>
-          <span>07 — FINAL STOP</span>
-          <span>{BRAND.availability}</span>
+        <div className="section-index">06</div>
+
+        <div className="section-label">
+          (CONTACT)
         </div>
 
-        <div className="contact-section__content">
-          <p className="section-kicker">
-            HAVE A PROJECT, OPPORTUNITY, OR IDEA?
+        <div className="contact-content">
+          <p className="contact-kicker">
+            HAVE A PROJECT / ROLE / IDEA?
           </p>
 
           <h2>
-            Let&apos;s make
+            LET'S MAKE
             <br />
-            <span>something people remember.</span>
+            SOMETHING
+            <br />
+            MATTER.
           </h2>
 
           <a
             href={`mailto:${BRAND.email}`}
             className="contact-email"
           >
-            {BRAND.email} ↗
+            {BRAND.email}
           </a>
         </div>
       </section>
 
-      {/* FOOTER */}
-      <footer className="portfolio-footer">
+
+      {/* =====================================================
+          FOOTER
+      ===================================================== */}
+      <footer className="site-footer">
+
         <div>
-          <strong>GAURAV SINGH</strong>
+          <strong>{BRAND.wordmark}</strong>
+          <span>{BRAND.location}</span>
+        </div>
+
+        <div>
           <p>{BRAND.footerNote}</p>
         </div>
 
         <div>
-          <p>NAVIGATE</p>
-          <a href="#about">About</a>
-          <a href="#mindset">Mindset</a>
-          <a href="#work">Work</a>
-          <a href="#lab">Lab</a>
-          <a href="#resume">Resume</a>
-          <a href="#contact">Contact</a>
+          <span>© {BRAND.year}</span>
         </div>
 
-        <div>
-          <p>ELSEWHERE</p>
-          <a href="https://linkedin.com" target="_blank">
-            LinkedIn ↗
-          </a>
-          <a href="https://instagram.com" target="_blank">
-            Instagram ↗
-          </a>
-        </div>
-
-        <div>
-          <p>BASED — TORONTO / CANADA</p>
-          <p>© {BRAND.year} GAURAV SINGH</p>
-        </div>
       </footer>
+
     </main>
   );
 }
