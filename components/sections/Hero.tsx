@@ -4,65 +4,95 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
-import { HERO } from "@/lib/data";
+import { BRAND, HERO } from "@/lib/data";
 
 export function Hero() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const numberRef = useRef<HTMLSpanElement>(null);
+  const rootRef = useRef<HTMLElement>(null);
   const reducedMotion = useReducedMotion();
 
   useEffect(() => {
-    const section = sectionRef.current;
-    const number = numberRef.current;
+    const root = rootRef.current;
 
-    if (!section || !number) return;
+    if (!root || reducedMotion) return;
 
     gsap.registerPlugin(ScrollTrigger);
 
     const ctx = gsap.context(() => {
-      const stage = section.querySelector<HTMLElement>(
-        "[data-hero-stage]",
-      );
-      const numberBlock = section.querySelector<HTMLElement>(
-        "[data-hero-number]",
-      );
-      const gaurav = section.querySelector<HTMLElement>(
-        "[data-hero-gaurav]",
-      );
-      const singh = section.querySelector<HTMLElement>(
-        "[data-hero-singh]",
-      );
-      const roles = section.querySelector<HTMLElement>(
-        "[data-hero-roles]",
-      );
-      const intro = section.querySelector<HTMLElement>(
-        "[data-hero-intro]",
-      );
-      const scrollPrompt = section.querySelector<HTMLElement>(
-        "[data-hero-scroll]",
-      );
+      gsap.to(root.querySelectorAll("[data-title]"), {
+        yPercent: -24,
+        opacity: 0,
+        letterSpacing: "0.18em",
+        filter: "blur(5px)",
+        stagger: 0.04,
+        ease: "none",
+        scrollTrigger: {
+          trigger: root,
+          start: "top top",
+          end: "bottom top",
+          scrub: 0.8,
+        },
+      });
+    }, root);
 
-      if (
-        !stage ||
-        !numberBlock ||
-        !gaurav ||
-        !singh ||
-        !roles ||
-        !intro ||
-        !scrollPrompt
-      ) {
-        return;
-      }
+    return () => ctx.revert();
+  }, [reducedMotion]);
 
-      if (reducedMotion) {
-        number.textContent = "100";
+  return (
+    <section
+      ref={rootRef}
+      id="hero"
+      className="title-sequence"
+      aria-labelledby="hero-title"
+    >
+      <div className="title-sequence__meta">
+        <span>{BRAND.name}</span>
+        <span>
+          {BRAND.headlineTop} /{" "}
+          {BRAND.headlineBottom.split(" / ")[1]}
+        </span>
+        <span>{BRAND.location}</span>
+      </div>
 
-        gsap.set(numberBlock, {
-          autoAlpha: 0,
-        });
+      <div className="title-sequence__center">
+        <p data-title className="eyebrow">
+          01 — CINEMATIC OPENING
+        </p>
 
-        gsap.set(
-          [gaurav, singh, roles, intro, scrollPrompt],
+        <h1
+          id="hero-title"
+          className="title-sequence__name"
+        >
+          <span data-title>GAURAV</span>
+          <span data-title>SINGH</span>
+        </h1>
+
+        <div
+          data-title
+          className="title-sequence__roles"
+        >
+          <span>MARKETING</span>
+          <span>CREATIVE</span>
+          <span>DIGITAL</span>
+        </div>
+
+        <p
+          data-title
+          className="title-sequence__statement"
+        >
+          {HERO.statementStrong} {HERO.statementMuted}
+        </p>
+      </div>
+
+      <a
+        className="title-sequence__scroll"
+        href="#about"
+      >
+        <span className="title-sequence__line" />
+        SCROLL TO ENTER
+      </a>
+    </section>
+  );
+}          [gaurav, singh, roles, intro, scrollPrompt],
           {
             autoAlpha: 1,
             clearProps: "transform,filter",
