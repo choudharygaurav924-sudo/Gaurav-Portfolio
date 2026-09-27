@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { CASE_STUDIES } from "@/lib/data";
@@ -27,135 +28,132 @@ export default async function WorkCaseStudy({
     notFound();
   }
 
+  const currentIndex = CASE_STUDIES.findIndex(
+    (item) => item.anchor === slug
+  );
+
+  const nextProject =
+    CASE_STUDIES[
+      (currentIndex + 1) % CASE_STUDIES.length
+    ];
+
   return (
     <main className="case-study-page">
+
+      {/* HEADER */}
       <header className="case-study-header">
         <Link href="/" className="case-study-back">
-          ← BACK TO PORTFOLIO
+          ← BACK TO WORK
         </Link>
 
-        <span>
-          {project.index} / {CASE_STUDIES.length}
+        <span className="case-study-header__brand">
+          GAURAV
         </span>
 
-        <span>{project.label}</span>
+        <span className="case-study-header__index">
+          {project.index} / 03
+        </span>
       </header>
 
+      {/* HERO */}
       <section className="case-study-hero">
-        <div className="case-study-meta">
+        <div className="case-study-hero__meta">
+          <span>{project.label}</span>
           <span>{project.type}</span>
-          <span>{project.role}</span>
         </div>
 
         <h1>{project.title}</h1>
 
-        <p>{project.description}</p>
-      </section>
+        <div className="case-study-hero__bottom">
+          <span>{project.role}</span>
 
-      <section className="case-study-overview">
-        <div className="case-study-label">
-          PROJECT OVERVIEW
-        </div>
-
-        <div>
           <p>{project.description}</p>
-
-          <div className="work-tags">
-            {project.tags.map((tag) => (
-              <span key={tag}>{tag}</span>
-            ))}
-          </div>
         </div>
       </section>
 
-      <section className="case-study-story">
-        {project.story.map(([label, copy]) => (
-          <article key={label}>
-            <span>{label}</span>
-            <p>{copy}</p>
-          </article>
-        ))}
+      {/* OVERVIEW */}
+      <section className="case-study-overview">
+        <div className="section-meta">
+          <span>01</span>
+          <span>OVERVIEW</span>
+        </div>
+
+        <div className="case-study-overview__content">
+          {project.story.map(([title, text]) => (
+            <div
+              className="case-study-story-row"
+              key={title}
+            >
+              <span className="case-study-story-row__label">
+                {title}
+              </span>
+
+              <p>{text}</p>
+            </div>
+          ))}
+        </div>
       </section>
 
+      {/* TAGS */}
+      <section className="case-study-tags">
+        <div className="section-meta">
+          <span>02</span>
+          <span>ROLE / SKILLS</span>
+        </div>
+
+        <div className="case-study-tags__list">
+          {project.tags.map((tag) => (
+            <span key={tag}>{tag}</span>
+          ))}
+        </div>
+      </section>
+
+      {/* IMAGE GALLERY */}
       {project.images.length > 0 && (
-        <section className="case-study-gallery">
+        <section className="case-study-material">
           <div className="section-meta">
-            <span>PROJECT MATERIAL</span>
-            <span>SELECTED VISUALS</span>
-            <span>{project.index}</span>
+            <span>03</span>
+            <span>SELECTED MATERIAL</span>
           </div>
 
-          <div className="case-study-gallery__grid">
+          <div className="case-study-gallery">
             {project.images.map((image, index) => (
               <figure
-                className={
+                className={`case-study-gallery__item ${
                   index === 0
-                    ? "case-study-gallery__item case-study-gallery__item--large"
-                    : "case-study-gallery__item"
-                }
+                    ? "case-study-gallery__item--large"
+                    : ""
+                }`}
                 key={image}
               >
-                <img
+                <Image
                   src={image}
-                  alt={`${project.title} project visual ${index + 1}`}
+                  alt={`${project.title} project image ${
+                    index + 1
+                  }`}
+                  width={2400}
+                  height={1600}
+                  sizes="(max-width: 768px) 100vw, 50vw"
                 />
-
-                <figcaption>
-                  {String(index + 1).padStart(2, "0")}
-                </figcaption>
               </figure>
             ))}
           </div>
         </section>
       )}
 
+      {/* NEXT PROJECT */}
       <section className="case-study-next">
-        <span>NEXT</span>
+        <span className="eyebrow">
+          NEXT PROJECT
+        </span>
 
-        <Link href="/#work">
-          VIEW ALL WORK ↗
+        <Link href={`/work/${nextProject.anchor}`}>
+          <span>{nextProject.index}</span>
+          <h2>{nextProject.title}</h2>
+          <span>VIEW CASE STUDY →</span>
         </Link>
       </section>
-    </main>
-  );
-}              <span key={tag}>{tag}</span>
-            ))}
-          </div>
-        </div>
-      </section>
 
-      <section className="case-study-story">
-        {project.story.map(([label, copy]) => (
-          <article key={label}>
-            <span>{label}</span>
-            <p>{copy}</p>
-          </article>
-        ))}
-      </section>
-
-      <section className="case-study-material">
-        <div className="section-meta">
-          <span>PROJECT MATERIAL</span>
-          <span>SELECTED VISUALS</span>
-          <span>
-            {project.index} / {CASE_STUDIES.length}
-          </span>
-        </div>
-
-        <div className="case-study-material__frame">
-          <div>{project.title}</div>
-
-          <span>PROJECT MATERIAL</span>
-        </div>
-      </section>
-
-      <section className="case-study-next">
-        <span>NEXT</span>
-
-        <Link href="/#work">
-          VIEW ALL WORK ↗
-        </Link>
-      </section>
     </main>
   );
 }
