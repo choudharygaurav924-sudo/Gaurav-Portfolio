@@ -78,24 +78,27 @@ export const CREATIVE_LAB = [
     line: "SUMMER, SERVED COLD.",
     copy:
       "Meet your new summer obsession. NOVA COLD BREW — Smooth. Bold. Ice-cold. Made for slow afternoons, long drives & hot days.",
-    image: "/images/service-1.jpg",
+    image: "",
     accent: "nova",
+    label: "SELF-INITIATED / AI-ASSISTED CREATIVE PRODUCTION",
   },
   {
     title: "VANTA Athletics",
     line: "ENGINEERED TO MOVE.",
     copy:
       "MOVE YOUR WAY. BUILT FOR THE EVERYDAY ATHLETE.",
-    image: "/images/service-2.jpg",
+    image: "",
     accent: "vanta",
+    label: "SELF-INITIATED / AI-ASSISTED CREATIVE PRODUCTION",
   },
   {
     title: "AURA Audio",
     line: "ESCAPE THE NOISE.",
     copy:
       "FIND YOUR FREQUENCY. IMMERSIVE SOUND. ZERO DISTRACTIONS. YOUR WORLD. YOUR SOUND.",
-    image: "/images/service-3.jpg",
+    image: "",
     accent: "aura",
+    label: "SELF-INITIATED / AI-ASSISTED CREATIVE PRODUCTION",
   },
 ] as const;
 
