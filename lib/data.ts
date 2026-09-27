@@ -149,19 +149,19 @@ export const CASE_STUDIES = [
     ],
 
     description:
-      "A campaign-led marketing role built around coordination, content, client work, event promotion, and campaign tracking across multiple digital and social initiatives.",
+      "A campaign-led marketing role built around coordination, digital and social activity, client work, event promotion, and campaign tracking across multiple initiatives.",
 
     tags: [
       "Digital / Social",
       "Campaign Tracking",
-      "Content / Client Work",
+      "Client Work",
       "Team Leadership",
     ],
 
     story: [
       [
         "THE ROLE",
-        "Marketing Team Leader during my college co-op, working across campaign development, content, digital activity, client work, event promotion, and coordination.",
+        "Marketing Team Leader during my college co-op, working across campaign development, digital activity, client work, event promotion, and coordination.",
       ],
       [
         "THE CHALLENGE",
@@ -169,7 +169,7 @@ export const CASE_STUDIES = [
       ],
       [
         "THE APPROACH",
-        "Connect campaign planning, content development, social activity, event promotion, and campaign tracking into an organized marketing workflow.",
+        "Connect campaign planning, digital activity, event promotion, content, and campaign tracking into an organized marketing workflow.",
       ],
     ],
   },
@@ -179,34 +179,46 @@ export const CASE_STUDIES = [
     anchor: "philer-ai",
     title: "PHILER.AI",
     label: "REAL WORK",
-    type: "Digital Marketing / Lead Generation",
+    type: "Digital Outreach / Lead Generation",
     role: "MARKETING SPECIALIST INTERN",
 
-    image: "",
-    images: [],
+    image: "/images/philer-outreach.png",
+
+    images: [
+      "/images/philer-outreach.png",
+      "/images/philer-crm.png",
+      "/images/philer-follow-up.png",
+      "/images/philer-strategy.png",
+    ],
 
     description:
-      "An outreach and follow-up system for a real estate and mortgage audience, combining targeted communication, lead generation, CRM tracking, campaign support, and event promotion.",
+      "A hands-on digital outreach and lead-generation role focused on prospect research, targeted communication, CRM organization, follow-up systems, contact validation, and business-development support.",
 
     tags: [
       "5,000+ Outreach",
       "~1,000 Opportunities",
-      "Google Sheets CRM",
+      "CRM Management",
       "Lead Generation",
+      "Prospect Research",
+      "Follow-Up Systems",
     ],
 
     story: [
       [
         "THE ROLE",
-        "Marketing Specialist Intern focused on digital outreach, lead generation, follow-up, CRM organization, campaign support, and event promotion.",
+        "Marketing Specialist Intern focused on digital outreach, prospect research, lead generation, CRM organization, follow-up, and business-development support.",
       ],
       [
         "THE AUDIENCE",
-        "Real estate and mortgage professionals across Ontario and Alberta.",
+        "Real estate agents and mortgage professionals across Ontario and Alberta.",
       ],
       [
-        "THE APPROACH",
-        "Build a repeatable outreach and follow-up system using targeted communication, Google Sheets CRM tracking, campaign support, and event promotion.",
+        "THE WORKFLOW",
+        "Research prospects, organize contact information, conduct targeted outreach, track engagement, manage follow-ups, validate contact data, and move qualified prospects toward the next step.",
+      ],
+      [
+        "THE SYSTEM",
+        "Used spreadsheets and CRM-style tracking to organize prospects, outreach status, engagement, contact validation, and follow-up activity.",
       ],
     ],
   },
@@ -283,12 +295,13 @@ export const EXPERIENCE = [
     role: "MARKETING SPECIALIST INTERN",
     location: "ONTARIO, CANADA",
     description:
-      "Built targeted outreach and follow-up systems for real estate and mortgage professionals, using direct outreach, CRM tracking, campaign support, and event promotion.",
+      "Built targeted outreach and follow-up systems for real estate and mortgage professionals, using direct outreach, CRM tracking, prospect research, contact validation, and lead-generation workflows.",
     tags: [
       "5,000+ Outreach",
       "~1,000 Opportunities",
       "CRM",
       "Lead Generation",
+      "Prospect Research",
     ],
   },
 
