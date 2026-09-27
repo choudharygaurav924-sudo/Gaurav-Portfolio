@@ -1,92 +1,77 @@
 import Link from "next/link";
-import { BRAND, NAV_LINKS, SOCIALS } from "@/lib/data";
+import {
+  BRAND,
+  NAV_LINKS,
+  SOCIALS,
+} from "@/lib/data";
 
 export function Footer() {
   return (
     <footer className="site-footer">
-      <div className="site-footer__inner">
-        <div className="site-footer__top">
-          <div className="site-footer__statement">
-            <span className="site-footer__eyebrow">
-              (GAURAV SINGH)
-            </span>
-
-            <p>
+      <div className="shell">
+        <div className="footer-grid">
+          <div>
+            <p className="footer-note">
               {BRAND.footerNote}
+            </p>
+
+            <Link
+              href={`mailto:${BRAND.email}`}
+              className="footer-link"
+            >
+              {BRAND.email}
+            </Link>
+
+            <p className="eyebrow footer-location">
+              {BRAND.location}
             </p>
           </div>
 
-          <div className="site-footer__column">
-            <span className="site-footer__eyebrow">
-              NAVIGATE
-            </span>
+          <nav aria-label="Sections">
+            <p className="eyebrow">Navigate</p>
 
-            <nav aria-label="Footer navigation">
+            <ul className="footer-links">
               {NAV_LINKS.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className="site-footer__link"
-                >
-                  {link.label}
-                </Link>
+                <li key={link.href}>
+                  <Link href={link.href}>
+                    {link.label}
+                  </Link>
+                </li>
               ))}
-            </nav>
-          </div>
+            </ul>
+          </nav>
 
-          <div className="site-footer__column">
-            <span className="site-footer__eyebrow">
-              ELSEWHERE
-            </span>
+          <nav aria-label="Social">
+            <p className="eyebrow">Elsewhere</p>
 
-            <nav aria-label="Social links">
+            <ul className="footer-links">
               {SOCIALS.map((social) => (
-                <Link
-                  key={social.label}
-                  href={social.href}
-                  className="site-footer__link"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  {social.label}
-                  <span>↗</span>
-                </Link>
+                <li key={social.label}>
+                  <a
+                    href={social.href}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    {social.label}
+                  </a>
+                </li>
               ))}
-            </nav>
-          </div>
+            </ul>
+          </nav>
         </div>
 
-        <div className="site-footer__email-row">
-          <span className="site-footer__eyebrow">
-            AVAILABLE FOR MEANINGFUL OPPORTUNITIES
-          </span>
-
-          <Link
-            href={`mailto:${BRAND.email}`}
-            className="site-footer__email"
-          >
-            {BRAND.email}
-            <span>↗</span>
-          </Link>
+        <div className="footer-wordmark">
+          GAURAV<span>.</span>
         </div>
 
-        <div className="site-footer__wordmark">
-          GAURAV
-          <span>SINGH</span>
-        </div>
-
-        <div className="site-footer__bottom">
+        <div className="footer-bottom">
           <span>
             © {BRAND.year} {BRAND.name}
           </span>
 
           <span>
-            {BRAND.location}
+            MARKETING × CREATIVE × DIGITAL
           </span>
-
-          <Link href="#hero">
-            BACK TO TOP ↑
-          </Link>
         </div>
       </div>
     </footer>
