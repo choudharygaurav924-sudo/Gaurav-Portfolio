@@ -4,65 +4,291 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
-import { BRAND, HERO } from "@/lib/data";
+import { HERO } from "@/lib/data";
 
 export function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
-  const countdownRef = useRef<HTMLSpanElement>(null);
-
+  const numberRef = useRef<HTMLSpanElement>(null);
   const reducedMotion = useReducedMotion();
 
   useEffect(() => {
     const section = sectionRef.current;
-    const countdown = countdownRef.current;
+    const number = numberRef.current;
 
-    if (!section || !countdown) return;
+    if (!section || !number) return;
 
     gsap.registerPlugin(ScrollTrigger);
 
     const ctx = gsap.context(() => {
-      const stage = section.querySelector<HTMLElement>(
-        "[data-hero-stage]"
+      if (reducedMotion) {
+        number.textContent = "100";
+
+        gsap.set("[data-hero-content]", {
+          autoAlpha: 1,
+          y: 0,
+        });
+
+        return;
+      }
+
+      const intro = gsap.timeline();
+
+      gsap.set("[data-hero-meta]", {
+        autoAlpha: 0,
+        y: 10,
+      });
+
+      gsap.set("[data-hero-number]", {
+        autoAlpha: 1,
+        scale: 1,
+      });
+
+      gsap.set("[data-hero-gaurav]", {
+        autoAlpha: 0,
+        yPercent: 100,
+        letterSpacing: "0.32em",
+      });
+
+      gsap.set("[data-hero-singh]", {
+        autoAlpha: 0,
+        yPercent: 100,
+        letterSpacing: "0.32em",
+      });
+
+      gsap.set("[data-hero-roles]", {
+        autoAlpha: 0,
+        y: 20,
+      });
+
+      gsap.set("[data-hero-intro]", {
+        autoAlpha: 0,
+        y: 25,
+      });
+
+      gsap.set("[data-hero-scroll]", {
+        autoAlpha: 0,
+        y: 20,
+      });
+
+      intro
+        .to("[data-hero-meta]", {
+          autoAlpha: 1,
+          y: 0,
+          duration: 0.6,
+          ease: "power2.out",
+        })
+        .to(
+          number,
+          {
+            duration: 0.8,
+            textContent: "06",
+            snap: {
+              textContent: 1,
+            },
+            ease: "none",
+          },
+          "-=0.2",
+        )
+        .to(number, {
+          duration: 0.9,
+          textContent: "81",
+          snap: {
+            textContent: 1,
+          },
+          ease: "none",
+        })
+        .to(number, {
+          duration: 0.8,
+          textContent: "100",
+          snap: {
+            textContent: 1,
+          },
+          ease: "none",
+        })
+        .to(number, {
+          autoAlpha: 0,
+          scale: 0.85,
+          duration: 0.45,
+          ease: "power2.inOut",
+        })
+        .to(
+          "[data-hero-gaurav]",
+          {
+            autoAlpha: 1,
+            yPercent: 0,
+            letterSpacing: "0.02em",
+            duration: 1,
+            ease: "power4.out",
+          },
+          "-=0.1",
+        )
+        .to(
+          "[data-hero-singh]",
+          {
+            autoAlpha: 1,
+            yPercent: 0,
+            letterSpacing: "0.02em",
+            duration: 1,
+            ease: "power4.out",
+          },
+          "-=0.8",
+        )
+        .to(
+          "[data-hero-roles]",
+          {
+            autoAlpha: 1,
+            y: 0,
+            duration: 0.65,
+            ease: "power3.out",
+          },
+          "-=0.45",
+        )
+        .to(
+          "[data-hero-intro]",
+          {
+            autoAlpha: 1,
+            y: 0,
+            duration: 0.8,
+            ease: "power3.out",
+          },
+          "-=0.35",
+        )
+        .to(
+          "[data-hero-scroll]",
+          {
+            autoAlpha: 1,
+            y: 0,
+            duration: 0.6,
+            ease: "power3.out",
+          },
+          "-=0.3",
+        );
+
+      ScrollTrigger.create({
+        trigger: section,
+        start: "top top",
+        end: "bottom top",
+        pin: "[data-hero-stage]",
+        anticipatePin: 1,
+      });
+
+      const exit = gsap.timeline({
+        scrollTrigger: {
+          trigger: section,
+          start: "top top",
+          end: "bottom top",
+          scrub: 1,
+        },
+      });
+
+      exit.to(
+        "[data-hero-stage]",
+        {
+          yPercent: -8,
+          scale: 0.96,
+          ease: "none",
+        },
+        0,
       );
 
-      const counterBlock = section.querySelector<HTMLElement>(
-        "[data-hero-counter]"
+      exit.to(
+        "[data-hero-gaurav], [data-hero-singh]",
+        {
+          yPercent: -18,
+          opacity: 0,
+          letterSpacing: "0.16em",
+          ease: "none",
+        },
+        0,
       );
 
-      const name = section.querySelector<HTMLElement>(
-        "[data-hero-name]"
+      exit.to(
+        "[data-hero-roles], [data-hero-intro]",
+        {
+          opacity: 0,
+          y: -20,
+          ease: "none",
+        },
+        0.05,
       );
 
-      const letters = gsap.utils.toArray<HTMLElement>(
-        "[data-hero-letter]"
+      exit.to(
+        "[data-hero-scroll]",
+        {
+          opacity: 0,
+          ease: "none",
+        },
+        0,
       );
+    }, section);
 
-      const roles = section.querySelector<HTMLElement>(
-        "[data-hero-roles]"
-      );
+    return () => ctx.revert();
+  }, [reducedMotion]);
 
-      const statement = section.querySelector<HTMLElement>(
-        "[data-hero-statement]"
-      );
+  return (
+    <section
+      ref={sectionRef}
+      id="hero"
+      className="title-sequence"
+      aria-labelledby="hero-title"
+    >
+      <div data-hero-stage className="title-sequence__stage">
+        <div data-hero-meta className="title-sequence__meta">
+          <span>GS / 001</span>
+          <span>PORTFOLIO / 2026</span>
+          <span>BASED — TORONTO / CANADA</span>
+        </div>
 
-      const portrait = section.querySelector<HTMLElement>(
-        "[data-hero-portrait]"
-      );
+        <div
+          data-hero-number
+          className="title-sequence__number"
+          aria-hidden="true"
+        >
+          <span ref={numberRef}>00</span>
+        </div>
 
-      const portraitGlow = section.querySelector<HTMLElement>(
-        "[data-hero-glow]"
-      );
+        <div className="title-sequence__center">
+          <p className="title-sequence__eyebrow">
+            01 — CINEMATIC OPENING
+          </p>
 
-      const scrollPrompt = section.querySelector<HTMLElement>(
-        "[data-hero-scroll]"
-      );
+          <h1 id="hero-title" className="title-sequence__name">
+            <span data-hero-gaurav className="title-sequence__word">
+              GAURAV
+            </span>
 
-      if (
-        !stage ||
-        !counterBlock ||
-        !name ||
-        !roles ||
-        !statement ||
+            <span data-hero-singh className="title-sequence__word">
+              SINGH
+            </span>
+          </h1>
+
+          <div data-hero-roles className="title-sequence__roles">
+            <span>MARKETING</span>
+            <span>CREATIVE</span>
+            <span>DIGITAL</span>
+          </div>
+
+          <p data-hero-intro className="title-sequence__statement">
+            {HERO.statementStrong}
+          </p>
+        </div>
+
+        <div className="title-sequence__location">
+          BASED — TORONTO / CANADA
+        </div>
+
+        <a
+          data-hero-scroll
+          className="title-sequence__scroll"
+          href="#about"
+        >
+          <span className="title-sequence__line" />
+          SCROLL TO ENTER
+        </a>
+      </div>
+    </section>
+  );
+}        !statement ||
         !portrait ||
         !scrollPrompt
       ) {
