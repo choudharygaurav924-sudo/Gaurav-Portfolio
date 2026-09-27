@@ -1,7 +1,13 @@
 import Link from "next/link";
 import { Hero } from "@/components/sections/Hero";
 import { InteractivePortrait } from "@/components/sections/InteractivePortrait";
-import { CASE_STUDIES, CREATIVE_LAB, EXPERIENCE, BRAND, HERO } from "@/lib/data";
+import {
+  CASE_STUDIES,
+  CREATIVE_LAB,
+  EXPERIENCE,
+  BRAND,
+  HERO,
+} from "@/lib/data";
 
 export default function Home() {
   return (
@@ -26,6 +32,7 @@ export default function Home() {
 
       <InteractivePortrait />
 
+      {/* ABOUT */}
       <section id="about" className="editorial-section about-section">
         <div className="section-meta">
           <span>(ABOUT)</span>
@@ -49,9 +56,7 @@ export default function Home() {
               {HERO.statementStrong}
             </p>
 
-            <p>
-              {HERO.statementMuted}
-            </p>
+            <p>{HERO.statementMuted}</p>
 
             <p>
               I turn audience insight into campaigns, content, and
@@ -61,6 +66,7 @@ export default function Home() {
         </div>
       </section>
 
+      {/* MINDSET */}
       <section id="mindset" className="editorial-section mindset-section">
         <div className="section-meta">
           <span>(MARKETING MINDSET)</span>
@@ -78,8 +84,8 @@ export default function Home() {
           </h2>
 
           <p>
-            Strategy gives creativity direction. Creativity gives
-            strategy a reason to be remembered.
+            Strategy gives creativity direction. Creativity gives strategy a
+            reason to be remembered.
           </p>
 
           <div className="mindset-grid">
@@ -87,8 +93,8 @@ export default function Home() {
               <span>01</span>
               <h3>INSIGHT</h3>
               <p>
-                Start with the audience, the tension, and the truth
-                behind the brief.
+                Start with the audience, the tension, and the truth behind
+                the brief.
               </p>
             </div>
 
@@ -96,8 +102,8 @@ export default function Home() {
               <span>02</span>
               <h3>STRATEGY</h3>
               <p>
-                Find the sharpest direction and the reason for people
-                to care.
+                Find the sharpest direction and the reason for people to
+                care.
               </p>
             </div>
 
@@ -105,8 +111,8 @@ export default function Home() {
               <span>03</span>
               <h3>CONCEPT</h3>
               <p>
-                Turn the strategy into a big idea with a distinct
-                point of view.
+                Turn the strategy into a big idea with a distinct point of
+                view.
               </p>
             </div>
 
@@ -114,8 +120,8 @@ export default function Home() {
               <span>04</span>
               <h3>EXECUTION</h3>
               <p>
-                Make the idea real across content, digital, social,
-                and experience.
+                Make the idea real across content, digital, social, and
+                experience.
               </p>
             </div>
 
@@ -123,14 +129,15 @@ export default function Home() {
               <span>05</span>
               <h3>IMPACT</h3>
               <p>
-                Measure what moved, learn what matters, and sharpen
-                the next idea.
+                Measure what moved, learn what matters, and sharpen the next
+                idea.
               </p>
             </div>
           </div>
         </div>
       </section>
 
+      {/* WORK */}
       <section id="work" className="work-section">
         <div className="section-meta work-section__meta">
           <span>(SELECTED WORK)</span>
@@ -148,9 +155,9 @@ export default function Home() {
           </h2>
 
           <p>
-            Real professional experience and academic work across
-            digital marketing, campaigns, content, strategy and
-            creative direction.
+            Real professional experience and academic work across digital
+            marketing, campaigns, outreach, CRM systems, lead generation,
+            strategy and creative direction.
           </p>
         </div>
 
@@ -168,6 +175,21 @@ export default function Home() {
               </div>
 
               <div className="work-card__visual">
+                {project.image ? (
+                  <img
+                    src={project.image}
+                    alt={project.title}
+                    className="work-card__image"
+                    loading="lazy"
+                  />
+                ) : (
+                  <div className="work-card__visual-placeholder">
+                    <span>CASE STUDY</span>
+                  </div>
+                )}
+
+                <div className="work-card__visual-overlay" />
+
                 <div className="work-card__visual-number">
                   {project.index}
                 </div>
@@ -205,6 +227,7 @@ export default function Home() {
         </div>
       </section>
 
+      {/* CREATIVE LAB */}
       <section id="lab" className="lab-section">
         <div className="section-meta">
           <span>(CREATIVE LAB)</span>
@@ -224,21 +247,18 @@ export default function Home() {
           </h2>
 
           <p>
-            A space for ideas I build because I want to explore a
-            brand, a visual language, or a different way of
-            communicating a product.
+            A space for ideas I build because I want to explore a brand, a
+            visual language, or a different way of communicating a product.
           </p>
         </div>
 
         <div className="lab-list">
           {CREATIVE_LAB.map((item, index) => (
             <article className="lab-item" key={item.title}>
-              <div className="lab-item__number">
-                0{index + 1}
-              </div>
+              <div className="lab-item__number">0{index + 1}</div>
 
               <div className="lab-item__content">
-                <p>SELF-INITIATED / FICTIONAL</p>
+                <p>{item.label}</p>
                 <h3>{item.title}</h3>
                 <strong>{item.line}</strong>
                 <p>{item.copy}</p>
@@ -255,6 +275,7 @@ export default function Home() {
         </div>
       </section>
 
+      {/* EXPERIENCE */}
       <section id="resume" className="experience-section">
         <div className="section-meta">
           <span>(EXPERIENCE)</span>
@@ -307,6 +328,7 @@ export default function Home() {
         </div>
       </section>
 
+      {/* CONTACT */}
       <section id="contact" className="contact-section">
         <div className="section-meta">
           <span>(CONTACT)</span>
@@ -334,6 +356,7 @@ export default function Home() {
         </div>
       </section>
 
+      {/* FOOTER */}
       <footer className="portfolio-footer">
         <div>
           <strong>GAURAV SINGH</strong>
