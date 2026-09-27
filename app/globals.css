@@ -715,7 +715,7 @@
 
   background: #050505;
 
-  isolation: isolate;
+    isolation: isolate;
 }
 
 .cinematic-hero__stage::before {
