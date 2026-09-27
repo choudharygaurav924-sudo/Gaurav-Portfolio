@@ -1,13 +1,14 @@
 "use client";
 
 import { useRef } from "react";
+import type { PointerEvent } from "react";
 
 export function InteractivePortrait() {
   const frameRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLImageElement>(null);
 
   const handlePointerMove = (
-    event: React.PointerEvent<HTMLDivElement>
+    event: PointerEvent<HTMLDivElement>
   ) => {
     const frame = frameRef.current;
     const image = imageRef.current;
