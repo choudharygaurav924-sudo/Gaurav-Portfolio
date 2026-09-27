@@ -55,10 +55,13 @@ export default function Home() {
       </section>
 
       {/* ABOUT */}
-      <section id="about" className="editorial-section about-section">
+      <section
+        id="about"
+        className="editorial-section about-section"
+      >
         <div className="section-label">
           <span>(02)</span>
-          <span>{ABOUT.label || "ABOUT"}</span>
+          <span>ABOUT</span>
         </div>
 
         <div className="about-content">
@@ -78,7 +81,10 @@ export default function Home() {
       </section>
 
       {/* MINDSET */}
-      <section id="mindset" className="editorial-section mindset-section">
+      <section
+        id="mindset"
+        className="editorial-section mindset-section"
+      >
         <div className="section-label">
           <span>(03)</span>
           <span>MINDSET</span>
@@ -87,29 +93,33 @@ export default function Home() {
         <div className="mindset-content">
           <div className="mindset-intro">
             <p>
-              I work across strategy, digital marketing, outreach,
-              campaign development and creative direction.
+              I work across strategy, digital marketing,
+              outreach, campaign development and creative
+              direction.
             </p>
           </div>
 
           <div className="creative-system">
-            {CREATIVE_SYSTEM.map((item) => (
-              <div className="system-row" key={item.number}>
-                <span className="system-number">
-                  {item.number}
-                </span>
-
-                <span className="system-title">
-                  {item.title}
-                </span>
-
-                {item.description && (
-                  <span className="system-description">
-                    {item.description}
+            {CREATIVE_SYSTEM.map(
+              ([number, title, description]) => (
+                <div
+                  className="system-row"
+                  key={number}
+                >
+                  <span className="system-number">
+                    {number}
                   </span>
-                )}
-              </div>
-            ))}
+
+                  <span className="system-title">
+                    {title}
+                  </span>
+
+                  <span className="system-description">
+                    {description}
+                  </span>
+                </div>
+              )
+            )}
           </div>
         </div>
       </section>
@@ -147,7 +157,9 @@ export default function Home() {
                   </div>
                 )}
 
-                <div className="work-card-arrow">↗</div>
+                <div className="work-card-arrow">
+                  ↗
+                </div>
               </div>
 
               <div className="work-card-info">
@@ -170,7 +182,7 @@ export default function Home() {
                 </p>
 
                 <div className="work-card-tags">
-                  {project.tags?.map((tag) => (
+                  {project.tags.map((tag) => (
                     <span key={tag}>{tag}</span>
                   ))}
                 </div>
@@ -191,14 +203,18 @@ export default function Home() {
           <h2>IDEAS WITHOUT A BRIEF.</h2>
 
           <p>
-            Self-initiated creative experiments exploring art
-            direction, campaign thinking and AI-assisted production.
+            Self-initiated creative experiments exploring
+            art direction, campaign thinking and
+            AI-assisted production.
           </p>
         </div>
 
         <div className="lab-grid">
           {CREATIVE_LAB.map((project) => (
-            <article className="lab-card" key={project.title}>
+            <article
+              className="lab-card"
+              key={project.title}
+            >
               <div className="lab-card-media">
                 {project.image ? (
                   <Image
@@ -217,6 +233,7 @@ export default function Home() {
 
               <div className="lab-card-info">
                 <span>{project.label}</span>
+
                 <h3>{project.title}</h3>
 
                 {project.description && (
@@ -240,13 +257,17 @@ export default function Home() {
 
         <div className="experience-list">
           {EXPERIENCE.map((item) => (
-            <div className="experience-row" key={`${item.company}-${item.period}`}>
+            <div
+              className="experience-row"
+              key={`${item.company}-${item.period}`}
+            >
               <div className="experience-date">
                 {item.period}
               </div>
 
               <div className="experience-main">
                 <h3>{item.company}</h3>
+
                 <p className="experience-role">
                   {item.role}
                 </p>
@@ -260,7 +281,7 @@ export default function Home() {
                 </p>
 
                 <div className="experience-tags">
-                  {item.tags?.map((tag) => (
+                  {item.tags.map((tag) => (
                     <span key={tag}>{tag}</span>
                   ))}
                 </div>
@@ -271,7 +292,10 @@ export default function Home() {
       </section>
 
       {/* CONTACT */}
-      <section id="contact" className="contact-section">
+      <section
+        id="contact"
+        className="contact-section"
+      >
         <div className="section-label">
           <span>(07)</span>
           <span>CONTACT</span>
