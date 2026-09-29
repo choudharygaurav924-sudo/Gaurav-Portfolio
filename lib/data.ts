@@ -1,60 +1,77 @@
 /**
  * ─────────────────────────────────────────────────────────────────────────────
- *  SINGLE SOURCE OF TRUTH FOR ALL SITE CONTENT
+ * SINGLE SOURCE OF TRUTH FOR GAURAV SINGH PORTFOLIO CONTENT
  * ─────────────────────────────────────────────────────────────────────────────
- *  Images live in /public/images/. Drop your files there using the exact
- *  filenames referenced below and they appear automatically.
- * ─────────────────────────────────────────────────────────────────────────────
+ * Keep the original Jishnu data structure intact.
+ * Images live in /public/images/.
  */
 
-/* ── BRAND ─────────────────────────────────────────────────────────────────── */
+ /* ── BRAND ─────────────────────────────────────────────────────────────────── */
 
 export const BRAND = {
-  name: "ECHO",
-  /** Shown oversized in the footer. Keep it short — it renders very large. */
-  wordmark: "ECHO",
-  /** Split across two lines in the hero. */
-  headlineTop: "BEYOND DESIGN",
-  headlineBottom: "BUILT TO MATTER",
-  email: "hello@echostudio.com",
-  phone: "+1 (555) 234-5678",
-  location: "New York, NY",
-  timezone: "EST (UTC-5)",
-  availability: "Available for Q1 & Q2 projects",
-  /** Short paragraph in the footer's first column. */
+  name: "GAURAV",
+  wordmark: "GAURAV",
+  headlineTop: "MARKETING",
+  headlineBottom: "THAT MAKES PEOPLE LOOK TWICE",
+  email: "hello@gauravsinghportfolio.com",
+  phone: "",
+  location: "Toronto, Canada",
+  timezone: "EST",
+  availability: "Open to marketing opportunities",
   footerNote:
-    "We are an independent creative studio partnering with ambitious brands to build transformative digital products and visual identities.",
+    "Marketing, strategy and creative work built around the things that make people stop, look twice, and care.",
   year: 2026,
 } as const;
 
+
 /* ── NAVIGATION ────────────────────────────────────────────────────────────── */
 
-/**
- * Drives both the StaggeredMenu panel and the footer's Navigate column.
- * `ariaLabel` is what screen readers announce — keep it descriptive.
- */
 export const NAV_LINKS = [
-  { label: "About", href: "#about", ariaLabel: "Go to the about section" },
-  { label: "Work", href: "#work", ariaLabel: "See selected work" },
-  { label: "Why us", href: "#why-us", ariaLabel: "Read why to work with us" },
-  { label: "Services", href: "#services", ariaLabel: "View services offered" },
-  { label: "Process", href: "#process", ariaLabel: "See how we work" },
-  { label: "Pricing", href: "#pricing", ariaLabel: "View pricing plans" },
-  { label: "Contact", href: "#cta", ariaLabel: "Get in touch" },
+  {
+    label: "About",
+    href: "#about",
+    ariaLabel: "Go to the about section",
+  },
+  {
+    label: "Work",
+    href: "#work",
+    ariaLabel: "See selected work",
+  },
+  {
+    label: "Experience",
+    href: "#why-us",
+    ariaLabel: "View marketing experience",
+  },
+  {
+    label: "Creative Lab",
+    href: "#services",
+    ariaLabel: "View self initiated creative work",
+  },
+  {
+    label: "Contact",
+    href: "#cta",
+    ariaLabel: "Get in touch",
+  },
 ] as const;
 
-/** Legal links in the footer's bottom bar. */
+
 export const FOOTER_LINKS = [
-  { label: "Privacy", href: "#" },
-  { label: "Terms", href: "#" },
-  { label: "Licensing", href: "#" },
+  { label: "LinkedIn", href: "https://www.linkedin.com/" },
+  { label: "Instagram", href: "https://www.instagram.com/" },
 ] as const;
+
 
 export const SOCIALS = [
-  { label: "Instagram", href: "https://instagram.com" },
-  { label: "LinkedIn", href: "https://linkedin.com" },
-  { label: "Twitter", href: "https://x.com" },
+  {
+    label: "Instagram",
+    href: "https://www.instagram.com/",
+  },
+  {
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/",
+  },
 ] as const;
+
 
 /* ── HERO ──────────────────────────────────────────────────────────────────── */
 
@@ -64,27 +81,35 @@ export const HERO: {
   statementStrong: string;
   statementMuted: string;
 } = {
-  /**
-   * Cursor-spotlight backdrop. The base layer is always visible; the reveal
-   * layer shows only inside the soft circle that trails the pointer, so the
-   * scene looks "peeled back" to a second version of itself. Use two images of
-   * the *same composition*, cropped identically, so they align pixel-for-pixel.
-   * Recommended: ~1280×720+ .webp.
+  /*
+   * Temporary compatibility paths for the original SpotlightReveal system.
+   * These can be replaced with your final hero imagery once the hero itself
+   * is redesigned.
    */
   base: "/images/hero-base.webp",
   reveal: "/images/hero-reveal.webp",
-  /** Bottom-left statement. The first half is white, the rest dimmed. */
-  statementStrong: "We craft brands, websites, and digital experiences",
-  statementMuted: "designed with purpose, clarity, and impact",
+
+  statementStrong:
+    "I like figuring out what makes people stop, look twice, and care.",
+
+  statementMuted:
+    "Somewhere between strategy, creativity and culture is where I do my best work.",
 };
+
 
 /* ── ABOUT ─────────────────────────────────────────────────────────────────── */
 
 export const ABOUT = {
   label: "(ABOUT)",
-  statementStrong: "We combine years of web design expertise with innovative ",
-  statementMuted: "experiences to create meaningful digital stories.",
+
+  statementStrong:
+    "I like figuring out what makes people stop, look twice, and care. ",
+
+  statementMuted:
+    "Somewhere between strategy, creativity and culture is where I do my best work.",
+
 } as const;
+
 
 /* ── WORK ──────────────────────────────────────────────────────────────────── */
 
@@ -98,71 +123,126 @@ export interface Project {
   tags: readonly string[];
 }
 
+
 export const PROJECTS: readonly Project[] = [
   {
     index: "01",
-    title: "Aether OS",
-    blurb: "Design system & web app for an AI cloud platform",
-    image: "/images/work-1.jpg",
+    title: "Life Is A Special Event",
+
+    blurb:
+      "Marketing Team Leader — Co-op. Led a five-person marketing team across digital campaigns, social media, campaign planning and client-facing creative work.",
+
+    image: "/images/life-is-a-special-event.jpg",
+
     href: "#",
+
     year: "2025",
-    tags: ["Web Design", "Development"],
+
+    tags: [
+      "Marketing",
+      "Campaign Strategy",
+      "Social Media",
+    ],
   },
+
   {
     index: "02",
-    title: "Veloce Motors",
-    blurb: "Brand identity & digital showroom for electric vehicles",
-    image: "/images/work-2.jpg",
+    title: "LagerShed / Sheridan",
+
+    blurb:
+      "Academic advertising project built around research, audience understanding, positioning and campaign strategy.",
+
+    image: "/images/sheridan-lagershed-photo.jpg",
+
     href: "#",
+
     year: "2025",
-    tags: ["Branding", "Web Design"],
+
+    tags: [
+      "Research",
+      "Positioning",
+      "Campaign Strategy",
+    ],
   },
+
   {
     index: "03",
-    title: "Lumina Audio",
-    blurb: "E-commerce experience & spatial 3D showcase for high-end audio",
-    image: "/images/work-3.jpg",
+    title: "SS Traders",
+
+    blurb:
+      "Marketing Specialist working on B2B marketing for a wholesale supplier of polycarbonate roofing sheets in Delhi NCR.",
+
+    image: "/images/ss-traders.jpg",
+
     href: "#",
+
     year: "2026",
-    tags: ["Branding", "Motion"],
+
+    tags: [
+      "B2B Marketing",
+      "Digital Marketing",
+      "Marketing",
+    ],
   },
 ] as const;
 
-/* ── WHY US / STATS ────────────────────────────────────────────────────────── */
+
+/* ── WHY US / EXPERIENCE ───────────────────────────────────────────────────── */
 
 export interface Stat {
-  /** Numeric portion — rolls up on scroll. Digits only. */
   value: number;
-  /** Rendered immediately after the number, e.g. "+", "%", "M". */
   suffix: string;
   label: string;
 }
 
+
 export const STATS: readonly Stat[] = [
-  { value: 8, suffix: "+", label: "Years of experience in the industry" },
-  { value: 77, suffix: "%", label: "Customer satisfaction rate" },
-  { value: 5, suffix: "M", label: "In client revenue growth" },
+  {
+    value: 5,
+    suffix: "+",
+    label: "Years across education, marketing and campaign experience",
+  },
+  {
+    value: 3,
+    suffix: "",
+    label: "Campaigns led during marketing co-op experience",
+  },
+  {
+    value: 5,
+    suffix: "",
+    label: "People led as part of a marketing team",
+  },
 ] as const;
 
+
 export const WHY_US = {
-  label: "(WHY US)",
-  heading: "NUMBERS DON'T LIE",
-  /** Full-bleed background image behind the stats. */
-  image: "/images/why-us.jpg",
+  label: "(EXPERIENCE)",
+
+  heading: "STRATEGY. CREATIVITY. CULTURE.",
+
+  image: "/images/life-is-a-special-event.jpg",
+
 } as const;
 
-/* ── FEATURED TESTIMONIAL ──────────────────────────────────────────────────── */
+
+/* ── FEATURED WORK ─────────────────────────────────────────────────────────── */
 
 export const FEATURED_TESTIMONIAL = {
   quote:
-    "Working with them felt personal. The process was smooth, the design was stunning, and everything had meaning.",
-  author: "Client Name",
-  role: "Founder at Nova Studio",
-  avatar: "/images/avatar-featured.jpg",
-  image: "/images/testimonial-highlight.jpg",
+    "Somewhere between strategy, creativity and culture is where I do my best work.",
+
+  author: "Gaurav Singh",
+
+  role: "Marketing Specialist",
+
+  avatar: "/images/gaurav.jpg",
+
+  image: "/images/life-is-a-special-event.jpg",
+
 } as const;
 
-/* ── SERVICES ──────────────────────────────────────────────────────────────── */
+
+/* ── SERVICES / CREATIVE CAPABILITIES ──────────────────────────────────────── */
 
 export interface Service {
   index: string;
@@ -172,36 +252,81 @@ export interface Service {
   image: string;
 }
 
+
 export const SERVICES: readonly Service[] = [
   {
     index: "01",
-    title: "Web Design & Development",
-    blurb: "High-performance digital experiences with responsive layouts and 60fps animations.",
-    items: [],
-    image: "/images/service-1.jpg",
+
+    title: "Marketing Strategy",
+
+    blurb:
+      "Turning audience understanding and research into clear marketing direction.",
+
+    items: [
+      "Audience Research",
+      "Positioning",
+      "Campaign Strategy",
+      "Marketing Planning",
+    ],
+
+    image: "/images/sheridan-lagershed-photo.jpg",
   },
+
   {
     index: "02",
-    title: "Branding & Identity",
-    blurb: "Comprehensive brand identity, logo design, visual systems, and brand guidelines.",
-    items: [],
-    image: "/images/service-2.jpg",
+
+    title: "Digital Marketing",
+
+    blurb:
+      "Building digital campaigns and outreach systems designed to create meaningful engagement.",
+
+    items: [
+      "Digital Campaigns",
+      "Social Media",
+      "Lead Generation",
+      "Outreach",
+    ],
+
+    image: "/images/life-is-a-special-event.jpg",
   },
+
   {
     index: "03",
-    title: "Social Media & Campaign",
-    blurb: "Creative social media graphics, campaign assets, and strategic content templates.",
-    items: [],
-    image: "/images/service-3.jpg",
+
+    title: "Creative Direction",
+
+    blurb:
+      "Developing visual ideas and campaign systems that give marketing a distinct point of view.",
+
+    items: [
+      "Campaign Concepts",
+      "Visual Direction",
+      "Creative Development",
+      "AI-Assisted Production",
+    ],
+
+    image: "/images/nova.jpg",
   },
+
   {
     index: "04",
-    title: "Motion & 3D Animation",
-    blurb: "Dynamic micro-interactions, 3D renders, and compelling product demos.",
-    items: [],
-    image: "/images/service-4.jpg",
+
+    title: "Campaign Execution",
+
+    blurb:
+      "Connecting strategy and creative execution across digital, social, print and out-of-home formats.",
+
+    items: [
+      "Social Assets",
+      "OOH",
+      "Print",
+      "Campaign Rollouts",
+    ],
+
+    image: "/images/vanta.jpg",
   },
 ] as const;
+
 
 /* ── PROCESS ───────────────────────────────────────────────────────────────── */
 
@@ -216,64 +341,113 @@ export interface ProcessStep {
   image: string;
 }
 
+
 export const PROCESS: readonly ProcessStep[] = [
   {
     id: "step-1",
+
     step: "STEP 01",
-    title: "Discovery",
-    subtitle: "Research & Alignment",
-    body: "Understanding goals, audience, and scope to define a clear roadmap.",
+
+    title: "Understand",
+
+    subtitle: "Research & Audience",
+
+    body:
+      "Start with the audience, the context and the problem before jumping into creative.",
+
     subsections: [
-      "Brand & Market Audit",
-      "User Journey Mapping",
-      "Scope & Milestone Timeline",
+      "Audience Research",
+      "Market Context",
+      "Problem Definition",
     ],
-    deliverables: ["Strategy Brief", "Project Scope"],
-    image: "/images/service-1.jpg",
+
+    deliverables: [
+      "Research Direction",
+      "Audience Understanding",
+    ],
+
+    image: "/images/sheridan-lagershed-photo.jpg",
   },
+
   {
     id: "step-2",
+
     step: "STEP 02",
-    title: "Concept",
-    subtitle: "UX & Visual Direction",
-    body: "Creating wireframes, design systems, and visual concepts for user flows.",
+
+    title: "Position",
+
+    subtitle: "Strategy & Direction",
+
+    body:
+      "Find the positioning, message and strategic idea that gives the campaign something worth saying.",
+
     subsections: [
-      "Wireframes & Layouts",
-      "Color & Type Systems",
-      "Interactive Prototypes",
+      "Positioning",
+      "Messaging",
+      "Campaign Direction",
     ],
-    deliverables: ["Figma UI Kit", "Prototype"],
-    image: "/images/service-2.jpg",
+
+    deliverables: [
+      "Strategic Direction",
+      "Campaign Concept",
+    ],
+
+    image: "/images/life-is-a-special-event.jpg",
   },
+
   {
     id: "step-3",
+
     step: "STEP 03",
-    title: "Build",
-    subtitle: "Development & Motion",
-    body: "Developing clean, high-performance code with smooth 60fps animations.",
+
+    title: "Create",
+
+    subtitle: "Creative Development",
+
+    body:
+      "Translate the strategy into visual concepts, campaign assets and digital experiences.",
+
     subsections: [
-      "Next.js App Router",
-      "GSAP Scroll Animations",
-      "SEO & Performance Tuning",
+      "Creative Concepts",
+      "Visual Systems",
+      "Campaign Assets",
     ],
-    deliverables: ["Clean Codebase", "Live Build"],
-    image: "/images/service-3.jpg",
+
+    deliverables: [
+      "Creative System",
+      "Campaign Assets",
+    ],
+
+    image: "/images/nova.jpg",
   },
+
   {
     id: "step-4",
+
     step: "STEP 04",
+
     title: "Launch",
-    subtitle: "QA & Handoff",
-    body: "Final testing, domain deployment, and ongoing post-launch support.",
+
+    subtitle: "Execution & Learning",
+
+    body:
+      "Bring the campaign into market, track the response and use what happens next to improve the work.",
+
     subsections: [
-      "Cross-Device QA Testing",
-      "Production Deployment",
-      "Handoff & Support",
+      "Campaign Rollout",
+      "Performance Tracking",
+      "Optimization",
     ],
-    deliverables: ["Production Site", "Support"],
-    image: "/images/service-4.jpg",
+
+    deliverables: [
+      "Campaign Launch",
+      "Performance Insights",
+    ],
+
+    image: "/images/vanta.jpg",
   },
 ] as const;
+
 
 /* ── TESTIMONIALS ──────────────────────────────────────────────────────────── */
 
@@ -284,47 +458,72 @@ export interface Testimonial {
   avatar: string;
 }
 
+
 export const TESTIMONIALS: readonly Testimonial[] = [
   {
-    quote: "Echo transformed our brand identity into an immersive digital experience that elevated our market presence.",
-    author: "Elena Rostova",
-    role: "CEO at Veloce",
-    avatar: "/images/avatar-1.jpg",
+    quote:
+      "Led a five-person marketing team across multiple campaign initiatives during my marketing co-op.",
+
+    author: "Life Is A Special Event",
+
+    role: "Marketing Team Leader — Co-op",
+
+    avatar: "/images/life-is-a-special-event-logo.jpg",
   },
+
   {
-    quote: "The speed, attention to detail, and smoothness of motion design blew our team away.",
-    author: "Marcus Vance",
-    role: "Head of Product at Aether",
-    avatar: "/images/avatar-2.jpg",
+    quote:
+      "Built marketing campaigns around research, audience understanding and strategic positioning.",
+
+    author: "Sheridan College",
+
+    role: "Advertising & Digital Marketing",
+
+    avatar: "/images/sheridan-logo.jpg",
   },
+
   {
-    quote: "Exceptional visual taste and flawless technical execution. They delivered beyond expectations.",
-    author: "Sophia Chen",
-    role: "Design Lead at Lumina",
-    avatar: "/images/avatar-3.jpg",
+    quote:
+      "Working across B2B marketing and digital outreach in a wholesale business environment.",
+
+    author: "SS Traders",
+
+    role: "Marketing Specialist",
+
+    avatar: "/images/ss-traders-logo.jpg",
   },
+
   {
-    quote: "Working with Echo felt like an extension of our internal team. Seamless communication throughout.",
-    author: "David Kellar",
-    role: "Founder at Apex",
-    avatar: "/images/avatar-4.jpg",
+    quote:
+      "Self-initiated campaigns exploring brand systems, campaign concepts and AI-assisted creative production.",
+
+    author: "Creative Lab",
+
+    role: "Self-Initiated Work",
+
+    avatar: "/images/nova-logo.jpg",
   },
 ] as const;
 
+
 export const TESTIMONIALS_INTRO = {
-  label: "(TESTIMONIALS)",
+  label: "(APPROACH)",
+
   heading:
-    "We deliver data-driven and result-focused work. Hear what our partners say about us.",
-  rating: "4.9",
-  ratingNote: "300+ Verified Reviews on Clutch",
+    "Good marketing starts with understanding what makes people care.",
+
+  rating: "TORONTO",
+
+  ratingNote: "CANADA",
+
 } as const;
+
 
 /* ── PRICING ───────────────────────────────────────────────────────────────── */
 
 export interface PricingTier {
   name: string;
   blurb: string;
-  /** null renders "Let's talk" instead of a number. */
   monthly: number | null;
   annual: number | null;
   features: readonly string[];
@@ -332,60 +531,75 @@ export interface PricingTier {
   cta: string;
 }
 
-/** Discount applied on the annual toggle, shown as a badge. */
-export const ANNUAL_DISCOUNT = 20;
+
+export const ANNUAL_DISCOUNT = 0;
+
 
 export const PRICING: readonly PricingTier[] = [
   {
-    name: "Starter",
-    blurb: "Perfect for solo founders and early stage brands.",
-    monthly: 5999,
-    annual: 4799,
-    features: [
-      "1 Senior designer",
-      "72 hours turnaround time",
-      "One request at a time",
-      "Pause or cancel anytime",
-      "Up to 40 hours per month",
-      "Async communication",
-    ],
-    featured: false,
-    cta: "Get started",
-  },
-  {
-    name: "Growth",
-    blurb: "For scaling teams that ship continuously.",
-    monthly: 9999,
-    annual: 7999,
-    features: [
-      "2 Senior designers",
-      "48 hours turnaround time",
-      "Two requests at a time",
-      "Pause or cancel anytime",
-      "Up to 80 hours per month",
-      "Weekly strategy call",
-      "Priority support",
-    ],
-    featured: true,
-    cta: "Get started",
-  },
-  {
-    name: "Bespoke",
-    blurb: "Custom scope for complex, multi-team engagements.",
+    name: "STRATEGY",
+
+    blurb:
+      "Audience, positioning and campaign thinking.",
+
     monthly: null,
     annual: null,
+
     features: [
-      "Dedicated design team",
-      "24 hours turnaround time",
-      "Unlimited requests",
-      "Custom contract terms",
-      "Unlimited hours",
-      "Dedicated Slack channel",
+      "Audience research",
+      "Positioning",
+      "Campaign strategy",
+      "Marketing planning",
     ],
+
     featured: false,
-    cta: "Book a call",
+
+    cta: "LET'S TALK",
+  },
+
+  {
+    name: "CREATIVE",
+
+    blurb:
+      "Campaign concepts and visual direction.",
+
+    monthly: null,
+    annual: null,
+
+    features: [
+      "Campaign concepts",
+      "Visual direction",
+      "Social creative",
+      "AI-assisted production",
+    ],
+
+    featured: true,
+
+    cta: "VIEW WORK",
+  },
+
+  {
+    name: "CAMPAIGN",
+
+    blurb:
+      "End-to-end campaign thinking and execution.",
+
+    monthly: null,
+    annual: null,
+
+    features: [
+      "Strategy",
+      "Creative",
+      "Digital execution",
+      "Campaign rollout",
+    ],
+
+    featured: false,
+
+    cta: "GET IN TOUCH",
   },
 ] as const;
+
 
 /* ── FAQ ───────────────────────────────────────────────────────────────────── */
 
@@ -394,30 +608,46 @@ export interface FaqItem {
   answer: string;
 }
 
+
 export const FAQ: readonly FaqItem[] = [
   {
-    question: "What's your typical process for a new project?",
-    answer: "We start with discovery and research, move into interactive design prototypes, and finish with clean development and testing.",
+    question: "What kind of marketing work do I do?",
+
+    answer:
+      "My work sits across marketing strategy, digital marketing, campaign development, creative direction and audience-focused communication.",
   },
+
   {
-    question: "How long does a typical project take?",
-    answer: "Most branding and web development projects are completed within 2 to 4 weeks depending on scope.",
+    question: "What is the Creative Lab?",
+
+    answer:
+      "The Creative Lab is a collection of self-initiated and AI-assisted campaign concepts created to explore different visual and strategic directions.",
   },
+
   {
-    question: "Do you work with clients outside your timezone?",
-    answer: "Yes, we work seamlessly with global clients through asynchronous updates and flexible scheduling.",
+    question: "Are the Creative Lab campaigns client projects?",
+
+    answer:
+      "No. Projects in the Creative Lab are clearly identified as self-initiated or fictional campaigns.",
   },
+
   {
-    question: "What do you need from me to get started?",
-    answer: "Just a quick project overview, your brand assets, and a kick-off call to align on goals.",
+    question: "Where am I based?",
+
+    answer:
+      "Toronto, Canada.",
   },
+
   {
-    question: "Can I pause or cancel my subscription?",
-    answer: "Yes, you can pause or cancel your project plan at any time with no lock-in contracts.",
+    question: "Are you open to opportunities?",
+
+    answer:
+      "Yes. I am open to marketing opportunities where strategy, creativity and culture come together.",
   },
 ] as const;
 
-/* ── BLOG ──────────────────────────────────────────────────────────────────── */
+
+/* ── BLOG / CREATIVE LAB ───────────────────────────────────────────────────── */
 
 export interface Post {
   title: string;
@@ -428,41 +658,68 @@ export interface Post {
   href: string;
 }
 
+
 export const POSTS: readonly Post[] = [
   {
-    title: "Why Clarity Beats Creativity in Web Design",
-    excerpt: "How clear messaging and structured layout drive higher engagement than complex visual tricks.",
-    date: "Feb 4, 2025",
-    category: "Design Strategy",
-    image: "/images/post-1.jpg",
+    title: "NOVA",
+
+    excerpt:
+      "SELF-INITIATED / FICTIONAL CAMPAIGN — A summer coffee concept built around refreshment, lifestyle and a cold visual language.",
+
+    date: "2026",
+
+    category: "Creative Lab",
+
+    image: "/images/nova.jpg",
+
     href: "#",
   },
+
   {
-    title: "Why Motion Design Makes Your Website Feel Alive",
-    excerpt: "Motion helps your website feel modern and clear. Here's why it matters and how to execute it right.",
-    date: "Feb 4, 2025",
-    category: "Social Media",
-    image: "/images/post-2.jpg",
+    title: "VANTA",
+
+    excerpt:
+      "SELF-INITIATED / FICTIONAL CAMPAIGN — An athletic campaign exploring movement, performance and urban energy.",
+
+    date: "2026",
+
+    category: "Creative Lab",
+
+    image: "/images/vanta.jpg",
+
     href: "#",
   },
+
   {
-    title: "What to Look for in a Premium Framer Template",
-    excerpt: "Not all Framer templates are built equal. Here's how to spot the ones worth your time and investment.",
-    date: "Feb 4, 2025",
-    category: "Branding",
-    image: "/images/post-3.jpg",
+    title: "AURA",
+
+    excerpt:
+      "SELF-INITIATED / AI-ASSISTED CREATIVE PRODUCTION — An audio campaign exploring atmosphere, focus and everyday escape.",
+
+    date: "2026",
+
+    category: "Creative Lab",
+
+    image: "/images/aura.jpg",
+
     href: "#",
   },
 ] as const;
 
+
 /* ── CTA ───────────────────────────────────────────────────────────────────── */
 
 export const CTA = {
-  headingLine1: "LET'S WORK",
-  headingLine2: "TOGETHER",
+  headingLine1: "LET'S MAKE",
+  headingLine2: "PEOPLE LOOK TWICE",
+
   blurb:
-    "Have a project in mind? We'd love to hear about it. Let's create something great together!",
+    "Have a project, opportunity or idea worth talking about? Let's connect.",
+
   buttonLabel: "GET IN TOUCH",
-  buttonHref: "mailto:hello@echostudio.com",
+
+  buttonHref: "mailto:hello@gauravsinghportfolio.com",
+
   image: "/images/cta-bg.jpg",
+
 } as const;
