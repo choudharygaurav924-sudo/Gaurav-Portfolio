@@ -3,158 +3,353 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { HERO, BRAND } from "@/lib/data";
-
-gsap.registerPlugin(ScrollTrigger);
+import { useReducedMotion } from "@/hooks/useReducedMotion";
+import { BRAND, HERO } from "@/lib/data";
 
 export function Hero() {
-  const rootRef = useRef<HTMLElement | null>(null);
-  const counterRef = useRef<HTMLSpanElement | null>(null);
-  const markRef = useRef<HTMLHeadingElement | null>(null);
-  const introRef = useRef<HTMLDivElement | null>(null);
+  const sectionRef = useRef<HTMLElement>(null);
+  const numberRef = useRef<HTMLSpanElement>(null);
+  const reducedMotion = useReducedMotion();
 
   useEffect(() => {
-    const root = rootRef.current;
-    const counter = counterRef.current;
-    const mark = markRef.current;
-    const intro = introRef.current;
+    const section = sectionRef.current;
+    const number = numberRef.current;
 
-    if (!root || !counter || !mark || !intro) return;
+    if (!section || !number) return;
+
+    gsap.registerPlugin(ScrollTrigger);
 
     const ctx = gsap.context(() => {
-      const counterObject = { value: 6 };
+      const stage =
+        section.querySelector<HTMLElement>("[data-hero-stage]");
+      const numberBlock =
+        section.querySelector<HTMLElement>("[data-hero-number]");
+      const gaurav =
+        section.querySelector<HTMLElement>("[data-hero-gaurav]");
+      const singh =
+        section.querySelector<HTMLElement>("[data-hero-singh]");
+      const roles =
+        section.querySelector<HTMLElement>("[data-hero-roles]");
+      const intro =
+        section.querySelector<HTMLElement>("[data-hero-intro]");
+      const scrollPrompt =
+        section.querySelector<HTMLElement>("[data-hero-scroll]");
 
-      const counterTween = gsap.to(counterObject, {
-        value: 100,
-        duration: 2.4,
-        ease: "power2.out",
+      if (
+        !stage ||
+        !numberBlock ||
+        !gaurav ||
+        !singh ||
+        !roles ||
+        !intro ||
+        !scrollPrompt
+      ) {
+        return;
+      }
 
-        onUpdate: () => {
-          const value = Math.round(counterObject.value);
+      if (reducedMotion) {
+        gsap.set(numberBlock, {
+          autoAlpha: 0,
+        });
 
-          if (value < 30) {
-            counter.textContent = String(
-              Math.max(6, value).toString().padStart(2, "0"),
-            );
-          } else if (value < 95) {
-            counter.textContent = "81";
-          } else {
-            counter.textContent = "100";
-          }
-        },
+        gsap.set(
+          [gaurav, singh, roles, intro, scrollPrompt],
+          {
+            autoAlpha: 1,
+            clearProps: "transform,filter",
+          },
+        );
 
-        onComplete: () => {
-          counter.textContent = "100";
+        return;
+      }
+
+      const sequence = gsap.timeline({
+        defaults: {
+          ease: "power4.out",
         },
       });
 
-      gsap.fromTo(
-        mark,
+      const counter = {
+        value: 0,
+      };
+
+      gsap.set(
+        [gaurav, singh, roles, intro, scrollPrompt],
         {
-          opacity: 0,
-          scaleX: 1.35,
-          letterSpacing: "0.28em",
-        },
-        {
-          opacity: 1,
-          scaleX: 1,
-          letterSpacing: "0em",
-          duration: 1.6,
-          delay: 0.5,
-          ease: "power4.out",
+          autoAlpha: 0,
         },
       );
 
-      gsap.fromTo(
+      gsap.set(gaurav, {
+        yPercent: 115,
+        scale: 1.16,
+        letterSpacing: "0.12em",
+        filter: "blur(9px)",
+      });
+
+      gsap.set(singh, {
+        yPercent: 115,
+        scale: 1.16,
+        letterSpacing: "0.12em",
+        filter: "blur(9px)",
+      });
+
+      gsap.set(roles, {
+        y: 24,
+        letterSpacing: "0.48em",
+        filter: "blur(5px)",
+      });
+
+      gsap.set(intro, {
+        y: 28,
+        filter: "blur(5px)",
+      });
+
+      gsap.set(scrollPrompt, {
+        y: 12,
+      });
+
+      sequence.to(counter, {
+        value: 100,
+        duration: 1.15,
+        ease: "none",
+        onUpdate: () => {
+          number.textContent = String(
+            Math.floor(counter.value),
+          ).padStart(3, "0");
+        },
+      });
+
+      sequence.to(
+        numberBlock,
+        {
+          autoAlpha: 0,
+          y: -14,
+          duration: 0.42,
+        },
+        "-=0.14",
+      );
+
+      sequence.to(
+        gaurav,
+        {
+          autoAlpha: 1,
+          yPercent: 0,
+          scale: 1,
+          letterSpacing: "-0.075em",
+          filter: "blur(0px)",
+          duration: 1.15,
+        },
+        "-=0.16",
+      );
+
+      sequence.to(
+        gaurav,
+        {
+          yPercent: -108,
+          scale: 0.86,
+          duration: 0.9,
+        },
+        "+=0.2",
+      );
+
+      sequence.to(
+        singh,
+        {
+          autoAlpha: 1,
+          yPercent: 0,
+          scale: 1,
+          letterSpacing: "-0.075em",
+          filter: "blur(0px)",
+          duration: 1.05,
+        },
+        "-=0.42",
+      );
+
+      sequence.to(
+        roles,
+        {
+          autoAlpha: 1,
+          y: 0,
+          letterSpacing: "0.22em",
+          filter: "blur(0px)",
+          duration: 0.75,
+        },
+        "-=0.3",
+      );
+
+      sequence.to(
         intro,
         {
-          opacity: 0,
-          y: 30,
-        },
-        {
-          opacity: 1,
+          autoAlpha: 1,
           y: 0,
-          duration: 1.2,
-          delay: 1.6,
-          ease: "power3.out",
+          filter: "blur(0px)",
+          duration: 0.9,
         },
+        "-=0.3",
+      );
+
+      sequence.to(
+        scrollPrompt,
+        {
+          autoAlpha: 1,
+          y: 0,
+          duration: 0.65,
+        },
+        "-=0.35",
       );
 
       ScrollTrigger.create({
-        trigger: root,
+        trigger: section,
         start: "top top",
-        end: "bottom top",
-        scrub: true,
+        end: "bottom bottom",
+        pin: stage,
+        scrub: false,
+        anticipatePin: 1,
+      });
 
-        onUpdate: (self) => {
-          const progress = self.progress;
-
-          gsap.set(mark, {
-            scale: 1 - progress * 0.45,
-            y: -progress * 30,
-          });
-
-          gsap.set(intro, {
-            opacity: 1 - progress * 1.4,
-            y: progress * -30,
-          });
+      const exit = gsap.timeline({
+        scrollTrigger: {
+          trigger: section,
+          start: "top top",
+          end: "bottom top",
+          scrub: 1.1,
         },
       });
 
-      return () => {
-        counterTween.kill();
-      };
-    }, root);
+      exit.to(
+        stage,
+        {
+          yPercent: -7,
+          scale: 0.96,
+          filter: "blur(1px)",
+          ease: "none",
+        },
+        0,
+      );
+
+      exit.to(
+        scrollPrompt,
+        {
+          autoAlpha: 0,
+          ease: "none",
+        },
+        0.12,
+      );
+    }, section);
 
     return () => ctx.revert();
-  }, []);
+  }, [reducedMotion]);
 
   return (
     <section
-      ref={rootRef}
-      className="hero-root relative min-h-[100svh] overflow-hidden bg-ink"
-      data-name="Hero"
+      ref={sectionRef}
+      id="hero"
+      className="title-sequence"
+      aria-labelledby="hero-title"
     >
-      <div className="hero-stage relative flex min-h-[100svh] items-center justify-center">
-        <div className="absolute left-6 top-6 z-20 font-mono text-[9px] uppercase tracking-[0.18em] text-muted md:left-10 md:top-10">
-          BASED — TORONTO / CANADA
+      <div
+        data-hero-stage
+        className="title-sequence__stage"
+        style={{
+          backgroundImage: `
+            linear-gradient(
+              180deg,
+              rgba(0,0,0,0.18) 0%,
+              rgba(0,0,0,0.08) 38%,
+              rgba(0,0,0,0.38) 100%
+            ),
+            url("${HERO.base}")
+          `,
+          backgroundPosition: "center center",
+          backgroundSize: "cover",
+          backgroundRepeat: "no-repeat",
+        }}
+      >
+        {/* Cinematic dark layer */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 z-0 bg-black/20"
+        />
+
+        {/* Editorial metadata */}
+        <div
+          className="title-sequence__meta"
+          aria-hidden="true"
+        >
+          <span>GS / 001</span>
+
+          <span>
+            MARKETING / CREATIVE / DIGITAL
+          </span>
+
+          <span>
+            {BRAND.location}
+          </span>
         </div>
 
-        <div className="absolute right-6 top-6 z-20 font-mono text-[9px] uppercase tracking-[0.18em] text-muted md:right-10 md:top-10">
-          <span ref={counterRef}>06</span>
+        {/* Counter */}
+        <div
+          data-hero-number
+          className="title-sequence__number"
+          aria-hidden="true"
+        >
+          <span ref={numberRef}>000</span>
         </div>
 
-        <div className="hero-pin relative z-10 w-full">
+        {/* Main typography */}
+        <div className="title-sequence__center">
           <h1
-            ref={markRef}
-            className="hero-mark select-none text-center font-display text-[18vw] uppercase leading-[0.78] tracking-[-0.055em] text-paper"
+            id="hero-title"
+            className="title-sequence__name"
+            aria-label="Gaurav Singh"
           >
-            {BRAND.wordmark}
+            <span
+              data-hero-gaurav
+              className="title-sequence__word"
+            >
+              GAURAV
+            </span>
+
+            <span
+              data-hero-singh
+              className="title-sequence__word"
+            >
+              SINGH
+            </span>
           </h1>
 
           <div
-            ref={introRef}
-            className="mx-auto mt-12 max-w-3xl px-6 text-center md:mt-16"
+            data-hero-roles
+            className="title-sequence__roles"
+            aria-label="Marketing, Creative, Digital"
           >
-            <p className="text-[9px] uppercase tracking-[0.22em] text-muted">
-              MARKETING / STRATEGY / CREATIVE
-            </p>
-
-            <p className="mt-7 font-display text-xl uppercase leading-[1.05] tracking-wide text-paper md:text-3xl lg:text-4xl">
-              {HERO.statementStrong}
-            </p>
-
-            <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-muted-light md:text-base">
-              {HERO.statementMuted}
-            </p>
+            <span>MARKETING</span>
+            <span>CREATIVE</span>
+            <span>DIGITAL</span>
           </div>
+
+          <p
+            data-hero-intro
+            className="title-sequence__statement"
+          >
+            {HERO.statementStrong}{" "}
+            {HERO.statementMuted}
+          </p>
         </div>
 
-        <div className="pointer-events-none absolute inset-x-0 bottom-6 z-20 flex justify-center md:bottom-10">
-          <span className="font-mono text-[8px] uppercase tracking-[0.2em] text-muted">
-            SCROLL TO EXPLORE
-          </span>
+        <div className="title-sequence__location">
+          BASED — TORONTO / CANADA
         </div>
+
+        <a
+          data-hero-scroll
+          className="title-sequence__scroll"
+          href="#about"
+        >
+          <span className="title-sequence__line" />
+          SCROLL TO ENTER
+        </a>
       </div>
     </section>
   );
