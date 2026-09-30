@@ -1,43 +1,54 @@
+"use client";
+
+import Link from "next/link";
 import { Reveal } from "@/components/ui/Reveal";
-import { CTA } from "@/lib/data";
+import { SectionLabel } from "@/components/ui/SectionLabel";
+import { CTA as CTA_DATA } from "@/lib/data";
 
 export function CTA() {
   return (
     <section
       id="cta"
       data-name="Contact"
-      className="relative overflow-hidden bg-ink"
+      className="shell bg-ink py-28 lg:py-40"
     >
-      <div className="shell py-32 lg:py-48">
-        <Reveal variant="up">
-          <p className="eyebrow">LET'S CONNECT</p>
+      <div className="grid gap-12 lg:grid-cols-[0.25fr_1fr] lg:gap-10">
+        <Reveal variant="fade">
+          <SectionLabel>(CONTACT)</SectionLabel>
         </Reveal>
 
-        <Reveal variant="up" className="mt-8 block">
-          <h2 className="max-w-7xl font-display text-[clamp(4rem,11vw,11rem)] uppercase leading-[0.78] tracking-[-0.04em] text-paper">
-            {CTA.headingLine1}
-            <br />
-            <span className="text-muted">
-              {CTA.headingLine2}
-            </span>
-          </h2>
-        </Reveal>
-
-        <div className="mt-14 flex flex-col gap-8 border-t border-line pt-8 md:flex-row md:items-end md:justify-between">
+        <div>
           <Reveal variant="up">
-            <p className="max-w-lg text-sm leading-relaxed text-muted-light">
-              {CTA.blurb}
+            <p className="eyebrow">
+              {CTA_DATA.blurb}
             </p>
           </Reveal>
 
           <Reveal variant="up">
-            <a
-              href={CTA.buttonHref}
-              className="inline-flex border border-paper px-7 py-4 text-[10px] uppercase tracking-[0.18em] text-paper transition-all duration-300 hover:bg-paper hover:text-ink"
-            >
-              {CTA.buttonLabel}
-              <span className="ml-4">↗</span>
-            </a>
+            <h2 className="mt-8 max-w-6xl font-display text-display-lg uppercase leading-[0.82] tracking-display text-paper">
+              {CTA_DATA.headingLine1}
+              <br />
+              {CTA_DATA.headingLine2}
+            </h2>
+          </Reveal>
+
+          <Reveal variant="up">
+            <div className="mt-12">
+              <Link
+                href={CTA_DATA.buttonHref}
+                className="inline-flex border border-paper px-7 py-4 text-[10px] uppercase tracking-[0.18em] text-paper transition-colors duration-300 hover:bg-paper hover:text-ink"
+              >
+                {CTA_DATA.buttonLabel}
+              </Link>
+            </div>
+          </Reveal>
+
+          <Reveal variant="up">
+            <div className="mt-20 border-t border-line pt-6">
+              <p className="text-[10px] uppercase tracking-[0.14em] text-muted">
+                {CTA_DATA.buttonHref.replace("mailto:", "")}
+              </p>
+            </div>
           </Reveal>
         </div>
       </div>
