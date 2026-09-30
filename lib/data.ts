@@ -1,7 +1,6 @@
 /**
- * ─────────────────────────────────────────────────────────────────────────────
- * SINGLE SOURCE OF TRUTH FOR GAURAV SINGH PORTFOLIO CONTENT
- * ─────────────────────────────────────────────────────────────────────────────
+ * GAURAV SINGH PORTFOLIO
+ * SINGLE SOURCE OF TRUTH FOR PORTFOLIO CONTENT
  */
 
 export const BRAND = {
@@ -20,7 +19,7 @@ export const BRAND = {
 } as const;
 
 
-/* ── NAVIGATION ────────────────────────────────────────────────────────────── */
+/* NAVIGATION */
 
 export const NAV_LINKS = [
   {
@@ -75,14 +74,9 @@ export const SOCIALS = [
 ] as const;
 
 
-/* ── HERO ──────────────────────────────────────────────────────────────────── */
+/* HERO */
 
-export const HERO: {
-  base: string;
-  reveal: string;
-  statementStrong: string;
-  statementMuted: string;
-} = {
+export const HERO = {
   base: "/images/hero-base.webp",
   reveal: "/images/hero-reveal.webp",
 
@@ -91,23 +85,23 @@ export const HERO: {
 
   statementMuted:
     "Somewhere between strategy, creativity and culture is where I do my best work.",
-};
+} as const;
 
 
-/* ── ABOUT ─────────────────────────────────────────────────────────────────── */
+/* ABOUT */
 
 export const ABOUT = {
   label: "(ABOUT)",
 
   statementStrong:
-    "I like figuring out what makes people stop, look twice, and care. ",
+    "I like figuring out what makes people stop, look twice, and care.",
 
   statementMuted:
     "Somewhere between strategy, creativity and culture is where I do my best work.",
 } as const;
 
 
-/* ── WORK ──────────────────────────────────────────────────────────────────── */
+/* PROJECTS */
 
 export interface Project {
   index: string;
@@ -171,10 +165,6 @@ export const PROJECTS: readonly Project[] = [
     blurb:
       "Marketing Specialist working on B2B marketing for a wholesale supplier of polycarbonate roofing sheets in Delhi NCR.",
 
-    /*
-     * No dedicated SS Traders image exists in the uploaded asset list.
-     * We therefore use a neutral existing visual temporarily.
-     */
     image: "/images/sheridan-lagershed-photo.jpg",
 
     href: "#",
@@ -211,7 +201,7 @@ export const PROJECTS: readonly Project[] = [
 ] as const;
 
 
-/* ── EXPERIENCE ────────────────────────────────────────────────────────────── */
+/* EXPERIENCE */
 
 export interface Stat {
   value: number;
@@ -222,19 +212,19 @@ export interface Stat {
 
 export const STATS: readonly Stat[] = [
   {
-    value: 5,
+    value: 5000,
     suffix: "+",
-    label: "Years across education, marketing and campaign experience",
+    label: "Targeted outreach interactions",
   },
   {
-    value: 3,
-    suffix: "",
-    label: "Campaigns led during marketing co-op experience",
+    value: 1000,
+    suffix: "+",
+    label: "Client opportunities generated",
   },
   {
     value: 5,
     suffix: "",
-    label: "People led as part of a marketing team",
+    label: "People led during marketing co-op",
   },
 ] as const;
 
@@ -246,7 +236,7 @@ export const WHY_US = {
 } as const;
 
 
-/* ── FEATURED PERSPECTIVE ──────────────────────────────────────────────────── */
+/* FEATURED PERSPECTIVE */
 
 export const FEATURED_TESTIMONIAL = {
   quote:
@@ -262,7 +252,7 @@ export const FEATURED_TESTIMONIAL = {
 } as const;
 
 
-/* ── CAPABILITIES ──────────────────────────────────────────────────────────── */
+/* CAPABILITIES */
 
 export interface Service {
   index: string;
@@ -348,7 +338,7 @@ export const SERVICES: readonly Service[] = [
 ] as const;
 
 
-/* ── PROCESS ───────────────────────────────────────────────────────────────── */
+/* PROCESS */
 
 export interface ProcessStep {
   id: string;
@@ -469,7 +459,7 @@ export const PROCESS: readonly ProcessStep[] = [
 ] as const;
 
 
-/* ── SELECTED EXPERIENCE ───────────────────────────────────────────────────── */
+/* SELECTED EXPERIENCE */
 
 export interface Testimonial {
   quote: string;
@@ -538,7 +528,7 @@ export const TESTIMONIALS_INTRO = {
 } as const;
 
 
-/* ── WHAT I BRING ───────────────────────────────────────────────────────────── */
+/* WHAT I BRING */
 
 export interface PricingTier {
   name: string;
@@ -620,7 +610,7 @@ export const PRICING: readonly PricingTier[] = [
 ] as const;
 
 
-/* ── FAQ ───────────────────────────────────────────────────────────────────── */
+/* FAQ */
 
 export interface FaqItem {
   question: string;
@@ -666,7 +656,7 @@ export const FAQ: readonly FaqItem[] = [
 ] as const;
 
 
-/* ── CREATIVE LAB ──────────────────────────────────────────────────────────── */
+/* CREATIVE LAB */
 
 export interface Post {
   title: string;
@@ -726,7 +716,7 @@ export const POSTS: readonly Post[] = [
 ] as const;
 
 
-/* ── CTA ───────────────────────────────────────────────────────────────────── */
+/* CTA */
 
 export const CTA = {
   headingLine1: "LET'S MAKE",
