@@ -3,70 +3,48 @@
 import { useEffect, useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { SpotlightReveal } from "@/components/ui/SpotlightReveal";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { BRAND, HERO } from "@/lib/data";
 
-/** Rendered height of the wordmark as a multiple of its font size. Matches
- *  `line-height` on .hero-mark; used to cap the measured size against the
- *  viewport and to reserve the headline's clearance. */
 const MARK_LEADING = 0.78;
-
-/** Fraction of the rail width the wordmark spans at rest. Below 1 so it reads
- *  as a headline rather than stretching edge to edge. */
 const MARK_FILL = 0.72;
 
-/**
- * Full-bleed hero with the scroll morph from the reference.
- *
- * Over one viewport of scroll, a single progress value (--hero-t, 1 → 0) drives
- * everything at once:
- *   - the giant wordmark shrinks and travels to the header rail, handing off to
- *     the menu logo that sits in that exact spot
- *   - the backdrop photo and the hero content fade out
- *   - the next section scrolls up over the pinned hero
- *
- * The wordmark's start size is measured, not hardcoded: we scale its rendered
- * width to fill the viewport between the rail gutters, so the handoff stays
- * exact at any width and even if Anton falls back to Impact.
- */
 export function Hero() {
   const rootRef = useRef<HTMLDivElement>(null);
   const stageRef = useRef<HTMLDivElement>(null);
   const markRef = useRef<HTMLAnchorElement>(null);
   const markInnerRef = useRef<HTMLSpanElement>(null);
+  const introRef = useRef<HTMLDivElement>(null);
+  const counterRef = useRef<HTMLDivElement>(null);
+
   const reducedMotion = useReducedMotion();
 
-  /* Solve the giant font size from the wordmark's natural width. */
+  /* ── RESPONSIVE WORDMARK SIZE ─────────────────────────────────────────── */
+
   useLayoutEffect(() => {
     const root = rootRef.current;
     const mark = markRef.current;
     const inner = markInnerRef.current;
+
     if (!root || !mark || !inner) return;
 
     const measure = () => {
-      /* Read the rail gutter off the mark itself. Querying the custom property
-         on :root returns the unresolved `max(...)` expression, since custom
-         properties aren't computed until they're used in a real declaration. */
       const padX = mark.getBoundingClientRect().left;
-
-      // Measure at a known size, then scale linearly to fill the rail width.
       const available = window.innerWidth - padX * 2;
+
       inner.style.fontSize = "100px";
+
       const naturalWidth = inner.getBoundingClientRect().width;
+
       inner.style.fontSize = "";
 
       if (naturalWidth <= 0 || available <= 0) return;
 
-      /* Fill the rail, but never let the wordmark take more than a fifth of the
-         viewport — a long name on a short screen would otherwise leave no room
-         for the headline below it. MARK_LEADING converts font size to the
-         rendered block height (line-height is 0.78). */
       const widthFit = ((available * MARK_FILL) / naturalWidth) * 100;
-      const heightCap = (window.innerHeight * 0.22) / MARK_LEADING;
 
-      /* Set on the root, not the mark: .hero-content reads this too, to reserve
-         the space the wordmark occupies so the two never overlap. */
+      const heightCap =
+        (window.innerHeight * 0.22) / MARK_LEADING;
+
       root.style.setProperty(
         "--mark-giant",
         `${Math.min(widthFit, heightCap)}px`,
@@ -75,99 +53,261 @@ export function Hero() {
 
     measure();
 
-    // Anton loads async; re-measure once it's swapped in.
     document.fonts?.ready.then(measure).catch(() => {});
+
     window.addEventListener("resize", measure);
-    return () => window.removeEventListener("resize", measure);
+
+    return () => {
+      window.removeEventListener("resize", measure);
+    };
   }, []);
+
+  /* ── CINEMATIC INTRO + SCROLL MORPH ───────────────────────────────────── */
 
   useEffect(() => {
     const root = rootRef.current;
     const stage = stageRef.current;
-    if (!root || !stage) return;
+    const intro = introRef.current;
+    const counter = counterRef.current;
 
-    const setT = (value: number) => {
-      root.style.setProperty("--hero-t", String(value));
-      // The menu logo only appears once the wordmark has nearly landed, so the
-      // two are never both visible.
-      document.documentElement.style.setProperty(
-        "--sm-logo-opacity",
-        String(gsap.utils.clamp(0, 1, 1 - value * 6)),
-      );
-    };
-
-    if (reducedMotion) {
-      // No morph — rest in the header state so the logos don't double up.
-      setT(0);
-      return () => {
-        document.documentElement.style.removeProperty("--sm-logo-opacity");
-      };
-    }
+    if (!root || !stage || !intro || !counter) return;
 
     gsap.registerPlugin(ScrollTrigger);
-    setT(1);
 
-    const trigger = ScrollTrigger.create({
-      trigger: stage,
-      start: "top top",
-      end: "bottom top",
-      scrub: 0.5,
-      onUpdate: (self) => setT(1 - self.progress),
-      onRefresh: (self) => setT(1 - self.progress),
-    });
+    const ctx = gsap.context(() => {
+      /*
+       * Initial state
+       */
+      gsap.set(intro, {
+        opacity: 0,
+        y: 24,
+      });
 
-    return () => {
-      trigger.kill();
-      document.documentElement.style.removeProperty("--sm-logo-opacity");
-    };
+      gsap.set(markRef.current, {
+        opacity: 0,
+        letterSpacing: "0.45em",
+      });
+
+      gsap.set(counter, {
+        opacity: 1,
+      });
+
+      /*
+       * Counter sequence:
+       *
+       * 06 → 81 → 100
+       */
+      const counterValues = {
+        value: 6,
+      };
+
+      const counterAnimation = gsap.to(counterValues, {
+        value: 100,
+
+        duration: 2.2,
+
+        ease: "power3.inOut",
+
+        onUpdate: () => {
+          const value = Math.round(counterValues.value);
+
+          if (value < 30) {
+            counter.textContent = String(
+              Math.max(6, value).padStart(2, "0"),
+            );
+          } else if (value < 95) {
+            counter.textContent = "81";
+          } else {
+            counter.textContent = "100";
+          }
+        },
+      });
+
+      /*
+       * GAURAV arrives after the loading sequence.
+       */
+      gsap.to(markRef.current, {
+        opacity: 1,
+        letterSpacing: "0.02em",
+        duration: 1.15,
+        delay: 1.8,
+        ease: "power4.out",
+      });
+
+      /*
+       * Intro statement.
+       */
+      gsap.to(intro, {
+        opacity: 1,
+        y: 0,
+        duration: 1.2,
+        delay: 2.35,
+        ease: "power3.out",
+      });
+
+      /*
+       * Once the intro is complete, normal scroll-driven morph begins.
+       */
+      if (reducedMotion) {
+        gsap.set(counter, {
+          opacity: 0,
+        });
+
+        gsap.set(markRef.current, {
+          opacity: 1,
+          letterSpacing: "0.02em",
+        });
+
+        gsap.set(intro, {
+          opacity: 1,
+          y: 0,
+        });
+
+        return;
+      }
+
+      const setT = (value: number) => {
+        root.style.setProperty("--hero-t", String(value));
+
+        document.documentElement.style.setProperty(
+          "--sm-logo-opacity",
+          String(gsap.utils.clamp(0, 1, 1 - value * 6)),
+        );
+      };
+
+      setT(1);
+
+      const trigger = ScrollTrigger.create({
+        trigger: stage,
+
+        start: "top top",
+
+        end: "bottom top",
+
+        scrub: 0.5,
+
+        onUpdate: (self) => {
+          const t = 1 - self.progress;
+
+          setT(t);
+
+          /*
+           * Counter disappears once scrolling begins.
+           */
+          gsap.set(counter, {
+            opacity: self.progress < 0.08 ? 1 : 0,
+          });
+        },
+
+        onRefresh: (self) => {
+          setT(1 - self.progress);
+        },
+      });
+
+      return () => {
+        counterAnimation.kill();
+        trigger.kill();
+
+        document.documentElement.style.removeProperty(
+          "--sm-logo-opacity",
+        );
+      };
+    }, root);
+
+    return () => ctx.revert();
   }, [reducedMotion]);
 
   return (
-    <div ref={rootRef} id="hero" data-name="Hero" className="hero-root">
-      {/* Scroll distance for the morph. The inner layer is sticky, so the next
-          section rides up over it. */}
-      <div ref={stageRef} className="hero-stage">
+    <div
+      ref={rootRef}
+      id="hero"
+      data-name="Hero"
+      className="hero-root"
+    >
+      <div
+        ref={stageRef}
+        className="hero-stage"
+      >
         <div className="hero-pin">
-          <div className="hero-backdrop">
-            {/* Cursor-spotlight reveal: the base image is always visible; the
-                reveal image shows only inside the soft circle trailing the
-                pointer. Fills the backdrop, so it still fades on scroll and the
-                vignette feathers its edges. */}
-            <SpotlightReveal
-              base={HERO.base}
-              reveal={HERO.reveal}
-              interactive={!reducedMotion}
-            />
-            {/* Feathers the image into the page background on all four edges. */}
-            <div className="hero-vignette" aria-hidden />
+
+          {/* ── COUNTER ─────────────────────────────────────────────── */}
+
+          <div
+            ref={counterRef}
+            className="absolute left-6 top-6 z-30 font-mono text-[11px] tracking-[0.25em] text-paper/70 md:left-10 md:top-10"
+            aria-hidden="true"
+          >
+            06
           </div>
 
-          {/* Wordmark: viewport-wide at rest, header-sized once scrolled. */}
+          {/* ── BASED LOCATION ─────────────────────────────────────── */}
+
+          <div className="absolute right-6 top-6 z-30 font-mono text-[10px] uppercase tracking-[0.22em] text-paper/60 md:right-10 md:top-10">
+            BASED — TORONTO / CANADA
+          </div>
+
+          {/* ── HERO BACKDROP ──────────────────────────────────────── */}
+
+          <div
+            className="hero-backdrop"
+            aria-hidden="true"
+          >
+            <div className="absolute inset-0 bg-[#0A0A0A]" />
+
+            <div
+              className="absolute inset-0 opacity-[0.16]"
+              style={{
+                background:
+                  "radial-gradient(circle at 50% 42%, rgba(255,255,255,0.16), transparent 48%)",
+              }}
+            />
+
+            <div
+              className="absolute inset-0"
+              style={{
+                background:
+                  "linear-gradient(180deg, rgba(10,10,10,0.05) 0%, rgba(10,10,10,0.15) 50%, rgba(10,10,10,0.95) 100%)",
+              }}
+            />
+          </div>
+
+          {/* ── WORDMARK ────────────────────────────────────────────── */}
+
           <a
             ref={markRef}
             href="#hero"
             className="hero-mark"
             aria-label={BRAND.name}
           >
-            <span ref={markInnerRef} className="hero-mark-inner">
+            <span
+              ref={markInnerRef}
+              className="hero-mark-inner"
+            >
               {BRAND.wordmark}
             </span>
           </a>
 
-          <div className="hero-content">
-            <h1 className="hero-headline">
-              <span className="block">{BRAND.headlineTop}</span>
-              <span className="block">{BRAND.headlineBottom}</span>
-            </h1>
+          {/* ── INTRO ───────────────────────────────────────────────── */}
 
-            <p className="hero-statement">
-              <span className="hero-statement-strong">
+          <div
+            ref={introRef}
+            className="absolute bottom-[9vh] left-6 z-20 max-w-[720px] md:left-10 lg:bottom-[11vh]"
+          >
+            <p className="font-display text-[clamp(1.6rem,3.2vw,3.4rem)] uppercase leading-[0.98] tracking-[-0.025em] text-paper">
+              <span>
                 {HERO.statementStrong}
-              </span>{" "}
-              <span className="hero-statement-muted">
-                {HERO.statementMuted}
               </span>
             </p>
+
+            <p className="mt-5 max-w-[580px] text-sm leading-relaxed text-muted-light md:text-base">
+              {HERO.statementMuted}
+            </p>
+          </div>
+
+          {/* ── SMALL META ──────────────────────────────────────────── */}
+
+          <div className="absolute bottom-6 right-6 z-20 text-right font-mono text-[9px] uppercase tracking-[0.18em] text-paper/40 md:bottom-10 md:right-10">
+            MARKETING / STRATEGY / CREATIVE
           </div>
         </div>
       </div>
