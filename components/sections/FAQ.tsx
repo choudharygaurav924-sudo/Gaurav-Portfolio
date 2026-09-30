@@ -60,6 +60,32 @@ export function FAQ() {
       </div>
     </section>
   );
+}                        {String(index + 1).padStart(2, "0")}
+                      </span>
+
+                      <h3 className="max-w-2xl text-sm uppercase tracking-[0.08em] text-paper md:text-base">
+                        {item.question}
+                      </h3>
+                    </div>
+
+                    <span className="text-xl font-light text-muted transition-transform duration-300 group-open:rotate-45">
+                      +
+                    </span>
+                  </summary>
+
+                  <div className="pb-7 pl-10 md:pl-[3.25rem]">
+                    <p className="max-w-2xl text-sm leading-relaxed text-muted-light">
+                      {item.answer}
+                    </p>
+                  </div>
+                </details>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
 }          />
           <SectionLabel>(ANSWERS)</SectionLabel>
         </div>
