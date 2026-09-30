@@ -2,7 +2,7 @@
 
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionLabel } from "@/components/ui/SectionLabel";
-import { FAQ } from "@/lib/data";
+import { FAQ as FAQ_ITEMS } from "@/lib/data";
 
 export function FAQ() {
   return (
@@ -24,7 +24,7 @@ export function FAQ() {
           </Reveal>
 
           <div className="mt-16 border-t border-line">
-            {FAQ.map((item, index) => (
+            {FAQ_ITEMS.map((item, index) => (
               <Reveal
                 key={item.question}
                 variant="up"
