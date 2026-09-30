@@ -44,6 +44,17 @@ export function Services() {
                     <p className="mt-4 max-w-lg text-sm leading-relaxed text-muted-light">
                       {service.blurb}
                     </p>
+
+                    <div className="mt-5 flex flex-wrap gap-x-5 gap-y-2">
+                      {service.items.map((item) => (
+                        <span
+                          key={item}
+                          className="text-[10px] uppercase tracking-[0.14em] text-muted"
+                        >
+                          {item}
+                        </span>
+                      ))}
+                    </div>
                   </div>
 
                   <div className="relative hidden aspect-[4/3] overflow-hidden bg-surface lg:block">
@@ -54,27 +65,7 @@ export function Services() {
                       sizes="30vw"
                       className="object-cover opacity-70 transition-all duration-700 group-hover:scale-105 group-hover:opacity-100"
                     />
-
-                    <div
-                      className="absolute inset-0 bg-black/20"
-                      aria-hidden
-                    />
                   </div>
-
-                  {service.items.length > 0 && (
-                    <div className="lg:col-start-2 lg:col-span-2">
-                      <div className="flex flex-wrap gap-x-5 gap-y-2">
-                        {service.items.map((item) => (
-                          <span
-                            key={item}
-                            className="text-[10px] uppercase tracking-[0.14em] text-muted"
-                          >
-                            {item}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  )}
                 </article>
               </Reveal>
             ))}
