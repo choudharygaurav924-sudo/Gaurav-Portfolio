@@ -3,11 +3,6 @@
 import { StaggeredMenu } from "@/components/ui/StaggeredMenu";
 import { BRAND, NAV_LINKS, SOCIALS } from "@/lib/data";
 
-/**
- * Site header. Wires the shared content layer into StaggeredMenu — the panel
- * replaces the old inline navbar at every breakpoint, so there is no separate
- * desktop link row.
- */
 export function SiteMenu() {
   const items = NAV_LINKS.map((link) => ({
     label: link.label,
@@ -32,11 +27,10 @@ export function SiteMenu() {
       logoHref="#hero"
       ctaLabel="Let's Talk"
       ctaHref="#cta"
-      /* Accent-tinted underlays sweep in ahead of the ink panel. */
-      colors={["#220F0D", "#FF4925"]}
-      accentColor="#FF4925"
+      colors={["#111111", "#FFFFFF"]}
+      accentColor="#FFFFFF"
       menuButtonColor="#FFFFFF"
-      openMenuButtonColor="#FF4925"
+      openMenuButtonColor="#FFFFFF"
       changeMenuColorOnOpen
     />
   );
