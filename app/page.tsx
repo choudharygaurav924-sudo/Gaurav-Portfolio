@@ -13,31 +13,39 @@ import { Blog } from "@/components/sections/Blog";
 import { CTA } from "@/components/sections/CTA";
 import { Footer } from "@/components/sections/Footer";
 
-/**
- * Section order mirrors the source page 1:1.
- */
 export default function Home() {
   return (
     <>
       <SiteMenu />
+
       <main>
         <Hero />
-        {/* Rides up over the pinned hero — needs a stacking context and an
-            opaque background to occlude it. */}
+
         <div className="relative z-10 bg-ink">
           <About />
+
           <Work />
+
           <WhyUs />
+
           <TestimonialHighlight />
+
           <Services />
+
           <Process />
+
           <Testimonials />
+
           <Pricing />
+
           <FAQ />
+
           <Blog />
+
           <CTA />
         </div>
       </main>
+
       <Footer />
     </>
   );
