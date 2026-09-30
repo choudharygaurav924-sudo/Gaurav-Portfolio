@@ -6,11 +6,15 @@ import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SplitText } from "@/components/ui/SplitText";
-import { PROJECTS, Project } from "@/lib/data";
+import {
+  PROJECTS,
+  CREATIVE_CASE_STUDIES,
+  Project,
+} from "@/lib/data";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 
 function ProjectCardItem({ project }: { project: Project }) {
-  const cardRef = useRef<HTMLDivElement>(null);
+  const cardRef = useRef<HTMLElement>(null);
   const frameRef = useRef<HTMLDivElement>(null);
   const imageInnerRef = useRef<HTMLDivElement>(null);
   const reducedMotion = useReducedMotion();
@@ -20,11 +24,11 @@ function ProjectCardItem({ project }: { project: Project }) {
 
     gsap.registerPlugin(ScrollTrigger);
 
-    const frame = frameRef.current;
     const card = cardRef.current;
+    const frame = frameRef.current;
     const img = imageInnerRef.current;
 
-    if (!frame || !card || !img) return;
+    if (!card || !frame || !img) return;
 
     const ctx = gsap.context(() => {
       const isSmallScreen = window.innerWidth < 640;
@@ -73,10 +77,9 @@ function ProjectCardItem({ project }: { project: Project }) {
       <Link
         href={project.href}
         className="block"
-        aria-label={`View ${project.title} project`}
+        aria-label={`Open ${project.title} case study`}
       >
         <div className="grid gap-8 lg:grid-cols-[1fr_0.48fr] lg:items-end lg:gap-12">
-          {/* IMAGE */}
           <div
             ref={frameRef}
             className="relative aspect-[16/11] overflow-hidden bg-surface"
@@ -97,10 +100,15 @@ function ProjectCardItem({ project }: { project: Project }) {
                 className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent"
                 aria-hidden
               />
+
+              <div className="absolute bottom-5 left-5 border border-white/20 bg-black/50 px-3 py-2 backdrop-blur-sm">
+                <span className="font-mono text-[9px] uppercase tracking-[0.18em] text-white">
+                  View Case Study →
+                </span>
+              </div>
             </div>
           </div>
 
-          {/* PROJECT INFORMATION */}
           <div className="pb-2">
             <div className="flex items-start justify-between gap-6">
               <span className="font-display text-5xl leading-none text-line-soft transition-colors duration-300 group-hover:text-paper">
@@ -137,6 +145,50 @@ function ProjectCardItem({ project }: { project: Project }) {
   );
 }
 
+function CreativePreview({
+  creative,
+}: {
+  creative: (typeof CREATIVE_CASE_STUDIES)[number];
+}) {
+  return (
+    <Link
+      href={`/personal/${creative.slug}`}
+      className="group block"
+      aria-label={`Open ${creative.title} personal project`}
+    >
+      <div className="relative aspect-[4/3] overflow-hidden bg-surface">
+        <Image
+          src={creative.image}
+          alt={creative.title}
+          fill
+          sizes="(min-width: 1024px) 33vw, 100vw"
+          className="object-cover transition-transform duration-700 group-hover:scale-[1.035]"
+        />
+
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent" />
+
+        <div className="absolute inset-x-5 bottom-5">
+          <div className="flex items-end justify-between gap-4">
+            <div>
+              <p className="font-mono text-[9px] uppercase tracking-[0.18em] text-white/60">
+                {creative.category}
+              </p>
+
+              <h3 className="mt-2 font-display text-4xl uppercase leading-none text-white">
+                {creative.title}
+              </h3>
+            </div>
+
+            <span className="font-mono text-xs text-white/70">
+              →
+            </span>
+          </div>
+        </div>
+      </div>
+    </Link>
+  );
+}
+
 export function Work() {
   return (
     <section
@@ -144,7 +196,6 @@ export function Work() {
       data-name="Selected Work"
       className="shell bg-ink py-28 lg:py-40"
     >
-      {/* SECTION HEADER */}
       <div className="flex flex-col gap-5 border-b border-line pb-6 md:flex-row md:items-end md:justify-between">
         <SplitText
           as="h2"
@@ -158,7 +209,6 @@ export function Work() {
         </span>
       </div>
 
-      {/* PROJECTS */}
       <div className="mt-16 flex flex-col gap-24 lg:mt-24 lg:gap-36">
         {PROJECTS.map((project) => (
           <ProjectCardItem
@@ -168,17 +218,25 @@ export function Work() {
         ))}
       </div>
 
-      {/* TRANSITION INTO CREATIVE LAB */}
       <div className="mt-28 border-t border-line pt-8 lg:mt-40">
         <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
           <p className="eyebrow">
-            NEXT — CREATIVE LAB
+            NEXT — PERSONAL CONTENT
           </p>
 
           <p className="max-w-md text-sm leading-relaxed text-muted">
-            Self-initiated campaign concepts exploring strategy, art direction
-            and AI-assisted creative production.
+            Self-initiated campaigns and creative experiments exploring
+            strategy, art direction and AI-assisted production.
           </p>
+        </div>
+
+        <div className="mt-12 grid gap-6 md:grid-cols-3">
+          {CREATIVE_CASE_STUDIES.map((creative) => (
+            <CreativePreview
+              key={creative.slug}
+              creative={creative}
+            />
+          ))}
         </div>
       </div>
     </section>
