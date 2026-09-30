@@ -1,119 +1,40 @@
 "use client";
 
-import { useEffect, useLayoutEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useReducedMotion } from "@/hooks/useReducedMotion";
-import { BRAND, HERO } from "@/lib/data";
+import { HERO, BRAND } from "@/lib/data";
 
-const MARK_LEADING = 0.78;
-const MARK_FILL = 0.72;
+gsap.registerPlugin(ScrollTrigger);
 
 export function Hero() {
-  const rootRef = useRef<HTMLDivElement>(null);
-  const stageRef = useRef<HTMLDivElement>(null);
-  const markRef = useRef<HTMLAnchorElement>(null);
-  const markInnerRef = useRef<HTMLSpanElement>(null);
-  const introRef = useRef<HTMLDivElement>(null);
-  const counterRef = useRef<HTMLDivElement>(null);
-
-  const reducedMotion = useReducedMotion();
-
-  /* ── RESPONSIVE WORDMARK SIZE ─────────────────────────────────────────── */
-
-  useLayoutEffect(() => {
-    const root = rootRef.current;
-    const mark = markRef.current;
-    const inner = markInnerRef.current;
-
-    if (!root || !mark || !inner) return;
-
-    const measure = () => {
-      const padX = mark.getBoundingClientRect().left;
-      const available = window.innerWidth - padX * 2;
-
-      inner.style.fontSize = "100px";
-
-      const naturalWidth = inner.getBoundingClientRect().width;
-
-      inner.style.fontSize = "";
-
-      if (naturalWidth <= 0 || available <= 0) return;
-
-      const widthFit = ((available * MARK_FILL) / naturalWidth) * 100;
-
-      const heightCap =
-        (window.innerHeight * 0.22) / MARK_LEADING;
-
-      root.style.setProperty(
-        "--mark-giant",
-        `${Math.min(widthFit, heightCap)}px`,
-      );
-    };
-
-    measure();
-
-    document.fonts?.ready.then(measure).catch(() => {});
-
-    window.addEventListener("resize", measure);
-
-    return () => {
-      window.removeEventListener("resize", measure);
-    };
-  }, []);
-
-  /* ── CINEMATIC INTRO + SCROLL MORPH ───────────────────────────────────── */
+  const rootRef = useRef<HTMLElement | null>(null);
+  const counterRef = useRef<HTMLSpanElement | null>(null);
+  const markRef = useRef<HTMLHeadingElement | null>(null);
+  const introRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     const root = rootRef.current;
-    const stage = stageRef.current;
-    const intro = introRef.current;
     const counter = counterRef.current;
+    const mark = markRef.current;
+    const intro = introRef.current;
 
-    if (!root || !stage || !intro || !counter) return;
-
-    gsap.registerPlugin(ScrollTrigger);
+    if (!root || !counter || !mark || !intro) return;
 
     const ctx = gsap.context(() => {
-      /*
-       * Initial state
-       */
-      gsap.set(intro, {
-        opacity: 0,
-        y: 24,
-      });
+      const counterObject = { value: 6 };
 
-      gsap.set(markRef.current, {
-        opacity: 0,
-        letterSpacing: "0.45em",
-      });
-
-      gsap.set(counter, {
-        opacity: 1,
-      });
-
-      /*
-       * Counter sequence:
-       *
-       * 06 → 81 → 100
-       */
-      const counterValues = {
-        value: 6,
-      };
-
-      const counterAnimation = gsap.to(counterValues, {
+      const counterTween = gsap.to(counterObject, {
         value: 100,
-
-        duration: 2.2,
-
-        ease: "power3.inOut",
+        duration: 2.4,
+        ease: "power2.out",
 
         onUpdate: () => {
-          const value = Math.round(counterValues.value);
+          const value = Math.round(counterObject.value);
 
           if (value < 30) {
             counter.textContent = String(
-              Math.max(6, value).padStart(2, "0"),
+              Math.max(6, value).toString().padStart(2, "0"),
             );
           } else if (value < 95) {
             counter.textContent = "81";
@@ -121,196 +42,120 @@ export function Hero() {
             counter.textContent = "100";
           }
         },
+
+        onComplete: () => {
+          counter.textContent = "100";
+        },
       });
 
-      /*
-       * GAURAV arrives after the loading sequence.
-       */
-      gsap.to(markRef.current, {
-        opacity: 1,
-        letterSpacing: "0.02em",
-        duration: 1.15,
-        delay: 1.8,
-        ease: "power4.out",
-      });
-
-      /*
-       * Intro statement.
-       */
-      gsap.to(intro, {
-        opacity: 1,
-        y: 0,
-        duration: 1.2,
-        delay: 2.35,
-        ease: "power3.out",
-      });
-
-      /*
-       * Once the intro is complete, normal scroll-driven morph begins.
-       */
-      if (reducedMotion) {
-        gsap.set(counter, {
+      gsap.fromTo(
+        mark,
+        {
           opacity: 0,
-        });
-
-        gsap.set(markRef.current, {
+          scaleX: 1.35,
+          letterSpacing: "0.28em",
+        },
+        {
           opacity: 1,
-          letterSpacing: "0.02em",
-        });
+          scaleX: 1,
+          letterSpacing: "0em",
+          duration: 1.6,
+          delay: 0.5,
+          ease: "power4.out",
+        },
+      );
 
-        gsap.set(intro, {
+      gsap.fromTo(
+        intro,
+        {
+          opacity: 0,
+          y: 30,
+        },
+        {
           opacity: 1,
           y: 0,
-        });
+          duration: 1.2,
+          delay: 1.6,
+          ease: "power3.out",
+        },
+      );
 
-        return;
-      }
-
-      const setT = (value: number) => {
-        root.style.setProperty("--hero-t", String(value));
-
-        document.documentElement.style.setProperty(
-          "--sm-logo-opacity",
-          String(gsap.utils.clamp(0, 1, 1 - value * 6)),
-        );
-      };
-
-      setT(1);
-
-      const trigger = ScrollTrigger.create({
-        trigger: stage,
-
+      ScrollTrigger.create({
+        trigger: root,
         start: "top top",
-
         end: "bottom top",
-
-        scrub: 0.5,
+        scrub: true,
 
         onUpdate: (self) => {
-          const t = 1 - self.progress;
+          const progress = self.progress;
 
-          setT(t);
-
-          /*
-           * Counter disappears once scrolling begins.
-           */
-          gsap.set(counter, {
-            opacity: self.progress < 0.08 ? 1 : 0,
+          gsap.set(mark, {
+            scale: 1 - progress * 0.45,
+            y: -progress * 30,
           });
-        },
 
-        onRefresh: (self) => {
-          setT(1 - self.progress);
+          gsap.set(intro, {
+            opacity: 1 - progress * 1.4,
+            y: progress * -30,
+          });
         },
       });
 
       return () => {
-        counterAnimation.kill();
-        trigger.kill();
-
-        document.documentElement.style.removeProperty(
-          "--sm-logo-opacity",
-        );
+        counterTween.kill();
       };
     }, root);
 
     return () => ctx.revert();
-  }, [reducedMotion]);
+  }, []);
 
   return (
-    <div
+    <section
       ref={rootRef}
-      id="hero"
+      className="hero-root relative min-h-[100svh] overflow-hidden bg-ink"
       data-name="Hero"
-      className="hero-root"
     >
-      <div
-        ref={stageRef}
-        className="hero-stage"
-      >
-        <div className="hero-pin">
+      <div className="hero-stage relative flex min-h-[100svh] items-center justify-center">
+        <div className="absolute left-6 top-6 z-20 font-mono text-[9px] uppercase tracking-[0.18em] text-muted md:left-10 md:top-10">
+          BASED — TORONTO / CANADA
+        </div>
 
-          {/* ── COUNTER ─────────────────────────────────────────────── */}
+        <div className="absolute right-6 top-6 z-20 font-mono text-[9px] uppercase tracking-[0.18em] text-muted md:right-10 md:top-10">
+          <span ref={counterRef}>06</span>
+        </div>
 
-          <div
-            ref={counterRef}
-            className="absolute left-6 top-6 z-30 font-mono text-[11px] tracking-[0.25em] text-paper/70 md:left-10 md:top-10"
-            aria-hidden="true"
-          >
-            06
-          </div>
-
-          {/* ── BASED LOCATION ─────────────────────────────────────── */}
-
-          <div className="absolute right-6 top-6 z-30 font-mono text-[10px] uppercase tracking-[0.22em] text-paper/60 md:right-10 md:top-10">
-            BASED — TORONTO / CANADA
-          </div>
-
-          {/* ── HERO BACKDROP ──────────────────────────────────────── */}
-
-          <div
-            className="hero-backdrop"
-            aria-hidden="true"
-          >
-            <div className="absolute inset-0 bg-[#0A0A0A]" />
-
-            <div
-              className="absolute inset-0 opacity-[0.16]"
-              style={{
-                background:
-                  "radial-gradient(circle at 50% 42%, rgba(255,255,255,0.16), transparent 48%)",
-              }}
-            />
-
-            <div
-              className="absolute inset-0"
-              style={{
-                background:
-                  "linear-gradient(180deg, rgba(10,10,10,0.05) 0%, rgba(10,10,10,0.15) 50%, rgba(10,10,10,0.95) 100%)",
-              }}
-            />
-          </div>
-
-          {/* ── WORDMARK ────────────────────────────────────────────── */}
-
-          <a
+        <div className="hero-pin relative z-10 w-full">
+          <h1
             ref={markRef}
-            href="#hero"
-            className="hero-mark"
-            aria-label={BRAND.name}
+            className="hero-mark select-none text-center font-display text-[18vw] uppercase leading-[0.78] tracking-[-0.055em] text-paper"
           >
-            <span
-              ref={markInnerRef}
-              className="hero-mark-inner"
-            >
-              {BRAND.wordmark}
-            </span>
-          </a>
-
-          {/* ── INTRO ───────────────────────────────────────────────── */}
+            {BRAND.wordmark}
+          </h1>
 
           <div
             ref={introRef}
-            className="absolute bottom-[9vh] left-6 z-20 max-w-[720px] md:left-10 lg:bottom-[11vh]"
+            className="mx-auto mt-12 max-w-3xl px-6 text-center md:mt-16"
           >
-            <p className="font-display text-[clamp(1.6rem,3.2vw,3.4rem)] uppercase leading-[0.98] tracking-[-0.025em] text-paper">
-              <span>
-                {HERO.statementStrong}
-              </span>
+            <p className="text-[9px] uppercase tracking-[0.22em] text-muted">
+              MARKETING / STRATEGY / CREATIVE
             </p>
 
-            <p className="mt-5 max-w-[580px] text-sm leading-relaxed text-muted-light md:text-base">
+            <p className="mt-7 font-display text-xl uppercase leading-[1.05] tracking-wide text-paper md:text-3xl lg:text-4xl">
+              {HERO.statementStrong}
+            </p>
+
+            <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-muted-light md:text-base">
               {HERO.statementMuted}
             </p>
           </div>
+        </div>
 
-          {/* ── SMALL META ──────────────────────────────────────────── */}
-
-          <div className="absolute bottom-6 right-6 z-20 text-right font-mono text-[9px] uppercase tracking-[0.18em] text-paper/40 md:bottom-10 md:right-10">
-            MARKETING / STRATEGY / CREATIVE
-          </div>
+        <div className="pointer-events-none absolute inset-x-0 bottom-6 z-20 flex justify-center md:bottom-10">
+          <span className="font-mono text-[8px] uppercase tracking-[0.2em] text-muted">
+            SCROLL TO EXPLORE
+          </span>
         </div>
       </div>
-    </div>
+    </section>
   );
 }
