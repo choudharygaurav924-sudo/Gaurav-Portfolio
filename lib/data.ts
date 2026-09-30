@@ -2,11 +2,7 @@
  * ─────────────────────────────────────────────────────────────────────────────
  * SINGLE SOURCE OF TRUTH FOR GAURAV SINGH PORTFOLIO CONTENT
  * ─────────────────────────────────────────────────────────────────────────────
- * Keep the original Jishnu data structure intact.
- * Images live in /public/images/.
  */
-
- /* ── BRAND ─────────────────────────────────────────────────────────────────── */
 
 export const BRAND = {
   name: "GAURAV",
@@ -44,7 +40,7 @@ export const NAV_LINKS = [
   },
   {
     label: "Creative Lab",
-    href: "#services",
+    href: "#creative-lab",
     ariaLabel: "View self initiated creative work",
   },
   {
@@ -56,8 +52,14 @@ export const NAV_LINKS = [
 
 
 export const FOOTER_LINKS = [
-  { label: "LinkedIn", href: "https://www.linkedin.com/" },
-  { label: "Instagram", href: "https://www.instagram.com/" },
+  {
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/",
+  },
+  {
+    label: "Instagram",
+    href: "https://www.instagram.com/",
+  },
 ] as const;
 
 
@@ -81,11 +83,6 @@ export const HERO: {
   statementStrong: string;
   statementMuted: string;
 } = {
-  /*
-   * Temporary compatibility paths for the original SpotlightReveal system.
-   * These can be replaced with your final hero imagery once the hero itself
-   * is redesigned.
-   */
   base: "/images/hero-base.webp",
   reveal: "/images/hero-reveal.webp",
 
@@ -107,7 +104,6 @@ export const ABOUT = {
 
   statementMuted:
     "Somewhere between strategy, creativity and culture is where I do my best work.",
-
 } as const;
 
 
@@ -127,12 +123,13 @@ export interface Project {
 export const PROJECTS: readonly Project[] = [
   {
     index: "01",
+
     title: "Life Is A Special Event",
 
     blurb:
       "Marketing Team Leader — Co-op. Led a five-person marketing team across digital campaigns, social media, campaign planning and client-facing creative work.",
 
-    image: "/images/life-is-a-special-event.jpg",
+    image: "/images/life-special-event-ayurveda-campaign.png",
 
     href: "#",
 
@@ -147,6 +144,7 @@ export const PROJECTS: readonly Project[] = [
 
   {
     index: "02",
+
     title: "LagerShed / Sheridan",
 
     blurb:
@@ -167,12 +165,17 @@ export const PROJECTS: readonly Project[] = [
 
   {
     index: "03",
+
     title: "SS Traders",
 
     blurb:
       "Marketing Specialist working on B2B marketing for a wholesale supplier of polycarbonate roofing sheets in Delhi NCR.",
 
-    image: "/images/ss-traders.jpg",
+    /*
+     * No dedicated SS Traders image exists in the uploaded asset list.
+     * We therefore use a neutral existing visual temporarily.
+     */
+    image: "/images/sheridan-lagershed-photo.jpg",
 
     href: "#",
 
@@ -184,10 +187,31 @@ export const PROJECTS: readonly Project[] = [
       "Marketing",
     ],
   },
+
+  {
+    index: "04",
+
+    title: "Philer.ai",
+
+    blurb:
+      "Marketing Specialist Intern supporting targeted digital outreach and lead-generation work for real estate and mortgage professionals across Ontario and Alberta.",
+
+    image: "/images/philer-ai-cover.png",
+
+    href: "#philer",
+
+    year: "2026",
+
+    tags: [
+      "Digital Marketing",
+      "Outreach",
+      "Lead Generation",
+    ],
+  },
 ] as const;
 
 
-/* ── WHY US / EXPERIENCE ───────────────────────────────────────────────────── */
+/* ── EXPERIENCE ────────────────────────────────────────────────────────────── */
 
 export interface Stat {
   value: number;
@@ -217,15 +241,12 @@ export const STATS: readonly Stat[] = [
 
 export const WHY_US = {
   label: "(EXPERIENCE)",
-
   heading: "STRATEGY. CREATIVITY. CULTURE.",
-
-  image: "/images/life-is-a-special-event.jpg",
-
+  image: "/images/life-special-event-campaign-tracking.png",
 } as const;
 
 
-/* ── FEATURED WORK ─────────────────────────────────────────────────────────── */
+/* ── FEATURED PERSPECTIVE ──────────────────────────────────────────────────── */
 
 export const FEATURED_TESTIMONIAL = {
   quote:
@@ -235,14 +256,13 @@ export const FEATURED_TESTIMONIAL = {
 
   role: "Marketing Specialist",
 
-  avatar: "/images/gaurav.jpg",
+  avatar: "/images/life_is_a_special_event_logo.jpeg",
 
-  image: "/images/life-is-a-special-event.jpg",
-
+  image: "/images/life-special-event-ayurveda-campaign.png",
 } as const;
 
 
-/* ── SERVICES / CREATIVE CAPABILITIES ──────────────────────────────────────── */
+/* ── CAPABILITIES ──────────────────────────────────────────────────────────── */
 
 export interface Service {
   index: string;
@@ -287,7 +307,7 @@ export const SERVICES: readonly Service[] = [
       "Outreach",
     ],
 
-    image: "/images/life-is-a-special-event.jpg",
+    image: "/images/life-special-event-campaign-tracking.png",
   },
 
   {
@@ -305,7 +325,7 @@ export const SERVICES: readonly Service[] = [
       "AI-Assisted Production",
     ],
 
-    image: "/images/nova.jpg",
+    image: "/images/01_NOVA_OOH_Billboard_01.png",
   },
 
   {
@@ -323,7 +343,7 @@ export const SERVICES: readonly Service[] = [
       "Campaign Rollouts",
     ],
 
-    image: "/images/vanta.jpg",
+    image: "/images/VANTA_01_Billboard_OOH.png",
   },
 ] as const;
 
@@ -392,7 +412,7 @@ export const PROCESS: readonly ProcessStep[] = [
       "Campaign Concept",
     ],
 
-    image: "/images/life-is-a-special-event.jpg",
+    image: "/images/lagershed-campaign-strategy.png",
   },
 
   {
@@ -418,7 +438,7 @@ export const PROCESS: readonly ProcessStep[] = [
       "Campaign Assets",
     ],
 
-    image: "/images/nova.jpg",
+    image: "/images/02_NOVA_Lifestyle_Ad.png",
   },
 
   {
@@ -444,12 +464,12 @@ export const PROCESS: readonly ProcessStep[] = [
       "Performance Insights",
     ],
 
-    image: "/images/vanta.jpg",
+    image: "/images/VANTA_06_Street_OOH.png",
   },
 ] as const;
 
 
-/* ── TESTIMONIALS ──────────────────────────────────────────────────────────── */
+/* ── SELECTED EXPERIENCE ───────────────────────────────────────────────────── */
 
 export interface Testimonial {
   quote: string;
@@ -468,7 +488,7 @@ export const TESTIMONIALS: readonly Testimonial[] = [
 
     role: "Marketing Team Leader — Co-op",
 
-    avatar: "/images/life-is-a-special-event-logo.jpg",
+    avatar: "/images/life_is_a_special_event_logo.jpeg",
   },
 
   {
@@ -479,7 +499,7 @@ export const TESTIMONIALS: readonly Testimonial[] = [
 
     role: "Advertising & Digital Marketing",
 
-    avatar: "/images/sheridan-logo.jpg",
+    avatar: "/images/sheridan-lagershed-photo.jpg",
   },
 
   {
@@ -490,7 +510,7 @@ export const TESTIMONIALS: readonly Testimonial[] = [
 
     role: "Marketing Specialist",
 
-    avatar: "/images/ss-traders-logo.jpg",
+    avatar: "/images/sheridan-lagershed-photo.jpg",
   },
 
   {
@@ -501,7 +521,7 @@ export const TESTIMONIALS: readonly Testimonial[] = [
 
     role: "Self-Initiated Work",
 
-    avatar: "/images/nova-logo.jpg",
+    avatar: "/images/AURA_01_Billboard_OOH.png",
   },
 ] as const;
 
@@ -515,11 +535,10 @@ export const TESTIMONIALS_INTRO = {
   rating: "TORONTO",
 
   ratingNote: "CANADA",
-
 } as const;
 
 
-/* ── PRICING ───────────────────────────────────────────────────────────────── */
+/* ── WHAT I BRING ───────────────────────────────────────────────────────────── */
 
 export interface PricingTier {
   name: string;
@@ -647,7 +666,7 @@ export const FAQ: readonly FaqItem[] = [
 ] as const;
 
 
-/* ── BLOG / CREATIVE LAB ───────────────────────────────────────────────────── */
+/* ── CREATIVE LAB ──────────────────────────────────────────────────────────── */
 
 export interface Post {
   title: string;
@@ -670,7 +689,7 @@ export const POSTS: readonly Post[] = [
 
     category: "Creative Lab",
 
-    image: "/images/nova.jpg",
+    image: "/images/01_NOVA_OOH_Billboard_01.png",
 
     href: "#",
   },
@@ -685,7 +704,7 @@ export const POSTS: readonly Post[] = [
 
     category: "Creative Lab",
 
-    image: "/images/vanta.jpg",
+    image: "/images/VANTA_01_Billboard_OOH.png",
 
     href: "#",
   },
@@ -700,7 +719,7 @@ export const POSTS: readonly Post[] = [
 
     category: "Creative Lab",
 
-    image: "/images/aura.jpg",
+    image: "/images/AURA_01_Billboard_OOH.png",
 
     href: "#",
   },
@@ -711,6 +730,7 @@ export const POSTS: readonly Post[] = [
 
 export const CTA = {
   headingLine1: "LET'S MAKE",
+
   headingLine2: "PEOPLE LOOK TWICE",
 
   blurb:
@@ -721,5 +741,4 @@ export const CTA = {
   buttonHref: "mailto:hello@gauravsinghportfolio.com",
 
   image: "/images/cta-bg.jpg",
-
 } as const;
