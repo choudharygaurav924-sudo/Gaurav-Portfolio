@@ -16,7 +16,9 @@ export function Testimonials() {
     >
       <div className="grid gap-12 lg:grid-cols-[0.25fr_1fr] lg:gap-10">
         <Reveal variant="fade">
-          <SectionLabel>{TESTIMONIALS_INTRO.label}</SectionLabel>
+          <SectionLabel>
+            {TESTIMONIALS_INTRO.label}
+          </SectionLabel>
         </Reveal>
 
         <div>
