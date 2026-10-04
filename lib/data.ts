@@ -69,6 +69,11 @@ export const SOCIALS = [
   },
 ] as const;
 
+
+/* =========================================================
+   CREATIVE SYSTEM
+   ========================================================= */
+
 export const CREATIVE_SYSTEM = [
   [
     "01",
@@ -97,35 +102,61 @@ export const CREATIVE_SYSTEM = [
   ],
 ] as const;
 
+
+/* =========================================================
+   CREATIVE LAB
+   ========================================================= */
+
 export const CREATIVE_LAB = [
   {
     title: "NOVA Coffee Co.",
     line: "SUMMER, SERVED COLD.",
     copy:
       "A self-initiated coffee concept exploring brand positioning, product storytelling, visual direction, and AI-assisted creative production.",
-    image: "",
+
+    /*
+      CHANGE ONLY THIS PATH TO YOUR ACTUAL NOVA COVER FILE.
+      Choose the strongest NOVA billboard / campaign visual.
+    */
+    image: "/images/NOVA-COVER-FILENAME-HERE.png",
+
     accent: "nova",
     label: "SELF-INITIATED / FICTIONAL CAMPAIGN",
   },
+
   {
     title: "VANTA Athletics",
     line: "ENGINEERED TO MOVE.",
     copy:
       "A self-initiated athletic brand concept focused on visual identity, product positioning, campaign language, and movement-driven creative direction.",
-    image: "",
+
+    /*
+      CHANGE ONLY THIS PATH TO YOUR ACTUAL VANTA COVER FILE.
+      Choose the strongest VANTA campaign visual.
+    */
+    image: "/images/VANTA-COVER-FILENAME-HERE.png",
+
     accent: "vanta",
     label: "SELF-INITIATED / FICTIONAL CAMPAIGN",
   },
+
   {
     title: "AURA Audio",
     line: "ESCAPE THE NOISE.",
     copy:
       "A self-initiated audio brand concept exploring product storytelling, emotional positioning, campaign language, and visual identity.",
-    image: "",
+
+    /*
+      CHANGE ONLY THIS PATH TO YOUR ACTUAL AURA COVER FILE.
+      Choose the strongest AURA billboard / OOH visual.
+    */
+    image: "/images/AURA-COVER-FILENAME-HERE.png",
+
     accent: "aura",
     label: "SELF-INITIATED / FICTIONAL CAMPAIGN",
   },
 ] as const;
+
 
 /* =========================================================
    SELECTED WORK
@@ -149,7 +180,7 @@ export const PROJECTS: readonly Project[] = [
     blurb:
       "Marketing Team Leader during my college co-op, working across campaign coordination, digital activity, client work, event promotion, content support, and campaign tracking.",
     image: "/images/life-is-a-special-event-cover.png",
-    href: "#work",
+    href: "#life-is-a-special-event",
     year: "REAL WORK",
     tags: [
       "Marketing",
@@ -166,7 +197,7 @@ export const PROJECTS: readonly Project[] = [
     blurb:
       "Academic advertising and marketing project shaped through research, audience definition, positioning, campaign strategy, and creative direction.",
     image: "/images/sheridan-lagershed-photo.jpg",
-    href: "#work",
+    href: "#sheridan-lagershed",
     year: "ACADEMIC PROJECT",
     tags: [
       "Research",
@@ -178,6 +209,7 @@ export const PROJECTS: readonly Project[] = [
     status: "academic",
   },
 ] as const;
+
 
 /* =========================================================
    CASE STUDIES
@@ -281,6 +313,12 @@ export const CASE_STUDIES = [
     ],
   },
 ] as const;
+
+
+/* =========================================================
+   EXPERIENCE
+   ========================================================= */
+
 export const EXPERIENCE = [
   {
     period: "AUG 2026 — PRESENT",
