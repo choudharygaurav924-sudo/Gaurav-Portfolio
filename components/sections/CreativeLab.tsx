@@ -5,7 +5,7 @@ import { CREATIVE_LAB } from "@/lib/data";
 
 export function CreativeLab() {
   return (
-    <section id="creative-lab" className="creative-lab section-shell">
+    <section id="lab" className="creative-lab section-shell">
       <div className="section-heading">
         <span className="eyebrow">03 / CREATIVE LAB</span>
 
@@ -16,31 +16,34 @@ export function CreativeLab() {
         </h2>
 
         <p>
-          Concept-driven campaign systems spanning outdoor, social, retail,
-          lifestyle and print.
+          Self-initiated campaign systems exploring strategy, visual
+          direction, storytelling, and multi-channel execution.
         </p>
       </div>
 
       <div className="lab-grid">
-        {CREATIVE_LAB.map((item, index) => (
-          <article key={item.title} className="lab-card group">
+        {CREATIVE_LAB.map((item) => (
+          <article
+            key={item.title}
+            className={`lab-card lab-card--${item.accent} group`}
+          >
             <div className="lab-visual">
               <Image
                 src={item.image}
                 alt={`${item.title} campaign`}
                 fill
-                sizes="(max-width: 768px) 100vw, 50vw"
+                sizes="(max-width: 900px) 100vw, 33vw"
                 className="lab-image"
               />
 
               <div className="lab-image-overlay" />
 
-              <div className="lab-card-index">
-                {String(index + 1).padStart(2, "0")}
+              <div className="lab-number">
+                {item.index}
               </div>
 
               <div className="lab-card-label">
-                {item.line}
+                {item.label}
               </div>
 
               <div className="lab-card-title">
@@ -49,11 +52,19 @@ export function CreativeLab() {
             </div>
 
             <div className="lab-copy">
-              <p>{item.copy}</p>
+              <p className="lab-label">
+                {item.label}
+              </p>
 
-              <span className="lab-view">
-                VIEW CAMPAIGN ↗
-              </span>
+              <h3>{item.title}</h3>
+
+              <p className="lab-line">
+                {item.line}
+              </p>
+
+              <p>
+                {item.copy}
+              </p>
             </div>
           </article>
         ))}
