@@ -15,7 +15,10 @@ export default function Experience() {
 
       <div className="experience-list">
         {EXPERIENCE.map((item, index) => (
-          <article key={`${item.company}-${index}`} className="experience-item">
+          <article
+            key={`${item.company}-${index}`}
+            className="experience-item"
+          >
             <div className="experience-date">
               {item.date}
             </div>
