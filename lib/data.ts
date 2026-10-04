@@ -69,10 +69,9 @@ export const SOCIALS = [
   },
 ] as const;
 
-
 /* =========================================================
    CREATIVE SYSTEM
-   ========================================================= */
+========================================================= */
 
 export const CREATIVE_SYSTEM = [
   [
@@ -102,65 +101,78 @@ export const CREATIVE_SYSTEM = [
   ],
 ] as const;
 
-
 /* =========================================================
    CREATIVE LAB
-   ========================================================= */
+========================================================= */
 
 export const CREATIVE_LAB = [
   {
+    index: "01",
     title: "NOVA Coffee Co.",
     line: "SUMMER, SERVED COLD.",
     copy:
       "A self-initiated coffee concept exploring brand positioning, product storytelling, visual direction, and AI-assisted creative production.",
-
-    /*
-      CHANGE ONLY THIS PATH TO YOUR ACTUAL NOVA COVER FILE.
-      Choose the strongest NOVA billboard / campaign visual.
-    */
-    image: "/images/NOVA-COVER-FILENAME-HERE.png",
-
+    description:
+      "A self-initiated coffee concept exploring brand positioning, product storytelling, visual direction, and AI-assisted creative production.",
+    image: "/images/01_NOVA_OOH_Billboard_01.png",
     accent: "nova",
     label: "SELF-INITIATED / FICTIONAL CAMPAIGN",
+    gallery: [
+      "/images/01_NOVA_OOH_Billboard_01.png",
+      "/images/02_NOVA_Lifestyle_Ad.png",
+      "/images/03_NOVA_OOH_Billboard_02.png",
+      "/images/04_NOVA_Transit_OOH.png",
+      "/images/05_NOVA_OOH_Billboard_03.png",
+      "/images/06_NOVA_OOH_Billboard_04.png",
+    ],
   },
 
   {
+    index: "02",
     title: "VANTA Athletics",
     line: "ENGINEERED TO MOVE.",
     copy:
       "A self-initiated athletic brand concept focused on visual identity, product positioning, campaign language, and movement-driven creative direction.",
-
-    /*
-      CHANGE ONLY THIS PATH TO YOUR ACTUAL VANTA COVER FILE.
-      Choose the strongest VANTA campaign visual.
-    */
-    image: "/images/VANTA-COVER-FILENAME-HERE.png",
-
+    description:
+      "A self-initiated athletic brand concept focused on visual identity, product positioning, campaign language, and movement-driven creative direction.",
+    image: "/images/VANTA_01_Billboard_OOH.png",
     accent: "vanta",
     label: "SELF-INITIATED / FICTIONAL CAMPAIGN",
+    gallery: [
+      "/images/VANTA_01_Billboard_OOH.png",
+      "/images/VANTA_02_Instagram_Post.png",
+      "/images/VANTA_03_Instagram_Story.png",
+      "/images/VANTA_04_In_Store_Display.png",
+      "/images/VANTA_05_Poster_Print.png",
+      "/images/VANTA_06_Street_OOH.png",
+    ],
   },
 
   {
+    index: "03",
     title: "AURA Audio",
     line: "ESCAPE THE NOISE.",
     copy:
       "A self-initiated audio brand concept exploring product storytelling, emotional positioning, campaign language, and visual identity.",
-
-    /*
-      CHANGE ONLY THIS PATH TO YOUR ACTUAL AURA COVER FILE.
-      Choose the strongest AURA billboard / OOH visual.
-    */
-    image: "/images/AURA-COVER-FILENAME-HERE.png",
-
+    description:
+      "A self-initiated audio brand concept exploring product storytelling, emotional positioning, campaign language, and visual identity.",
+    image: "/images/AURA_01_Billboard_OOH.png",
     accent: "aura",
     label: "SELF-INITIATED / FICTIONAL CAMPAIGN",
+    gallery: [
+      "/images/AURA_01_Billboard_OOH.png",
+      "/images/AURA_02_Instagram_Post.png",
+      "/images/AURA_03_Instagram_Story.png",
+      "/images/AURA_04_In_Store_Display.png",
+      "/images/AURA_05_Street_OOH.png",
+      "/images/AURA_06_Poster_Print.png",
+    ],
   },
 ] as const;
 
-
 /* =========================================================
    SELECTED WORK
-   ========================================================= */
+========================================================= */
 
 export interface Project {
   index: string;
@@ -210,10 +222,9 @@ export const PROJECTS: readonly Project[] = [
   },
 ] as const;
 
-
 /* =========================================================
    CASE STUDIES
-   ========================================================= */
+========================================================= */
 
 export const CASE_STUDIES = [
   {
@@ -314,10 +325,9 @@ export const CASE_STUDIES = [
   },
 ] as const;
 
-
 /* =========================================================
    EXPERIENCE
-   ========================================================= */
+========================================================= */
 
 export const EXPERIENCE = [
   {
