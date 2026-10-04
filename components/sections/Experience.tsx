@@ -1,6 +1,6 @@
 import { EXPERIENCE } from "@/lib/data";
 
-export default function Experience() {
+export function Experience() {
   return (
     <section id="experience" className="experience section-shell">
       <div className="section-heading">
