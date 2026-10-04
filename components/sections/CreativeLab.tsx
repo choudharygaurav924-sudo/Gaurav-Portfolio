@@ -1,38 +1,59 @@
-import { EXPERIENCE } from "@/lib/data";
+"use client";
 
-export function Experience() {
+import Image from "next/image";
+import { CREATIVE_LAB } from "@/lib/data";
+
+export default function CreativeLab() {
   return (
-    <section id="experience" className="experience section-shell">
+    <section id="creative-lab" className="creative-lab section-shell">
       <div className="section-heading">
-        <span className="eyebrow">04 / EXPERIENCE</span>
+        <span className="eyebrow">03 / CREATIVE LAB</span>
 
         <h2>
-          WHERE I&apos;VE
+          CAMPAIGNS
           <br />
-          <em>WORKED.</em>
+          BUILT TO <em>MOVE.</em>
         </h2>
+
+        <p>
+          Concept-driven campaign systems spanning outdoor, social, retail,
+          lifestyle and print.
+        </p>
       </div>
 
-      <div className="experience-list">
-        {EXPERIENCE.map((item, index) => (
-          <article
-            key={`${item.company}-${index}`}
-            className="experience-item"
-          >
-            <div className="experience-date">
-              {item.date}
+      <div className="lab-grid">
+        {CREATIVE_LAB.map((item) => (
+          <article key={item.title} className="lab-card group">
+            <div className="lab-visual">
+              <Image
+                src={item.image}
+                alt={`${item.title} campaign`}
+                fill
+                sizes="(max-width: 768px) 100vw, 50vw"
+                className="lab-image"
+              />
+
+              <div className="lab-image-overlay" />
+
+              <div className="lab-card-index">
+                {item.index}
+              </div>
+
+              <div className="lab-card-label">
+                {item.label}
+              </div>
+
+              <div className="lab-card-title">
+                {item.title}
+              </div>
             </div>
 
-            <div className="experience-company">
-              {item.company}
-            </div>
+            <div className="lab-copy">
+              <p>{item.description}</p>
 
-            <div className="experience-role">
-              {item.role}
-            </div>
-
-            <div className="experience-location">
-              {item.location}
+              <span className="lab-view">
+                VIEW CAMPAIGN ↗
+              </span>
             </div>
           </article>
         ))}
