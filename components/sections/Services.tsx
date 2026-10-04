@@ -1,12 +1,21 @@
+"use client";
+
+import Image from "next/image";
+
 import { CREATIVE_LAB } from "@/lib/data";
 
 export function Services() {
   return (
-    <section id="lab" className="lab-section editorial-section">
+    <section
+      id="lab"
+      className="lab-section editorial-section"
+    >
       <div className="shell">
         <div className="section-heading">
           <div>
-            <span className="eyebrow">(CREATIVE LAB)</span>
+            <span className="eyebrow">
+              (CREATIVE LAB)
+            </span>
 
             <h2 className="text-display-md mt-6">
               What if brands
@@ -16,9 +25,9 @@ export function Services() {
           </div>
 
           <p className="section-intro">
-            Self-initiated creative experiments exploring strategy,
-            art direction, storytelling, AI-assisted production,
-            and digital execution.
+            Self-initiated creative experiments exploring
+            strategy, art direction, storytelling,
+            AI-assisted production, and digital execution.
           </p>
         </div>
 
@@ -33,12 +42,24 @@ export function Services() {
               </div>
 
               <div className="lab-visual">
-                <span>{item.title}</span>
+                <Image
+                  src={item.image}
+                  alt={`${item.title} campaign`}
+                  fill
+                  sizes="(min-width: 980px) 33vw, 100vw"
+                  className="lab-image"
+                />
+
+                <div className="lab-image-overlay" />
+
+                <div className="lab-visual-title">
+                  {item.line}
+                </div>
               </div>
 
               <div className="lab-copy">
                 <p className="lab-label">
-                  SELF-INITIATED / FICTIONAL CAMPAIGN
+                  {item.label}
                 </p>
 
                 <h3>{item.title}</h3>
