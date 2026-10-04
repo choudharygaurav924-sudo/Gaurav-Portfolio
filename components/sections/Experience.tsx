@@ -16,7 +16,7 @@ export function Experience() {
 
         <p>
           Marketing experience across B2B, digital campaigns, content,
-          outreach and campaign leadership.
+          outreach, campaign leadership, and advertising.
         </p>
       </div>
 
@@ -30,7 +30,7 @@ export function Experience() {
               {item.period}
             </div>
 
-            <div>
+            <div className="experience-main">
               <h3>{item.company}</h3>
 
               <p className="experience-role">
@@ -45,13 +45,13 @@ export function Experience() {
                 {item.description}
               </p>
 
-              {"tags" in item && item.tags && (
-                <div className="experience-tags">
-                  {item.tags.map((tag: string) => (
-                    <span key={tag}>{tag}</span>
-                  ))}
-                </div>
-              )}
+              <div className="experience-tags">
+                {item.tags.map((tag) => (
+                  <span key={tag}>
+                    {tag}
+                  </span>
+                ))}
+              </div>
             </div>
           </article>
         ))}
