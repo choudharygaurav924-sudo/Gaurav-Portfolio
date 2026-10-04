@@ -2,37 +2,56 @@ import { EXPERIENCE } from "@/lib/data";
 
 export function Experience() {
   return (
-    <section id="experience" className="experience section-shell">
-      <div className="section-heading">
-        <span className="eyebrow">04 / EXPERIENCE</span>
+    <section id="experience" className="resume-section section-shell">
+      <div className="experience-heading">
+        <div>
+          <span className="eyebrow">04 / EXPERIENCE</span>
 
-        <h2>
-          WHERE I&apos;VE
-          <br />
-          <em>WORKED.</em>
-        </h2>
+          <h2>
+            WHERE I&apos;VE
+            <br />
+            <em>WORKED.</em>
+          </h2>
+        </div>
+
+        <p>
+          Marketing experience across B2B, digital campaigns, content,
+          outreach and campaign leadership.
+        </p>
       </div>
 
       <div className="experience-list">
         {EXPERIENCE.map((item, index) => (
           <article
             key={`${item.company}-${index}`}
-            className="experience-item"
+            className="experience-row"
           >
             <div className="experience-date">
-              {item.date}
+              {item.period}
             </div>
 
-            <div className="experience-company">
-              {item.company}
-            </div>
+            <div>
+              <h3>{item.company}</h3>
 
-            <div className="experience-role">
-              {item.role}
-            </div>
+              <p className="experience-role">
+                {item.role}
+              </p>
 
-            <div className="experience-location">
-              {item.location}
+              <p className="experience-location">
+                {item.location}
+              </p>
+
+              <p className="experience-description">
+                {item.description}
+              </p>
+
+              {"tags" in item && item.tags && (
+                <div className="experience-tags">
+                  {item.tags.map((tag: string) => (
+                    <span key={tag}>{tag}</span>
+                  ))}
+                </div>
+              )}
             </div>
           </article>
         ))}
