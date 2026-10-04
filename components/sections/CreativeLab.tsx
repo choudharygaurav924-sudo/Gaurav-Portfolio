@@ -22,7 +22,7 @@ export function CreativeLab() {
       </div>
 
       <div className="lab-grid">
-        {CREATIVE_LAB.map((item) => (
+        {CREATIVE_LAB.map((item, index) => (
           <article key={item.title} className="lab-card group">
             <div className="lab-visual">
               <Image
@@ -36,11 +36,11 @@ export function CreativeLab() {
               <div className="lab-image-overlay" />
 
               <div className="lab-card-index">
-                {item.index}
+                {String(index + 1).padStart(2, "0")}
               </div>
 
               <div className="lab-card-label">
-                {item.label}
+                {item.line}
               </div>
 
               <div className="lab-card-title">
@@ -49,7 +49,7 @@ export function CreativeLab() {
             </div>
 
             <div className="lab-copy">
-              <p>{item.description}</p>
+              <p>{item.copy}</p>
 
               <span className="lab-view">
                 VIEW CAMPAIGN ↗
