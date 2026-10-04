@@ -4,6 +4,7 @@ import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useEffect, useRef } from "react";
+
 import { PROJECTS } from "@/lib/data";
 import { SplitText } from "@/components/ui/SplitText";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
@@ -18,13 +19,14 @@ export function Work() {
     gsap.registerPlugin(ScrollTrigger);
 
     const ctx = gsap.context(() => {
-      gsap
-        .utils
+      gsap.utils
         .toArray<HTMLElement>(".work-image")
-        .forEach((image) =>
+        .forEach((image) => {
           gsap.fromTo(
             image,
-            { scale: 1.12 },
+            {
+              scale: 1.14,
+            },
             {
               scale: 1,
               ease: "none",
@@ -32,11 +34,33 @@ export function Work() {
                 trigger: image,
                 start: "top bottom",
                 end: "bottom top",
-                scrub: 1.2,
+                scrub: 1.4,
               },
             }
-          )
-        );
+          );
+        });
+
+      gsap.utils
+        .toArray<HTMLElement>(".work-item")
+        .forEach((item) => {
+          gsap.fromTo(
+            item,
+            {
+              opacity: 0,
+              y: 50,
+            },
+            {
+              opacity: 1,
+              y: 0,
+              duration: 1,
+              ease: "power3.out",
+              scrollTrigger: {
+                trigger: item,
+                start: "top 85%",
+              },
+            }
+          );
+        });
     }, ref);
 
     return () => ctx.revert();
@@ -63,24 +87,38 @@ export function Work() {
 
         <p className="section-intro">
           Marketing thinking, campaign development, and
-          creative execution — grounded in real and academic work.
+          creative execution — grounded in real and
+          academic work.
         </p>
       </div>
 
       <div className="work-list">
         {PROJECTS.map((project) => (
-          <article
+          <a
             key={project.title}
-            className="work-item"
+            href={project.href}
+            className="work-item group"
           >
             <div className="work-media">
               <Image
                 src={project.image}
-                alt=""
+                alt={project.title}
                 fill
                 sizes="(min-width: 1024px) 62vw, 100vw"
                 className="work-image object-cover"
               />
+
+              <div className="work-overlay" />
+
+              <div className="work-media-meta">
+                <span>{project.index}</span>
+                <span>{project.year}</span>
+              </div>
+
+              <div className="work-view">
+                VIEW CASE STUDY
+                <span>↗</span>
+              </div>
             </div>
 
             <div className="work-details">
@@ -104,7 +142,7 @@ export function Work() {
                 ))}
               </div>
             </div>
-          </article>
+          </a>
         ))}
       </div>
     </section>
