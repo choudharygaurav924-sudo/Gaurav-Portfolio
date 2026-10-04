@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { CREATIVE_LAB } from "@/lib/data";
 
-export default function CreativeLab() {
+export function CreativeLab() {
   return (
     <section id="creative-lab" className="creative-lab section-shell">
       <div className="section-heading">
